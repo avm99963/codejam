@@ -1,0 +1,326 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700,700italic,400italic,300italic);
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: "Roboto", "Arial", sans-serif;
+	font-size: 15px;
+	-webkit-tap-highlight-color: transparent;
+}
+
+header {
+	padding: 20px 20px 0 20px;
+	border-bottom: solid 1px rgb(214, 214, 214);
+}
+
+#title {
+	font-size: 24px;
+	font-weight: lighter;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+nav {
+	margin-left: -20px;
+	padding-left: 20px;
+	width: Calc(100% + 20px);
+	overflow-y: auto;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+}
+
+nav ul {
+	list-style: none;
+	list-style-position: outside;
+	list-style-type: disc;
+	padding: 0;
+	margin: 0;
+}
+
+nav ul li {
+	display: inline-block;
+	cursor: pointer;
+	border: solid 1px rgb(214, 214, 214);
+	border-bottom: none;
+	font-weight: lighter;
+	margin-right: 5px;
+	padding: 5px 5px 3px 5px;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	background-color: whitesmoke;
+}
+
+nav ul li:hover {
+	background-color: rgb(234, 234, 234);
+}
+
+nav ul li:active {
+	background-color: lightgray;
+}
+
+nav ul li.active {
+	background-color: rgb(172, 211, 244); /* Was lightgray... why? Blue is better :-D */
+}
+
+main {
+	padding: 20px;
+}
+
+aside, section {
+	font-size: 13px;
+}
+
+section {
+	margin-bottom: 20px;
+}
+
+table.solve {
+	border-collapse: collapse;
+}
+
+table.solve td:first-child {
+	padding: 5px;
+	padding-right: 7px;
+	border-right: 1px solid #cccccc;
+	line-height: 1.5em;
+	vertical-align: top;
+}
+
+table.solve td:last-child {
+	padding: 5px;
+	padding-left: 10px;
+	vertical-align: top;
+}
+
+button.solve_btn {
+	font-size: 100%;
+	-webkit-tap-highlight-color: initial;
+}
+
+.solve_msg {
+	line-height: 19.5px;
+	color: #666666;
+}
+
+.solve_container {
+	background-color: #faeca5;
+	padding: 0.5em;
+	width: 320px;
+	border-right: 1px solid #ddc850;
+	border-bottom: 1px solid #ddc850;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	-khtml-border-radius: 0.5em;
+	border-radius: 0.5em;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.solve_container div {
+	margin-bottom: 10px;
+}
+
+.file_download img {
+	vertical-align: middle;
+}
+
+.output_file, .source_file {
+	border-top: 0.1em solid #fff8aa;
+	padding-top: 10px;
+}
+
+.source_file {
+	border-bottom: 0.1em solid #fff8aa;
+	padding-bottom: 10px;
+}
+
+.notneeded {
+	color: gray;
+}
+
+.navigation {
+	text-align: center;
+}
+
+.navigation button {
+	vertical-align: middle;
+}
+
+.submit {
+	vertical-align: middle;
+}
+
+.time {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0!important;
+	color: #736519;
+}
+
+.description {
+	max-width: 520px;
+}
+
+details {
+	border-radius: 2px;
+}
+
+details:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+summary {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	outline: 0;
+	cursor: pointer;
+	background-color: #c3d9ff;
+	padding: 6px;
+}
+
+details .detailed {
+	padding: 6px;
+	border-left: solid 2px #c3d9ff;
+	border-bottom: solid 2px #c3d9ff;
+	border-right: solid 2px #c3d9ff;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+details .detailed.nopadding {
+	padding: 0;
+}
+
+.detailed .submission:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+.detailed .submission .title {
+	border-bottom: 1px solid #cccccc;
+}
+
+.detailed .submission table td:first-child {
+	text-align: right;
+	padding-right: 5px;
+	color: #666666;
+	border-right: 1px solid #cccccc;
+	width: 30px;
+}
+
+.detailed .submission .correct {
+	background-color: #eefbce;
+}
+
+table#topscores {
+	width: 100%;
+}
+
+table#topscores, table#topscores tr, table#topscores td {
+	border-collapse: collapse;
+}
+
+table#topscores td:first-child {
+	padding: 3px 0 3px 6px;
+}
+
+table#topscores td:last-child {
+	text-align: right;
+	padding: 3px 6px 3px 0;
+}
+
+table#topscores tr:nth-child(even) {
+	background-color: #eeeeee;
+}
+
+summary::-webkit-details-marker {
+  display: none
+}
+
+summary:after {
+  color: rgb(79, 169, 225);
+  background-color: #fff;
+  border: solid 1px rgb(79, 169, 225);
+  border-radius: 2px;
+  content: "+";
+  float: left;
+  font-size: 13px;
+  font-weight: bold;
+  margin: -1px 5px 0 0;
+  padding: 0;
+  text-align: center;
+  width: 13px;
+  height: 15px;
+}
+
+details[open] summary:after {
+  content: "-";
+}
+
+details:not([open]) summary {
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+#time {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.detailed.stats p {
+	margin: 0;
+}
+
+.detailed.stats .value {
+	color: #3f762c;
+}
+
+.toastcontainer {
+	position: absolute;
+	margin-top: 5px;
+	text-align: center;
+	width: 100%;
+}
+
+.toast {
+	font-weight: bold;
+	font-size: 13px;
+	display: inline;
+	margin: 0 auto;
+	padding: 0.4em 1em 0.4em 1em;
+	line-height: 1.75em;
+	background-color: #faeca5;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	-khtml-border-radius: 0.5em;
+	border-radius: 0.5em;
+}
+
+@media (max-width: 600px) {
+	section {
+		padding-bottom: 10px;
+		border-bottom: solid 1px rgb(214, 214, 214);
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 600px) {
+	aside {
+		float: left;
+		height: Calc(100% - 125px);
+		width: 170px;
+	}
+	section {
+		padding-left: 20px;
+		border-left: solid 1px rgb(214, 214, 214);
+		float: right;
+		width: Calc(100% - 215px);
+	}
+}
