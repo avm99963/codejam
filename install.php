@@ -49,7 +49,8 @@ if (isset($_GET['install']) && $_GET['install'] == "1") {
   )";
   $sql["configuration"] = "CREATE TABLE configuration 
   (
-  starred_contest INT(13)
+  starred_contest INT(13),
+  contests_link INT(1)
   )";
   $sql["securitykeys"] = "CREATE TABLE securitykeys (
     id integer primary key AUTO_INCREMENT,

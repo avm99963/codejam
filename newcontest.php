@@ -57,7 +57,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
           ?>
           <form action="newcontest.php?sent=1" method="POST" autocomplete="off">
               <p><label for="name">Nombre</label>: <input type="text" name="name" id="name" required="required" maxlength="50"></p>
-              <p><label for="description">Descripción</label>: <input type="text" name="description" id="description" required="required" maxlength="1000"></p>
+              <p><label for="description">Descripción</label>:<br><textarea name="description" id="description" required="required" maxlength="1000" style="width: 300px; height: 100px;"></textarea></p>
               <p><label for="privacy">Privacidad</label>: <select name="privacy" id="privacy"><option value="0">Private</option><option value="1">Semiprivate</option><option value="2">Public</option></select></p>
               <p><label for="starttime">Comienzo</label>: <input type="datetime-local" name="starttime" id="starttime" required="required"></p>
               <p><label for="endtime">Final</label>: <input type="datetime-local" name="endtime" id="endtime" required="required"></p>

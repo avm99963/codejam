@@ -217,6 +217,14 @@ details .detailed.nopadding {
 	background-color: #eefbce;
 }
 
+.detailed .submission .mj {
+	color: red;
+	vertical-align: center;
+	margin-left: 3px;
+	font-weight: bold;
+	font-size: 11px;
+}
+
 table#topscores {
 	width: 100%;
 }

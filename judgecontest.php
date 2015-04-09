@@ -117,7 +117,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
                   // Not shown
                 } else {
                 ?>
-                  <a href="judge_submission.php?id=<?=$row2["id"]?>&judge=1"><img src="img/thumb_up.svg" style="width:15px"></a> <a href="judge_submission.php?id=<?=$row2["id"]?>&judge=0"><img src="img/thumb_down.svg" style="width:15px"></a><?=(isset($row2["judged"]) ? ' <a href="judge_submission.php?id='.$row2["id"].'&judge=2"><img src="img/cross.svg" style="width:15px"></a>' : "")?>
+                  <a href="judgesubmission.php?id=<?=$row2["id"]?>&judge=1"><img src="img/thumb_up.svg" style="width:15px"></a> <a href="judgesubmission.php?id=<?=$row2["id"]?>&judge=0"><img src="img/thumb_down.svg" style="width:15px"></a><?=(isset($row2["judged"]) ? ' <a href="judgesubmission.php?id='.$row2["id"].'&judge=2"><img src="img/cross.svg" style="width:15px"></a>' : "")?>
                 </td>
                 <?php
                 }

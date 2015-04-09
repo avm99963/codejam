@@ -165,6 +165,7 @@ function translateintosubmission($problem, $dataset, $try = null, $userid = 'cur
 	}
 }
 
+// "Broken" function for now... (It works, but it is not very useful)
 function submission($submission, $tellmethetruth = false) {
 	global $con;
 
@@ -177,6 +178,7 @@ function submission($submission, $tellmethetruth = false) {
 	}
 
 	$row3 = mysqli_fetch_assoc($query3);
+	$dataset = ($row3["type"] == 1) ? "large" : "small";
 
 	$query = mysqli_query($con, "SELECT * FROM contests WHERE id = ".(INT)$row3["contest"]);
 
@@ -205,10 +207,56 @@ function submission($submission, $tellmethetruth = false) {
 		$row2 = mysqli_fetch_assoc($query2);
 		$io = json_decode($row2["io"], true);
 
-		
+		$valid = 0;
+		if (isset($row3["judged"]) && $row3["judged"] != "") {
+			$valid = $row3["judged"];
+		} else {
+			$valid = $row3["valid"];
+		}
+		if ($row3["type"] == "large") {
+			$return = array(
+				"status" => "notattempted",
+				"pts" => 0,
+				"penalty" => 0
+			);
+			if (!isset($valid)) {
+				$return["status"] = "timeexpired";
+			} elseif ($now > $row["endtime"] || $tellmethetruth === true) {
+				if ($valid == 1) {
+					$return["status"] = "correct";
+					$return["penalty"] = $row3["timesent"] - $row["starttime"];
+					$return["pts"] = $io["pts"][$dataset];
+				} else {
+					$return["status"] = "incorrect";
+				}
+			} else {
+				$return["status"] = "submitted";
+				$return["penalty"] = $row3["timesent"] - $row["starttime"];
+				$return["pts"] = $io["pts"][$dataset];
+			}
+		} else {
+			$return = array(
+				"status" => "notattempted",
+				"pts" => 0,
+				"penalty" => 0,
+				"count" => 0
+			);
+			if ($valid == 1) {
+				$return["status"] = "correct";
+				$return["penalty"] = $row3["timesent"] - $row["starttime"];
+				$return["pts"] = $io["pts"][$dataset];
+			} elseif ($valid == 0) {
+				$return["status"] = "incorrect";
+			} else {
+				$return["status"] = "timeexpired";
+			}
+			$query4 = mysqli_query($con, "SELECT id FROM submissions WHERE problem = ".$row3["problem"]." AND type = ".$row3["type"]." AND user_id = ".$row3["user_id"]." LIMIT 1");
+			$return["count"] = mysqli_num_rows($query4);
+		}
 	} else {
 		return false;
 	}
+	return $return;
 }
 
 function submissions($contest, $userid='currentuser', $tellmethetruth = false) {
@@ -260,12 +308,14 @@ function submissions($contest, $userid='currentuser', $tellmethetruth = false) {
 				"status" => "notattempted",
 				"pts" => 0,
 				"penalty" => 0,
-				"count" => 0
+				"count" => 0,
+				"manuallyjudged" => false
 			),
 			"large" => array(
 				"status" => "notattempted",
 				"pts" => 0,
-				"penalty" => 0
+				"penalty" => 0,
+				"manuallyjudged" => false
 			)
 		);
 	}
@@ -286,6 +336,9 @@ function submissions($contest, $userid='currentuser', $tellmethetruth = false) {
 					$valid = 0;
 					if (isset($last["judged"]) && $last["judged"] != "") {
 						$valid = $last["judged"];
+						if ($last["judged"] != $last["valid"]) {
+							$return[$problemid][$dataset]["manuallyjudged"] = true;
+						}
 					} else {
 						$valid = $last["valid"];
 					}
@@ -317,11 +370,15 @@ function submissions($contest, $userid='currentuser', $tellmethetruth = false) {
 						}
 						$return[$problemid][$dataset]["count"] = count($submissions[$problemid][$dataset]) + 1;
 					}
+					if ($return[$problemid][$dataset]["manuallyjudged"] === true && (!isset($last["timesent"]) || $last["timesent"] == "")) {
+						$return[$problemid][$dataset]["penalty"] = $last["time"] - $row["starttime"] + (($last["type"] == 0) ? 4 : 8) * 60;
+						if ($return[$problemid][$dataset]["penalty"] > $row["endtime"]) {
+							$return[$problemid][$dataset]["penalty"] = $row["endtime"] - $last["time"];
+						}
+					}
 				}
 			}
 		}
-	} else {
-		return false;
 	}
 
 	return $return;

@@ -59,6 +59,10 @@ function updatestats() {
 	        			var small = submission.small.count+' incorrect attempt'+((submission.small.count == 1) ? '' : 's');
 	        		}
 
+	        		if (submission.small.manuallyjudged === true) {
+	        			small += '<span class="mj" title="Manually Judged">(MJ)</span>';
+	        		}
+
 	        		if (submission.large.status == "correct") {
 	        			var large = '<span class="correct">Correct</span>';
 	        		} else if (submission.large.status == "incorrect") {
@@ -69,6 +73,10 @@ function updatestats() {
 	        			var large = 'Not attempted';
 	        		} else if (submission.large.status == "timeexpired") {
 	        			var large = 'Time expired';
+	        		}
+
+	        		if (submission.large.manuallyjudged === true) {
+	        			large += '<span class="mj" title="Manually Judged">(MJ)</span>';
 	        		}
 
 	        		$(".submission[data-problem-id='"+i+"'] .small_submission").innerHTML = small;

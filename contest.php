@@ -75,7 +75,7 @@ $row = mysqli_fetch_assoc($query);
           if ($now < $row["starttime"] && getrole() == 0) {
             die("<span style='color: red;'>Todavía no ha empezado la competición</span>");
           }
-          if (!isinvited($row["id"])) {
+          if (!isinvited($row["id"]) && getrole() == 0) {
             die("<span style='color: red;'>No estás invitado a esta competición</span>");
           }
           $query2 = mysqli_query($con, "SELECT * FROM problems WHERE contest = ".$contest." ORDER BY num");
@@ -132,6 +132,13 @@ $row = mysqli_fetch_assoc($query);
         ?>
         <div class="problem" data-problem-id="<?=$problem["id"]?>"<?=$hidden?>>
           <h2><?=$problem["name"]?></h2>
+          <?php
+          if ($now > $row["endtime"]) {
+          ?>
+          <p style="color: gray;">This contest is open for practice. You can try every problem as many times as you like, though we won't keep track of which problems you solve.</p>
+          <?php
+          }
+          ?>
           <table class="solve">
             <?php
             foreach(array("small", "large") as $type) {

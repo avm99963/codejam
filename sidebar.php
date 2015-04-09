@@ -21,7 +21,7 @@
 	if (isadmin()) {
 	?>
 		<p class="padding40" style="margin-top:5px;"> <a href="newcontest.php">Crear competición</a></p>
-	<p><span class="icon svg-ic_settings_24px"></span> <a href="configuracion.php">Configuración</a></p>
+	<p><span class="icon svg-ic_settings_24px"></span> <a href="configuration.php">Configuración</a></p>
 	<?php
 	}
 	?>
