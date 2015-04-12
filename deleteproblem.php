@@ -60,7 +60,7 @@ table, th, td
 		?>
 		<p>Estás a punto de eliminar el problema <b><?=$row["name"]?></b>.</p>
 		<p>¿Estás seguro? <span style="color:red;font-weight:bold;">Esta acción no se puede revertir</span></p>
-		<p><a href="deletecontest.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red">Sí</a> <a href="admincontest.php?id=<?=$row2['id']?>" class="button-link">No</a></p>
+		<p><a href="deleteproblem.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red">Sí</a> <a href="admincontest.php?id=<?=$row2['id']?>" class="button-link">No</a></p>
 		<?php
 		}
 		?>

@@ -60,12 +60,14 @@ $leaderboard = leaderboard($contest, true);
 $return["topscores"] = array();
 
 $i = 0;
-foreach ($leaderboard as $leader) {
-	$return["topscores"][$i] = array(
-		"contestant" => userdata("username", $leader["user_id"]),
-		"score" => $leader["score"]
-	);
-	$i++;
+if ($leaderboard !== false) {
+	foreach ($leaderboard as $leader) {
+		$return["topscores"][$i] = array(
+			"contestant" => userdata("username", $leader["user_id"]),
+			"score" => $leader["score"]
+		);
+		$i++;
+	}
 }
 
 $return["rank"] = rank($contest, $_SESSION["id"]);

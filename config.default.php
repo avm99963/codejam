@@ -35,6 +35,7 @@ $conf = array();
 $conf["email_domain"] = "";
 
 // Configuration array for Recaptcha:
+// (You can get your API keys at https://www.google.com/recaptcha/admin)
 $conf["recaptcha"] = array();
 $conf["recaptcha"]["secretkey"] = "";
 $conf["recaptcha"]["sitekey"] = "";
