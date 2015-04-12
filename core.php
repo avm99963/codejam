@@ -23,8 +23,7 @@ session_start();
 
 // Custom error handler
 
-function myErrorHandler($errno, $errstr, $errfile, $errline)
-{
+function myErrorHandler($errno, $errstr, $errfile, $errline) {
     if (!(error_reporting() & $errno)) {
         // This error code is not included in error_reporting
         return;
@@ -77,14 +76,8 @@ function anuncio()
 }
 
 // Function which tells if user is hyperadmin. Unsupported, should be removed from code where found and replaced with function getrole().
-function isadmin()
-{
-	if (!isset($_SESSION['id']))
-		return FALSE;
-	$id = $_SESSION['id'];
-	$query = mysqli_query($GLOBALS['con'], "SELECT * FROM users WHERE ID = '".$id."'");
-	$row = mysqli_fetch_assoc($query);
-	if ($row['role'] == 3)
+function isadmin() {
+	if (getrole() == 3)
 		return TRUE;
 	else
 		return FALSE;
@@ -99,8 +92,7 @@ function getrole() {
 	return $row["role"];
 }
 
-function userdata($data2, $userid='currentuser')
-{
+function userdata($data2, $userid='currentuser') {
 	if ($userid == 'currentuser') {
 		$id = $_SESSION['id'];
 	} else {
@@ -115,8 +107,7 @@ function userdata($data2, $userid='currentuser')
 	return $row[$data];
 }
 
-function loggedin()
-{
+function loggedin() {
 	if (isset($_SESSION['id']))
 	{
 		return TRUE;
@@ -127,7 +118,7 @@ function loggedin()
 	}
 }
 
-function randomfilename($filename){
+function randomfilename($filename) {
 	$chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
 	$length = $GLOBALS['filenamelength'];
 	$name = '';

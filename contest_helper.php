@@ -372,8 +372,8 @@ function submissions($contest, $userid='currentuser', $tellmethetruth = false) {
 					}
 					if ($return[$problemid][$dataset]["manuallyjudged"] === true && (!isset($last["timesent"]) || $last["timesent"] == "")) {
 						$return[$problemid][$dataset]["penalty"] = $last["time"] - $row["starttime"] + (($last["type"] == 0) ? 4 : 8) * 60;
-						if ($return[$problemid][$dataset]["penalty"] > $row["endtime"]) {
-							$return[$problemid][$dataset]["penalty"] = $row["endtime"] - $last["time"];
+						if ($return[$problemid][$dataset]["penalty"] > $row["endtime"] - $row["starttime"]) {
+							$return[$problemid][$dataset]["penalty"] = $row["endtime"] - $row["starttime"];
 						}
 					}
 				}

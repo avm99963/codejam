@@ -1,7 +1,6 @@
 <?php
 require_once("core.php");
-if (getrole() > 1)
-{
+if (getrole() > 1) {
 $msg = "";
 if (isset($_GET['msg']) && $_GET['msg'] == "empty")
   $msg = '<p class="alert-danger">Por favor, rellena todos los campos</p>';

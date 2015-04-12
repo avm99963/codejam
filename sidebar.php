@@ -18,7 +18,7 @@
 			
 		}
 		}
-	if (isadmin()) {
+	if (getrole() == 3) {
 	?>
 		<p class="padding40" style="margin-top:5px;"> <a href="newcontest.php">Crear competición</a></p>
 	<p><span class="icon svg-ic_settings_24px"></span> <a href="configuration.php">Configuración</a></p>
@@ -27,4 +27,11 @@
 	?>
 	<p><span class="icon svg-ic_security_24px"></span> <a href="2stepverification.php">Verificación en 2 pasos</a></p>
 	<p><span class="icon svg-ic_stars_24px"></span> <a href="promote.php">Pasar de ronda</a></p>
+	<?php
+	if (getrole() == 3) {
+	?>
+	<p><span class="icon svg-ic_bug_report_24px"></span> <a href="debug.php">Debug</a></p>
+	<?php
+	}
+	?>
 </aside>

@@ -9,6 +9,8 @@ if (isset($_GET['msg']) && $_GET['msg'] == "addproblemsuccess")
   $msg = '<p class="alert-success">Problema añadido satisfactoriamente</p>';
 if (isset($_GET['msg']) && $_GET['msg'] == "editproblemsuccess")
   $msg = '<p class="alert-success">Problema editado satisfactoriamente</p>';
+if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
+  $msg = '<p class="alert-success">Problema eliminado satisfactoriamente</p>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -146,7 +148,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editproblemsuccess")
             <div><button id="share" class="g-button g-button-share">Invitar</button></div>
           </div>
           <h1>Administrar <?=$row["name"]?></h1>
-          <p><?php if (getrole() > 1) { ?><a href="addproblem.php?id=<?=$row["id"]?>"><span class="icon svg-ic_note_add_24px"></span></a> <a href="addproblem.php?id=<?=$row["id"]?>">Añadir problema</a><?php } if (isadmin()) { ?> | <a href="editcontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_mode_edit_24px"></span></a> <a href="editcontest.php?id=<?=$row["id"]?>">Editar datos de la competición</a> | <a href="deletecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_delete_24px"></span></a> <a href="deletecontest.php?id=<?=$row["id"]?>">Eliminar competición</a><?php } if ($status == "finished") { ?> | <a href="judgecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_thumbs_up_down_24px"></span></a> <a href="judgecontest.php?id=<?=$row["id"]?>">Juzgar respuestas</a><?php } ?></p>
+          <p><?php if (getrole() > 1) { ?><a href="addproblem.php?id=<?=$row["id"]?>"><span class="icon svg-ic_note_add_24px"></span></a> <a href="addproblem.php?id=<?=$row["id"]?>">Añadir problema</a><?php } if (isadmin()) { ?> | <a href="editcontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_mode_edit_24px"></span></a> <a href="editcontest.php?id=<?=$row["id"]?>">Editar datos de la competición</a> | <a href="deletecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_delete_24px"></span></a> <a href="deletecontest.php?id=<?=$row["id"]?>">Eliminar competición</a><?php } if ($status != "notstarted") { ?> | <a href="judgecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_thumbs_up_down_24px"></span></a> <a href="judgecontest.php?id=<?=$row["id"]?>">Juzgar respuestas</a><?php } ?></p>
 
           <h3>Problemas</h3>
           <?php

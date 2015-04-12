@@ -89,7 +89,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editproblemsuccess")
                 echo "<div class='alert-warning' style='margin-bottom: 5px;'>No se ha invitado al usuario ".userdata("username", $leader["user_id"])." porque ya estaba invitado.</div>";
               } else {
                 if (!mysqli_query($con, "INSERT INTO invitations (user_id, contest) VALUES (".$leader["user_id"].", ".$objective.")")) {
-                  die("<div class='alert-error'>No se ha podido invitar el usuario ".userdata("username", $leader["user_id"]).".</div>");
+                  die("<div class='alert-danger'>No se ha podido invitar el usuario ".userdata("username", $leader["user_id"]).".</div>");
                 }
               }
             }

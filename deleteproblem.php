@@ -45,9 +45,16 @@ table, th, td
 			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
 			$row2 = mysqli_fetch_assoc($query2);
 
-			$sql = "DELETE FROM problems WHERE id = '".(INT)$_GET['id']."'";
-			if (mysqli_query($con, $sql)) {
-  				header("Location: contest.php?id=".$row2["id"]."&msg=deletesuccessful");
+			$sql = array();
+			$sql["problems"] = "DELETE FROM problems WHERE id = ".(INT)$_GET['id'];
+			$sql["submissions"] = "DELETE FROM submissions WHERE problem = ".(INT)$_GET['id'];
+
+			foreach ($sql as $table => $single_sql) {
+				if (mysqli_query($con, $single_sql)) {
+  					header("Location: admnincontest.php?id=".$row2["id"]."&msg=deleteproblemsuccess");
+				} else {
+					die("<div class='alert alert-danger'>No se han podido eliminar los datos de la tabla ".$table.".</div>");
+				}
 			}
 		} else {
 			$query = mysqli_query($con, "SELECT * FROM problems WHERE id = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
