@@ -51,7 +51,16 @@ table, th, td
 
 			foreach ($sql as $table => $single_sql) {
 				if (mysqli_query($con, $single_sql)) {
-  					header("Location: admnincontest.php?id=".$row2["id"]."&msg=deleteproblemsuccess");
+					if (!empty($row["io"])) {
+						$io = json_decode($row["io"], true);
+						foreach ($io["files"] as $file) {
+							if (!unlink("uploaded_img/".$file)) {
+								die("<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_img/".$file.". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>");
+							} else {
+								header("Location: admincontest.php?id=".$row2["id"]."&msg=deleteproblemsuccess");
+							}
+						}
+					}
 				} else {
 					die("<div class='alert alert-danger'>No se han podido eliminar los datos de la tabla ".$table.".</div>");
 				}

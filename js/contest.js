@@ -138,7 +138,7 @@ function solve() {
 			        	toast.create("No se ha podido empezar el contador: "+response.errorText, 10000);
 			        	$(".solve_btn[data-problem-id='"+problemId+"'][data-type='"+type+"']").disabled = false;
 			        } else {
-			        	$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"'] .file_download").innerHTML = '<img src="img/file.gif"> <a href="'+response.inputurl+'">Download '+response.inputfilename+'.in</a>';
+			        	$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"'] .file_download").innerHTML = '<img src="img/file.gif"> <a href="'+response.inputurl+'" data-problem-id="'+response.problem+'" data-type="'+response.type+'">Download '+response.inputfilename+'.in</a>';
 			        	$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"'] .time").innerText = ((response.type == "large") ? "08" : "04")+":00";
 			        	$(".solve_btn[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").hidden = true;
 						$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").hidden = false;
@@ -149,6 +149,7 @@ function solve() {
 							ntry: response.ntry
 						};
 						$(".solve_btn[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").disabled = false;
+						$("a[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").click();
 			        }
 				} else {
 					toast.create("No se ha podido contactar con el servidor correctamente. Por favor, vuelve a probar.", 10000);

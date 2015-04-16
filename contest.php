@@ -170,7 +170,7 @@ $row = mysqli_fetch_assoc($query);
                   <?php
                   if ($now > $row["endtime"]) {
                   ?>
-                  <div class="file_download"><img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>">Download <?=getfilename($problem["id"], $type_file)?>.in</a></div>
+                  <div class="file_download"><img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>">Download <?=getfilename($problem["id"], $type_file)?>.in</a></div>
                   <div class="output_file">output: <input type="file" class="output"></div>
                   <div class="source_file notneeded">código fuente: no se necesita</div>
                   <div class="navigation"><button class="submit">Enviar solución</button> <button class="hide">Ocultar</button></div>
@@ -181,7 +181,7 @@ $row = mysqli_fetch_assoc($query);
                   <?php  
                   if ($submissionactive) {
                   ?>
-                  <img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>">Download <?=getfilename($problem["id"], convertfileshorthand($type, "in", $try))?>.in</a>
+                  <img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>">Download <?=getfilename($problem["id"], convertfileshorthand($type, "in", $try))?>.in</a>
                   <?php
                   }
                   ?>

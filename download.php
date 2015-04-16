@@ -43,7 +43,7 @@ $translated = translateweirdnesstoawesome($type);
 
 if (getrole() == 0 && $now <= $row2["endtime"]) {
     if ($translated["io"] == "out") {
-        die("Can't touch this. Naaaa na na na naa, naaaaaa na. Can't touch this!");
+        die("Can't touch this. Naaaa na na na naa, naaaaaa na. Can't touch this!<br><iframe width='420' height='315' src='https://www.youtube-nocookie.com/embed/otCpCn0l4Wo?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>");
     }
     $query3 = mysqli_query($con, "SELECT * FROM submissions WHERE contest = {$row['contest']} AND user_id = {$_SESSION['id']} AND problem = {$row['id']} AND type = ".(($translated["difficulty"] == "small") ? "0 AND try = ".$translated["try"] : 1));
     if (!mysqli_num_rows($query3)) {
