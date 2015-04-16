@@ -49,13 +49,27 @@ table, th, td
 			$sql["problems"] = "DELETE FROM problems WHERE id = ".(INT)$_GET['id'];
 			$sql["submissions"] = "DELETE FROM submissions WHERE problem = ".(INT)$_GET['id'];
 
+			$query3 = mysqli_query($con, "SELECT solution FROM submissions WHERE problem = ".(INT)$_GET["id"]);
+			while ($row3 = mysqli_fetch_assoc($query3)) {
+				if (!empty($row3["solution"])) {
+					$solution = json_decode($row3["solution"], true);
+					if (!unlink("uploaded_solutions/".$solution["output"])) {
+						echo "<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_solutions/".$solution["output"].". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>";
+					} else {
+						if (!unlink("uploaded_solutions/".$solution["sourcecode"])) {
+							echo "<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_solutions/".$solution["sourcecode"].". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>";
+						}
+					}
+				}
+			}
+
 			foreach ($sql as $table => $single_sql) {
 				if (mysqli_query($con, $single_sql)) {
 					if (!empty($row["io"])) {
 						$io = json_decode($row["io"], true);
 						foreach ($io["files"] as $file) {
 							if (!unlink("uploaded_img/".$file)) {
-								die("<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_img/".$file.". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>");
+								echo "<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_img/".$file.". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>";
 							} else {
 								header("Location: admincontest.php?id=".$row2["id"]."&msg=deleteproblemsuccess");
 							}
