@@ -255,6 +255,7 @@ $row = mysqli_fetch_assoc($query);
               <tbody>
               </tbody>
             </table>
+            <span id="leaderboardlink"><a href="leaderboard.php?id=<?=$contest?>" target="_blank">Leaderboard...</a></span>
           </div>
         </details>
       </aside>

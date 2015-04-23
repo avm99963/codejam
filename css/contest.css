@@ -246,6 +246,12 @@ table#topscores tr:nth-child(even) {
 	background-color: #eeeeee;
 }
 
+#leaderboardlink {
+	display: block;
+	text-align: center;
+	margin: 3px 0;
+}
+
 summary::-webkit-details-marker {
   display: none
 }

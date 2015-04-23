@@ -169,7 +169,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
           while ($row = mysqli_fetch_assoc($problems_query)) {
             $io = json_decode($row["io"], true);
             if (getrole() > 1) {
-              $added = "<td><a href='editproblem.php?id=".$row['id']."'><span class='icon svg-ic_mode_edit_24px'></span></a><br><a href='deleteproblem.php?id=".$row['id']."'><span class='icon svg-ic_delete_24px'></span></a></td><td><a href='move.php?id=".$row['id']."&do=up'><span class='icon svg-ic_keyboard_arrow_up_24px'></span></a><br><a href='move.php?id=".$row['id']."&do=down'><span class='icon svg-ic_keyboard_arrow_down_24px'></span></a></td>";
+              $added = "<td><a href='editproblem.php?id=".$row['id']."'><span class='icon svg-ic_mode_edit_24px'></span></a><br><a href='deleteproblem.php?id=".$row['id']."'><span class='icon svg-ic_delete_24px'></span></a></td><td><a href='move.php?id=".$row['id']."&do=up'><span class='icon svg-ic_keyboard_arrow_up_24px'></span></a><br><a href='move.php?id=".$row['id']."&do=down'><span class='icon svg-ic_keyboard_arrow_down_24px'></span></a></td><td><a href='intermove.php?id=".$row['id']."'><span class='icon svg-ic_open_with_24px'></span></a></td>";
             } else {
               $added = "";
             }
