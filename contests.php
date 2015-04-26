@@ -45,7 +45,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 						} elseif ($row["privacy"] == 0) {
 							$img = "lock";
 						}
-						$output[] = "<h2><span class='icon svg-ic_".$img."_24px'></span> ".$row["name"]."</h2><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a><br><a href='admincontest.php?id=".$row["id"]."'><span class='icon svg-ic_mode_edit_24px'></span></a> <a href='admincontest.php?id=".$row["id"]."'>Administrar la competición</a></p>";
+						$output[] = "<h2><span class='icon svg-ic_".$img."_24px'></span> <span style='vertical-align: middle;'>".$row["name"]."</span></h2><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a><br><a href='admincontest.php?id=".$row["id"]."'><span class='icon svg-ic_mode_edit_24px'></span></a> <a href='admincontest.php?id=".$row["id"]."'>Administrar la competición</a></p>";
 					}
 					echo implode("<hr>", $output);
 				} else {
