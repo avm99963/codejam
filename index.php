@@ -1,14 +1,13 @@
 <?php
 require_once("core.php");
+initi18n("index");
 $msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "loginwrong")
-	$msg = '<p class="alert-danger">Usuario y/o contraseña incorrecto</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "empty")
-	$msg = '<p class="alert-warning">Por favor, rellena todos los campos</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "logoutsuccess")
-	$msg = '<p class="alert-success">¡Has cerrado la sesión correctamente!</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "registersuccess")
-	$msg = '<p class="alert-success">¡Has creado tu perfil de concursante correctamente! Ya puedes iniciar sesión.</p>';
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("loginwrong", "empty"))) {
+	$msg = '<p class="alert-danger">'.i18n("global", "msg_".$_GET['msg']).'</p>';
+}
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("logoutsuccess", "registersuccess"))) {
+	$msg = '<p class="alert-success">'.i18n("global", "msg_".$_GET['msg']).'</p>';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,24 +21,24 @@ if (isset($_GET['msg']) && $_GET['msg'] == "registersuccess")
 	<article>
 		<?php anuncio(); ?>
 		<div class="text" style='text-align:center;'>
-		<h1>Iniciar sesión</h1>
+		<h1><?=i18n("index", "title")?></h1>
 		<?=$msg?>
 		<?php
 		if (loggedin())
 		{
 		?>
-		<p>¡Hola <?php echo userdata('username'); ?>!</p>
+		<p><?=i18n("index", "salute", [userdata('username')])?></p>
 		<?php
 		if (isadmin())
 		{
 		?>
-		<a href="contests.php" class="button-link">Competiciones</a> <a href="dashboard.php" class="button-link">Panel de Control</a><br>&nbsp;
+		<a href="contests.php" class="button-link"><?=i18n("index", "contests_btn")?></a> <a href="dashboard.php" class="button-link"><?=i18n("index", "dashboard_btn")?></a><br>&nbsp;
 		<?php
 		}
 		else
 		{
 		?>
-		<a href="contests.php" class="button-link">Competiciones</a><br>&nbsp;
+		<a href="contests.php" class="button-link"><?=i18n("index", "contests_btn")?></a><br>&nbsp;
 		<?php
 		}
 		}
@@ -47,9 +46,9 @@ if (isset($_GET['msg']) && $_GET['msg'] == "registersuccess")
 		{
 		?>
 		<form action="login.php" method="POST" autocomplete="off" id="formulario">
-			<p><label for="username">Usuario:</label> <input type="text" name="username" id="username" required="required"></p>
-			<p><label for="password">Contraseña:</label> <input type="password" name="password" id="password" required="required"></p>
-			<p><input type="submit" value="Login" class="button-link"></p>
+			<p><label for="username"><?=i18n("index", "user_field")?></label> <input type="text" name="username" id="username" required="required"></p>
+			<p><label for="password"><?=i18n("index", "password_field")?></label> <input type="password" name="password" id="password" required="required"></p>
+			<p><input type="submit" value="<?=i18n("index", "form_button")?>" class="button-link"></p>
 		</form>
 		<script>
 		document.getElementById("username").focus();
@@ -68,9 +67,8 @@ if (isset($_GET['msg']) && $_GET['msg'] == "registersuccess")
 <?php
 // Select * from table_name will return false if the table does not exist.
 $val = mysqli_query($con, "select * from users");
-if($val === FALSE)
-{
-	echo "<a href='install.php' style='color:red;'>¡Instala la aplicación antes de usarla!</a>";
+if($val === FALSE) {
+	echo "<a href='install.php' style='color:red;'>".i18n("index", "install_promotion")."</a>";
 }
 ?>
 		</div>

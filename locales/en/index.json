@@ -1,0 +1,14 @@
+{
+	"title": "Log in",
+	"user_field": "Username:",
+	"password_field": "Password:",
+	"form_button": "Log in",
+	"msg_loginwrong": "Incorrect username and/or password",
+	"msg_empty": "Fill in all the fields, please",
+	"msg_logoutsuccess": "¡Has cerrado la sesión correctamente!",
+	"msg_registersuccess": "¡Has creado tu perfil de concursante correctamente! Ya puedes iniciar sesión.",
+	"salute": "Hi %0!",
+	"contests_btn": "Competiciones",
+	"dashboard_btn": "Panel de Control",
+	"install_promotion": "¡Instala la aplicación antes de usarla!"
+}

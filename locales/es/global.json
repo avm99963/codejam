@@ -1,0 +1,6 @@
+{
+	"msg_loginwrong": "Usuario y/o contraseña incorrecto",
+	"msg_empty": "Por favor, rellena todos los campos",
+	"msg_logoutsuccess": "Has cerrado la sesión correctamente",
+	"msg_registersuccess": "Has creado tu perfil de concursante correctamente. Ya puedes iniciar sesión."
+}

@@ -271,4 +271,59 @@ function array_search_multidimensional($haystack, $field, $needle) {
    }
    return false;
 }
+
+function getlanguagei18n() {
+    global $language;
+    return $language;
+}
+
+function initi18n($include) {
+    global $i18n_strings;
+    $i18n_strings = array();
+    $language = getlanguagei18n();
+
+    $i18n_strings["global"] = json_decode(file_get_contents("locales/".$language."/global.json"), true);
+
+    if (gettype($include) == "array") {
+        foreach ($include as $includer) {
+            $file = "locales/".$language."/".$includer.".json";
+            if (file_exists($file)) {
+                $i18n_strings[$includer] = json_decode(file_get_contents($file), true);
+            } else {
+                die("<div class='alert alert-danger'>File ".$file." doesn't exist</div>");
+                return false;
+            }
+        }
+    } elseif (gettype($include) == "string") {
+        $file = "locales/".$language."/".$include.".json";
+        if (file_exists($file)) {
+            $i18n_strings[$include] = json_decode(file_get_contents($file), true);
+        } else {
+            die("<div class='alert alert-danger'>File ".$file." doesn't exist</div>");
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+    return true;
+}
+
+function i18n($include, $message, $strings = null) {
+    global $i18n_strings;
+
+    if (!isset($i18n_strings[$include][$message])) {
+        return false;
+    }
+
+    $string = $i18n_strings[$include][$message];
+
+    if ($strings != null) {
+        foreach ($strings as $i => $subst) {
+            $string = str_replace("%".$i, $subst, $string);
+        }
+    }
+
+    return $string;
+}
 ?>
