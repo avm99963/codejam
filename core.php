@@ -279,7 +279,9 @@ function getlanguagei18n() {
 
 function initi18n($include) {
     global $i18n_strings;
-    $i18n_strings = array();
+
+    if (empty($i18n_strings))
+        $i18n_strings = array();
     $language = getlanguagei18n();
 
     $i18n_strings["global"] = json_decode(file_get_contents("locales/".$language."/global.json"), true);
