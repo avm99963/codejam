@@ -274,7 +274,14 @@ function array_search_multidimensional($haystack, $field, $needle) {
 
 function getlanguagei18n() {
     global $language;
-    return $language;
+    global $_GET;
+    global $conf;
+
+    if (isset($_GET["hl"]) && in_array($_GET["hl"], $conf["hllist"])) {
+        return $_GET["hl"];
+    } else {
+        return $language;
+    }
 }
 
 function initi18n($include) {

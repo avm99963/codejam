@@ -1,16 +1,16 @@
 <?php
 require_once("core.php");
+initi18n("secondfactor");
 $msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "wrongcode")
-  $msg = '<p class="alert-warning">El código que has introducido no es correcto</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
-  $msg = '<p class="alert-danger">La contraseña que has introducido no es correcta</p>';
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("wrongcode", "passworddoesntmatch"))) {
+    $msg = '<p class="alert-danger">'.i18n("global", "msg_".$_GET['msg']).'</p>';
+}
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <?php require ("head.php"); ?>
-        <title>Segundo factor - <?php echo $appname; ?></title>
+        <title><?=i18n("secondfactor", "title")?> - <?php echo $appname; ?></title>
         <style>
         .small_view {
             max-width: 400px;
@@ -137,7 +137,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                       exit;
                     }
                     ?>
-                    <h1>Verificación en 2 pasos</h1>
+                    <h1><?=i18n("secondfactor", "subtitle")?></h1>
                     <?php
                     echo $msg;
                     $secondfactor = twostepverification($_SESSION["prov_id"]);
@@ -181,26 +181,26 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                     </style>
                     <div id="code_container">
                         <div class="deliverymethodcontainer">
-                            <p><b>Introduce el código de verificación generado por tu aplicación para móviles.</b></p>
+                            <p><b><?=i18n("secondfactor", "deliverymethod")?></b></p>
                         </div>
                         <div id="verify_container">
                             <div id="input">
-                                <div style="margin-bottom: 10px;"><input type="text" id="verificationcode" name="verificationcode" placeholder="Introduce el código"></div>
-                                <div><button id="verify" class="g-button g-button-submit">Verificar</button></div>
+                                <div style="margin-bottom: 10px;"><input type="text" id="verificationcode" name="verificationcode" placeholder="<?=i18n("secondfactor", "verificationcode_placeholder")?>"></div>
+                                <div><button id="verify" class="g-button g-button-submit"><?=i18n("secondfactor", "verify_btn")?></button></div>
                             </div>
                             <div hidden id="waiting">
                                 <svg class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                                     <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
                                 </svg>
-                                <span>Verificando...</span>
+                                <span></span>
                             </div>
                             <div hidden id="error_1">
                                 <span class="icon svg-ic_warning_24px"></span>
-                                <span>El código de verificación debe tener 6 cifras</span>
+                                <span><?=i18n("secondfactor", "error_1")?></span>
                             </div>
                             <div hidden id="error_2">
                                 <span class="icon svg-ic_error_24px"></span>
-                                <span>El código de verificación no es correcto</span>
+                                <span><?=i18n("secondfactor", "error_2")?></span>
                             </div>
                             <div hidden id="error_3">
                                 <span class="icon svg-ic_error_24px"></span>
@@ -247,41 +247,41 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                         <img src="img/Challenge_2SV-Gnubby_graphic.png" style="height: 162px;">
                     </div>
                     <div id="install_extension" hidden>
-                        <p>Antes deberás instalar la extensión <a href="https://chrome.google.com/webstore/detail/fido-u2f-universal-2nd-fa/pfboblefjcgdjicmnffhdgionmgcdmne" target="_blank">FIDO U2F</a> de la Chrome Web Store.</p>
+                        <p><?=i18n("secondfactor", "install_extension", array('<a href="https://chrome.google.com/webstore/detail/fido-u2f-universal-2nd-fa/pfboblefjcgdjicmnffhdgionmgcdmne" target="_blank">FIDO U2F</a>'))?></p>
                     </div>
                     <div id="auth_container">
                         <div hidden id="waiting_usb">
                             <svg class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                                 <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
                             </svg>
-                            <span>Introduce (y pulsa) tu llave de seguridad.</span>
+                            <span><?=i18n("secondfactor", "waiting_usb")?></span>
                         </div>
                         <div hidden id="done">
                             <span class="icon svg-ic_done_all_24px"></span>
-                            <span>¡Listo!</span>
+                            <span><?=i18n("secondfactor", "done")?></span>
                         </div>
                         <div hidden id="usb_error_1">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>Ha ocurrido un error inesperado. Por favor, intenta de nuevo. <span style="color: gray;font-size: 12px;">(OTHER_ERROR)</span></span>
+                            <span><?=i18n("secondfactor", "usb_error_1")?> <span style="color: gray;font-size: 12px;">(OTHER_ERROR)</span></span>
                         </div>
                         <div hidden id="usb_error_2">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>Oh, vaya. Ha ocurrido un error inesperado. <span style="color: gray;font-size: 12px;">(BAD_REQUEST)</span></span>
+                            <span><?=i18n("secondfactor", "usb_error_2")?> <span style="color: gray;font-size: 12px;">(BAD_REQUEST)</span></span>
                         </div>
                         <div hidden id="usb_error_3">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>Parece que la configuración no es está soportada. <span style="color: gray;font-size: 12px;">(CONFIGURATION_UNSUPPORTED)</span></span>
+                            <span><?=i18n("secondfactor", "usb_error_3")?> <span style="color: gray;font-size: 12px;">(CONFIGURATION_UNSUPPORTED)</span></span>
                         </div>
                         <div hidden id="usb_error_4">
                             <span class="icon svg-ic_warning_24px"></span>
-                            <span>Esta llave ya está asociada a tu cuenta. <span style="color: gray;font-size: 12px;">(DEVICE_INELIGIBLE)</span></span>
+                            <span><?=i18n("secondfactor", "usb_error_4")?> <span style="color: gray;font-size: 12px;">(DEVICE_INELIGIBLE)</span></span>
                         </div>
                         <div hidden id="usb_error_5">
                             <span class="icon svg-ic_timer_24px"></span>
-                            <span>Se ha agotado el tiempo de espera. Por favor, <a href="secondfactor.php">intenta de nuevo</a>. <span style="color: gray;font-size: 12px;">(TIMEOUT)</span></span>
+                            <span><?=i18n("secondfactor", "usb_error_5")?> <span style="color: gray;font-size: 12px;">(TIMEOUT)</span></span>
                         </div>
                     </div>
-                    <p><a style="font-size: 12px;" href="secondfactor.php?forcecode=true">También puedes introducir un código</a></p>
+                    <p><a style="font-size: 12px;" href="secondfactor.php?forcecode=true"><?=i18n("secondfactor", "forcecode")?></a></p>
                     <?php
                         } else {
                     ?>

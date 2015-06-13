@@ -1,0 +1,12 @@
+{
+	"dashboard": "Panel de Control",
+	"users": "Usuarios",
+	"contests": "Competiciones",
+	"admin_contest": "admin",
+	"leaderboard_contest": "leader",
+	"create_contest": "Crear competición",
+	"configuration": "Configuración",
+	"2stepverification": "Verificación en 2 pasos",
+	"promote": "Pasar de ronda",
+	"debug": "Debug"
+}

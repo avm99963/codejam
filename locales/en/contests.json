@@ -1,0 +1,10 @@
+{
+	"title": "Contests",
+	"dashboard": "Open dashboard",
+	"leaderboard": "View leaderboard",
+	"admin": "Administer the contest",
+	"nocontests": "There are no contests available. <a href='newcontest.php'>Create one</a>",
+	"nopublic": "There are no public contests available.",
+	"nosemiprivate": "There isn't any semprivate contest.",
+	"noprivate": "You haven't been invited to any private contest."
+}

@@ -1,0 +1,10 @@
+{
+	"title": "Competiciones",
+	"dashboard": "Abrir el panel de competición",
+	"leaderboard": "Ver la clasificación",
+	"admin": "Administrar la competición",
+	"nocontests": "No hay competiciones disponibles. <a href='newcontest.php'>Crea una</a>",
+	"nopublic": "No hay competiciones públicas disponibles.",
+	"nosemiprivate": "No hay ninguna competición semiprivada.",
+	"noprivate": "No has sido invitado a ninguna competición privada."
+}
