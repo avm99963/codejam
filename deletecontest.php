@@ -42,13 +42,13 @@ table, th, td
 					if (mysqli_query($con, $sql3)) {
   						header("Location: contests.php?msg=deletesuccessful");
   					} else {
-  						die ("<p class='alert-danger'>Error eliminando los envíos de la competición: " . mysqli_error($con) . "</p>");
+  						die ("<p class='alert-danger'>".i18n("deletecontest", "error_submissions")." " . mysqli_error($con) . "</p>");
   					}
  				} else {
-					die ("<p class='alert-danger'>Error eliminando la competición: " . mysqli_error($con) . "</p>");
+					die ("<p class='alert-danger'>".i18n("deletecontest", "error_contest")." " . mysqli_error($con) . "</p>");
 				}
 			} else {
-				die ("<p class='alert-danger'>Error eliminando los problemas de la competición: " . mysqli_error($con) . "</p>");
+				die ("<p class='alert-danger'>".i18n("deletecontest", "error_problems")." " . mysqli_error($con) . "</p>");
 			}
 		} else {
 			$query = mysqli_query($con, "SELECT * FROM contests WHERE ID = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");

@@ -1,3 +1,6 @@
 {
-	"title": "Delete contest"
+	"title": "Delete contest",
+	"error_submissions": "An error ocurred while deleting this contest' submissions:",
+	"error_contest": "An error ocurred while deleting this contest:",
+	"error_problems": "An error ocurred while deleting this contest' problems:"
 }
