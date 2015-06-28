@@ -1,0 +1,15 @@
+{
+	"title": "Add problem",
+	"contestdoesntexist": "Contest doesn't exist :-/",
+	"error_upload": "Error %0 happened while uploading file %1",
+	"error_move": "Couldn't upload file %0 – can't move it from tmp directory to the problems folder",
+	"error": "An error ocurred while adding the problem :-/",
+	"name_field": "Problem title",
+	"description_field": "Description",
+	"small": "Small input",
+	"large": "Large input",
+	"points": "Points",
+	"input_field": "Input %0 (<i>.in</i>)",
+	"output_field": "Output %0 (<i>.out</i>)",
+	"add_btn": "Add"
+}

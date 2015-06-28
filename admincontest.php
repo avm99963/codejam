@@ -4,14 +4,9 @@ initi18n("admincontest");
 if (getrole())
 {
 $msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
-  $msg = '<p class="alert-success">Competición editada satisfactoriamente</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "addproblemsuccess")
-  $msg = '<p class="alert-success">Problema añadido satisfactoriamente</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "editproblemsuccess")
-  $msg = '<p class="alert-success">Problema editado satisfactoriamente</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
-  $msg = '<p class="alert-success">Problema eliminado satisfactoriamente</p>';
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("editsuccess", "addproblemsuccess", "editproblemsuccess", "deleteproblemsuccess"))) {
+  $msg = "<p class='alert-success'>".i18n("global", "msg_".$_GET['msg'])."</p>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -105,6 +100,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
       line-height: 15px;
     }
     </style>
+    <?php initi18n_js("share_js"); ?>
     <script src="js/share.js"></script>
   </head>
   <body>

@@ -2,9 +2,9 @@ var invited = [], selectize;
 
 function updated() {
 	if (document.querySelector("input").value == "") {
-		document.querySelector("#done").innerText = "Listo";
+		document.querySelector("#done").innerText = i18n.ok;
 	} else {
-		document.querySelector("#done").innerText = "Invitar";
+		document.querySelector("#done").innerText = i18n.invite;
 	}
 }
 
@@ -17,7 +17,7 @@ function remove() {
 	    if(this.status == 200) {
 	        var response = JSON.parse(this.responseText);
 	        if (response.errorCode) {
-	        	alert("Ha ocurrido un error inesperado: "+response.errorText);
+	        	alert(i18n.error+" "+response.errorText);
 	        } else {
 	        	document.querySelector("tr[data-id='"+response.id+"']").parentNode.removeChild(document.querySelector("tr[data-id='"+response.id+"']"));
 	        	if (document.querySelectorAll("tr").length == 0) {
@@ -45,7 +45,7 @@ function done() {
 		    if(this.status == 200) {
 		        var response = JSON.parse(this.responseText);
 		        if (response.errorCode) {
-		        	alert("Ha ocurrido un error inesperado: "+response.errorText);
+		        	alert(i18n.error+" "+response.errorText);
 		        } else {
 		        	var people_array = people.split(",");
 		        	if (document.querySelectorAll("tr").length == 0) {

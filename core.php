@@ -153,7 +153,7 @@ function format_time($t,$f=':') {
 }
 
 function htmledit() {
-    echo '<script src="lib/ckeditor/ckeditor.js"></script>';
+    echo '<script src="lib/ckeditor/ckeditor.js"></script><script>window.addEventListener("load", function() { CKEDITOR.replace(document.querySelector("textarea"), { language: "'.getlanguagei18n().'" }); });</script>';
 }
 
 function get_ip_address(){
@@ -284,18 +284,30 @@ function getlanguagei18n() {
     }
 }
 
-function initi18n($include) {
+function initi18n($include, $gobacki=0) {
     global $i18n_strings;
 
     if (empty($i18n_strings))
         $i18n_strings = array();
     $language = getlanguagei18n();
 
-    $i18n_strings["global"] = json_decode(file_get_contents("locales/".$language."/global.json"), true);
+    /* Messy code which allows me to be able to load empty strings :-D */
+    if ($language == "empty") {
+        return true;
+    }
+    /* End of messy code */
+
+    $goback = "";
+
+    for ($i = 0; $i < $gobacki; $i++) {
+        $goback .= "../";
+    }
+
+    $i18n_strings["global"] = json_decode(file_get_contents($goback."locales/".$language."/global.json"), true);
 
     if (gettype($include) == "array") {
         foreach ($include as $includer) {
-            $file = "locales/".$language."/".$includer.".json";
+            $file = $goback."locales/".$language."/".$includer.".json";
             if (file_exists($file)) {
                 $i18n_strings[$includer] = json_decode(file_get_contents($file), true);
             } else {
@@ -304,7 +316,7 @@ function initi18n($include) {
             }
         }
     } elseif (gettype($include) == "string") {
-        $file = "locales/".$language."/".$include.".json";
+        $file = $goback."locales/".$language."/".$include.".json";
         if (file_exists($file)) {
             $i18n_strings[$include] = json_decode(file_get_contents($file), true);
         } else {
@@ -334,5 +346,23 @@ function i18n($include, $message, $strings = null) {
     }
 
     return $string;
+}
+
+function initi18n_js($include, $gobacki=0) {
+    $language = getlanguagei18n();
+
+    $goback = "";
+
+    for ($i = 0; $i < $gobacki; $i++) {
+        $goback .= "../";
+    }
+
+    $file = $goback."locales/".$language."/".$include.".json";
+    if (file_exists($file)) {
+        echo "<script>var i18n = ".file_get_contents($file).";</script>";
+    } else {
+        die("<div class='alert alert-danger'>File ".$file." doesn't exist</div>");
+        return false;
+    }
 }
 ?>

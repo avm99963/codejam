@@ -7,7 +7,7 @@ function $all(a) {
 }
 
 function share() {
-	$("#modal-dialog").innerHTML = "<h3>Loading...</h3>";
+	$("#modal-dialog").innerHTML = "<h3>"+i18n.loading+"</h3>";
 	$("#modal-dialog").hidden = false;
 	$("#modal-dialog-bg").hidden = false;
 	var iframe = document.createElement("iframe");
