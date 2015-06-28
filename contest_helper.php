@@ -57,9 +57,10 @@ function leaderboard($contest, $top10 = false, $tellmethetruth = false) {
 
 		$time += $penalty;
 
-		if ($totalpoints == 0) {
+		/*if ($totalpoints == 0) {
 			continue;
-		}
+		}*/ // Causes bug when judging submissions of contestant who has only submitted wrong responses
+		// TODO: Decide if support for this should be continued or not
 
 		$scores[] = array(
 			"score" => $totalpoints,
