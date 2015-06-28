@@ -153,7 +153,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
           <h3>Problemas</h3>
           <?php
           $problems_query = mysqli_query($con, "SELECT * FROM problems WHERE contest = '{$id}' ORDER BY num");
-          if (mysqli_num_rows($problems_query)) {
+          if ($numrows = mysqli_num_rows($problems_query)) {
           ?>
           <table>
             <thead>
@@ -166,13 +166,15 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
             </thead>
             <tbody>
           <?php
+          $i = 0;
           while ($row = mysqli_fetch_assoc($problems_query)) {
             $io = json_decode($row["io"], true);
             if (getrole() > 1) {
-              $added = "<td><a href='editproblem.php?id=".$row['id']."'><span class='icon svg-ic_mode_edit_24px'></span></a><br><a href='deleteproblem.php?id=".$row['id']."'><span class='icon svg-ic_delete_24px'></span></a></td><td><a href='move.php?id=".$row['id']."&do=up'><span class='icon svg-ic_keyboard_arrow_up_24px'></span></a><br><a href='move.php?id=".$row['id']."&do=down'><span class='icon svg-ic_keyboard_arrow_down_24px'></span></a></td><td><a href='intermove.php?id=".$row['id']."'><span class='icon svg-ic_open_with_24px'></span></a></td>";
+              $added = "<td><a href='editproblem.php?id=".$row['id']."'><span class='icon svg-ic_mode_edit_24px'></span></a><br><a href='deleteproblem.php?id=".$row['id']."'><span class='icon svg-ic_delete_24px'></span></a></td><td>".(($i != 0) ? "<a href='move.php?id=".$row['id']."&do=up'><span class='icon svg-ic_keyboard_arrow_up_24px'></span></a>" : "")."<br>".(($i < ($numrows - 1)) ? "<a href='move.php?id=".$row['id']."&do=down'><span class='icon svg-ic_keyboard_arrow_down_24px'></span></a>" : "")."</td><td><a href='intermove.php?id=".$row['id']."'><span class='icon svg-ic_open_with_24px'></span></a></td>";
             } else {
               $added = "";
             }
+            $i++;
             echo "<tr><td>".$row["id"]."</td><td><a href='problem.php?id=".$row["id"]."'>".htmlspecialchars($row["name"])."</a></td><td>".$io["pts"]["small"]." pts</td><td>".$io["pts"]["large"]." pts</td>".$added."</tr>";
           }
           ?>
