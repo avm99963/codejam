@@ -37,11 +37,11 @@ table, th, td
 		<?=$msg?>
 		<?php
 		if (isset($_GET['sent']) && $_GET['sent'] == "1") {
-			$sql = "DELETE FROM problems WHERE contest = '".(INT)$_GET['id']."'";
+			$sql = "DELETE FROM problems WHERE contest = ".(INT)$_GET['id']."";
 			if (mysqli_query($con, $sql)) {
-				$sql2 = "DELETE FROM contests WHERE id = '".(INT)$_GET['id']."' LIMIT 1";
+				$sql2 = "DELETE FROM contests WHERE id = ".(INT)$_GET['id']." LIMIT 1";
 				if (mysqli_query($con, $sql2)) {
-					$sql3 = "DELETE FROM contests WHERE id = '".(INT)$_GET['id']."' LIMIT 1";
+					$sql3 = "DELETE FROM submissions WHERE contest = ".(INT)$_GET['id']."";
 					if (mysqli_query($con, $sql3)) {
   						header("Location: contests.php?msg=deletesuccessful");
   					} else {
