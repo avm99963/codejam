@@ -75,7 +75,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
           }
           ?>
           <?=$msg?>
-          <h1><a href="admincontest.php?id=<?=$_GET["id"]?>"><span class='icon svg-ic_chevron_left_24px'></span></a> <span><?=$row["name"]?></span></h1>
+          <h1><a href="admincontest.php?id=<?=$_GET["id"]?>"><span class='icon svg-ic_chevron_left_24px'></span></a> <span><?=i18n("judgecontest", "subtitle", array($row["name"]))?></span></h1>
           <?php
           $query2 = mysqli_query($con, "SELECT * FROM submissions WHERE contest = {$id}");
           if (mysqli_num_rows($query2)) {

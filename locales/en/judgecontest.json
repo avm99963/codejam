@@ -3,7 +3,7 @@
 	"contestdoesntexist":"This contest doesn't exist",
 	"contesthasntstarted": "This contest hasn't started yet",
 	"noproblems": "This contest doesn't have any problems",
-	"subtitle": "Judge submissions from %0",
+	"subtitle": "Judge submissions in %0",
 	"id": "ID",
 	"starttimer": "Start time",
 	"senttime": "Submission time",
