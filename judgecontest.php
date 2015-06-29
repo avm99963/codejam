@@ -3,6 +3,7 @@ require_once("core.php");
 require_once("contest_helper.php");
 if (getrole())
 {
+initi18n("judgecontest");
 $msg = "";
 if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
   $msg = '<p class="alert-success">Competición editada satisfactoriamente</p>';
@@ -11,7 +12,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
 <html>
   <head>
     <?php require ("head.php"); ?>
-    <title>Juzgar soluciones – <?=$appname?></title>
+    <title><?=i18n("judgecontest", "title")?> – <?=$appname?></title>
     <style>
     table {
       width: 100%;
@@ -45,7 +46,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
         <?php
         }
           if (!isset($_GET["id"]))
-            die("<div class='alert-danger'>Esta competición no existe</div>");
+            die("<div class='alert-danger'></div>");
           $id = (INT)$_GET["id"];
           $query = mysqli_query($con, "SELECT * FROM contests WHERE id = '{$id}'");
 
@@ -57,7 +58,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
           $now = time();
 
           if ($now < $row["starttime"]) {
-            die("<div class='alert-danger'>Esta competición todavía no ha empezado</div>");
+            die("<div class='alert-danger'></div>");
           }
 
           $query3 = mysqli_query($con, "SELECT id, name, io FROM problems WHERE contest = {$id}");
@@ -70,11 +71,11 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
               $problems[$problem["id"]]["io"] = json_decode($problems[$problem["id"]]["io"], true);
             }
           } else {
-            die("<div class='alert-danger'>Esta competición no tiene problemas</div>");
+            die("<div class='alert-danger'></div>");
           }
           ?>
           <?=$msg?>
-          <h1><a href="admincontest.php?id=<?=$_GET["id"]?>"><span class='icon svg-ic_chevron_left_24px'></span></a> <span>Juzgar respuestas de <?=$row["name"]?></span></h1>
+          <h1><a href="admincontest.php?id=<?=$_GET["id"]?>"><span class='icon svg-ic_chevron_left_24px'></span></a> <span><?=$row["name"]?></span></h1>
           <?php
           $query2 = mysqli_query($con, "SELECT * FROM submissions WHERE contest = {$id}");
           if (mysqli_num_rows($query2)) {
@@ -83,17 +84,17 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Tiempo de inicio</th>
-                  <th>Tiempo de envío</th>
-                  <th>Username</th>
-                  <th>Problema</th>
-                  <th>Tipo</th>
-                  <th>Válido</th>
-                  <th>Juzgado</th>
-                  <th>Código fuente</th>
-                  <th>Salida</th>
-                  <th>Juzgar</th>
+                  <th><?=i18n("judgecontest", "id")?></th>
+                  <th><?=i18n("judgecontest", "starttimer")?></th>
+                  <th><?=i18n("judgecontest", "senttime")?></th>
+                  <th><?=i18n("judgecontest", "username")?></th>
+                  <th><?=i18n("judgecontest", "problem")?></th>
+                  <th><?=i18n("judgecontest", "type")?></th>
+                  <th><?=i18n("judgecontest", "valid")?></th>
+                  <th><?=i18n("judgecontest", "judged")?></th>
+                  <th><?=i18n("judgecontest", "sourcecode")?></th>
+                  <th><?=i18n("judgecontest", "output")?></th>
+                  <th><?=i18n("judgecontest", "judge")?></th>
                 </tr>
               </thead>
               <tbody>
@@ -130,7 +131,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
             </table>
             <?php
           } else {
-            echo "No hay ningun envío";
+            echo i18n("judgecontest", "nosubmissions");
           }
           ?>
     		</div>

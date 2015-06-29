@@ -1,10 +1,10 @@
 {
-	"title": "Iniciar sesión",
-	"user_field": "Usuario:",
-	"password_field": "Contraseña:",
-	"form_button": "Log in",
-	"salute": "¡Hola %0!",
-	"contests_btn": "Competiciones",
-	"dashboard_btn": "Panel de Control",
-	"install_promotion": "¡Instala la aplicación antes de usarla!"
+  "title":"Iniciar sesión",
+  "user_field":"Usuario:",
+  "password_field":"Contraseña:",
+  "form_button":"Log in",
+  "salute":"¡Hola %0!",
+  "contests_btn":"Competiciones",
+  "dashboard_btn":"Panel de Control",
+  "install_promotion":"¡Instala la aplicación antes de usarla!"
 }

@@ -1,0 +1,19 @@
+{
+	"title": "Judge solutions",
+	"contestdoesntexist":"This contest doesn't exist",
+	"contesthasntstarted": "This contest hasn't started yet",
+	"noproblems": "This contest doesn't have any problems",
+	"subtitle": "Judge submissions from %0",
+	"id": "ID",
+	"starttimer": "Start time",
+	"senttime": "Submission time",
+	"username": "Username",
+	"problem": "Problem",
+	"type": "Type",
+	"valid": "Valid",
+	"judged": "Judged",
+	"sourcecode": "Source code",
+	"output": "Output",
+	"judge": "Judge",
+	"nosubmissions": "There isn't any submission"
+}

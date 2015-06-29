@@ -1,5 +1,5 @@
 {
-	"ok": "Listo",
-	"invite": "Invitar",
-	"error": "Ha ocurrido un error inesperado:"
+  "ok":"Listo",
+  "invite":"Invitar",
+  "error":"Ha ocurrido un error inesperado:"
 }

@@ -1,15 +1,15 @@
 {
-	"title": "Añadir problema",
-	"contestdoesntexist": "La competición no existe :-/",
-	"error_upload": "Error %0 happened while uploading file %1",
-	"error_move": "No se ha podido subir el archivo %0 – no se ha podido mover del directorio temporal a la carpeta problems",
-	"error": "Error al añadir el problema :-/",
-	"name_field": "Título del problema",
-	"description_field": "Descripción",
-	"small": "Entrada pequeña",
-	"large": "Entrada grande",
-	"points": "Puntos",
-	"input_field": "Entrada %0 (<i>.in</i>)",
-	"output_field": "Salida %0 (<i>.out</i>)",
-	"add_btn": "Añadir"
+  "title":"Añadir problema",
+  "contestdoesntexist":"La competición no existe :-\/",
+  "error_upload":"Ha ocurrido el error %0 mientras se subía el archivo %1",
+  "error_move":"No se ha podido subir el archivo %0 – no se ha podido mover del directorio temporal a la carpeta problems",
+  "error":"Error al añadir el problema :-\/",
+  "name_field":"Título del problema",
+  "description_field":"Descripción",
+  "small":"Entrada pequeña",
+  "large":"Entrada grande",
+  "points":"Puntos",
+  "input_field":"Entrada %0 (<i>.in<\/i>)",
+  "output_field":"Salida %0 (<i>.out<\/i>)",
+  "add_btn":"Añadir"
 }

@@ -1,9 +1,9 @@
 {
-	"home": "Home",
-	"dashboard": "Panel de Control",
-	"editprofile": "Editar perfil",
-	"contests": "Competiciones",
-	"logout": "Cerrar sesión",
-	"register": "Formulario de registro",
-	"salute": "Hola %0"
+  "home":"Home",
+  "dashboard":"Panel de Control",
+  "editprofile":"Editar perfil",
+  "contests":"Competiciones",
+  "logout":"Cerrar sesión",
+  "register":"Formulario de registro",
+  "salute":"Hola %0"
 }

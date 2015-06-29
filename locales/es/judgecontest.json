@@ -1,0 +1,19 @@
+{
+	"title": "Juzgar soluciones",
+	"contestdoesntexist":"Esta competición no existe",
+	"contesthasntstarted": "Esta competición todavía no ha empezado",
+	"noproblems": "Esta competición no tiene problemas",
+	"subtitle": "Juzgar respuestas de %0",
+	"id": "ID",
+	"starttimer": "Tiempo de inicio",
+	"senttime": "Tiempo de envío",
+	"username": "Usuario",
+	"problem": "Problema",
+	"type": "Tipo",
+	"valid": "Válido",
+	"judged": "Juzgado",
+	"sourcecode": "Código fuente",
+	"output": "Salida",
+	"judge": "Juzgar",
+	"nosubmissions": "No hay ningún envío"
+}
