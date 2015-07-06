@@ -7,6 +7,8 @@ if (!twostepverification()) {
   exit;
 }
 
+initi18n("addsecuritykey");
+
 $query = mysqli_query($con, "SELECT keyHandle FROM securitykeys WHERE user_id = '".$_SESSION['id']."'") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 $row = array();
 if (mysqli_num_rows($query)) {
@@ -28,7 +30,7 @@ try {
 <html>
     <head>
         <?php require ("head.php"); ?>
-        <title>Administrar llaves de seguridad - <?php echo $appname; ?></title>
+        <title><?=i18n("addsecuritykey", "title")?> - <?php echo $appname; ?></title>
         <style>
         h1 span {
             vertical-align: middle;
@@ -211,56 +213,56 @@ try {
                     <?php
                     if (!loggedin())
                     {
-                        die ("<div class='alert-danger'><p>¡No estás connectado! <a href='index.php'>Conéctate</a></p></div>");
+                        die ("<div class='alert-danger'><p>".i18n("global", "notloggedin")."</p></div>");
                     }
                     ?>
-                    <h1><a href="securitykeys.php"><span class='icon svg-ic_chevron_left_24px'></span></a> <span>Añadir llave de seguridad</span></h1>
+                    <h1><a href="securitykeys.php"><span class='icon svg-ic_chevron_left_24px'></span></a> <span><?=i18n("addsecuritykey", "title")?></span></h1>
                     <img src="img/security-key.png" style="float: right;">
-                    <p style="margin-bottom: 20px;">Puedes añadir una llave de seguridad a tu cuenta para que el proceso de inicio de sesión sea más seguro.</p>
-                    <p style="margin-bottom: 0;">Para ello, sigue los siguientes pasos:</p>
+                    <p style="margin-bottom: 20px;"><?=i18n("addsecuritykey", "intro1")?></p>
+                    <p style="margin-bottom: 0;"><?=i18n("addsecuritykey", "intro2")?></p>
                     <div class="step">
-                        <div class="number">1</div><div class="text"><b>Instala la extensión <a href="https://chrome.google.com/webstore/detail/fido-u2f-universal-2nd-fa/pfboblefjcgdjicmnffhdgionmgcdmne" target="_blank">FIDO U2F</a> de la Chrome Web Store.</b></div><div hidden flex class="icon_container" id="extension"><span class="icon svg-ic_done_24px"></span></div>
+                        <div class="number">1</div><div class="text"><b><?=i18n("addsecuritykey", "step1", array('<a href="https://chrome.google.com/webstore/detail/fido-u2f-universal-2nd-fa/pfboblefjcgdjicmnffhdgionmgcdmne" target="_blank">FIDO U2F</a>'))?></b></div><div hidden flex class="icon_container" id="extension"><span class="icon svg-ic_done_24px"></span></div>
                     </div>
                     <div class="step">
-                        <div class="number">2</div><div class="text"><b>Asegúrate de que tienes a mano una llave de seguridad</b><br>¿No tienes una llave de seguridad? <a href="https://support.google.com/accounts/answer/6103523?hl=es" target="_blank">Más información</a></div>
+                        <div class="number">2</div><div class="text"><b><?=i18n("addsecuritykey", "step2")?></b><br><?=i18n("addsecuritykey", "step2_helper")?></div>
                     </div>
                     <div class="step">
-                        <div class="number">3</div><div class="text"><b>Retira la llave de seguridad si ya la has insertado.</b></div>
+                        <div class="number">3</div><div class="text"><b><?=i18n("addsecuritykey", "step3")?></b></div>
                     </div>
                     <div class="step" style="margin-bottom: 5px">
-                        <div class="number">4</div><div class="text"><b>Haz clic en Registrar y, a continuación, introduce tu llave de seguridad en un puerto USB.</b><br>Si tu llave de seguridad tiene un botón o un disco dorado, tócalo.</div>
+                        <div class="number">4</div><div class="text"><b><?=i18n("addsecuritykey", "step4")?></b><br><?=i18n("addsecuritykey", "step4_helper")?></div>
                     </div>
                     <div id="registrar_container">
-                        <button id="registrar" class="button-link">Registrar</button>
+                        <button id="registrar" class="button-link"><?=i18n("addsecuritykey", "register")?></button>
                         <div hidden id="waiting_usb">
                             <svg class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                                 <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
                             </svg>
-                            <span>Ahora introduce (y toca) tu llave de seguridad.</span>
+                            <span><?=i18n("addsecuritykey", "waiting_usb")?></span>
                         </div>
                         <div hidden id="done">
                             <span class="icon svg-ic_done_all_24px"></span>
-                            <span>¡Listo!</span>
+                            <span><?=i18n("addsecuritykey", "done")?></span>
                         </div>
                         <div hidden id="usb_error_1">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>Ha ocurrido un error inesperado. Por favor, intenta de nuevo. <span style="color: gray;font-size: 12px;">(OTHER_ERROR)</span></span>
+                            <span><?=i18n("addsecuritykey", "usb_error_1")?> <span style="color: gray;font-size: 12px;">(OTHER_ERROR)</span></span>
                         </div>
                         <div hidden id="usb_error_2">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>Oh, vaya. Ha ocurrido un error inesperado. <span style="color: gray;font-size: 12px;">(BAD_REQUEST)</span></span>
+                            <span><?=i18n("addsecuritykey", "usb_error_2")?> <span style="color: gray;font-size: 12px;">(BAD_REQUEST)</span></span>
                         </div>
                         <div hidden id="usb_error_3">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>Parece que la configuración no es está soportada. <span style="color: gray;font-size: 12px;">(CONFIGURATION_UNSUPPORTED)</span></span>
+                            <span><?=i18n("addsecuritykey", "usb_error_3")?> <span style="color: gray;font-size: 12px;">(CONFIGURATION_UNSUPPORTED)</span></span>
                         </div>
                         <div hidden id="usb_error_4">
                             <span class="icon svg-ic_warning_24px"></span>
-                            <span>Esta llave ya está asociada a tu cuenta. <span style="color: gray;font-size: 12px;">(DEVICE_INELIGIBLE)</span></span>
+                            <span><?=i18n("addsecuritykey", "usb_error_4")?> <span style="color: gray;font-size: 12px;">(DEVICE_INELIGIBLE)</span></span>
                         </div>
                         <div hidden id="usb_error_5">
                             <span class="icon svg-ic_timer_24px"></span>
-                            <span>Se ha agotado el tiempo de espera. Por favor, intenta de nuevo. <span style="color: gray;font-size: 12px;">(TIMEOUT)</span></span>
+                            <span><?=i18n("addsecuritykey", "usb_error_5")?> <span style="color: gray;font-size: 12px;">(TIMEOUT)</span></span>
                         </div>
                     </div>
                 </div>

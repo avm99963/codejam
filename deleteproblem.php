@@ -2,15 +2,13 @@
 require_once("core.php");
 if (isadmin())
 {
-$msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
-  $msg = '<p class="alert-danger">¡No puedes borrar el único hyperadmin!</p>';
+initi18n("deleteproblem");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Eliminar problema - <?php echo $appname; ?></title>
+<title><?=i18n("deleteproblem", "title")?> - <?php echo $appname; ?></title>
 <style>
 td, th
 {
@@ -33,13 +31,12 @@ table, th, td
 		<?php anuncio(); ?>
 		<?php require("sidebar.php"); ?>
 		<div class="text right large">
-		<h1>Eliminar problema</h1>
-		<?=$msg?>
+		<h1><?=i18n("deleteproblem", "title")?></h1>
 		<?php
 		if (isset($_GET['sent']) && $_GET['sent'] == "1") {
 			$query = mysqli_query($con, "SELECT * FROM problems WHERE id = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
 			if (!mysqli_num_rows($query))
-				die("<div class='alert alert-danger'>Este problema no existe.</div>");
+				die("<div class='alert alert-danger'>".i18n("deleteproblem", "problemdoesntexist")."</div>");
 			$row = mysqli_fetch_assoc($query);
 
 			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
@@ -54,10 +51,10 @@ table, th, td
 				if (!empty($row3["solution"])) {
 					$solution = json_decode($row3["solution"], true);
 					if (!unlink("uploaded_solutions/".$solution["output"])) {
-						echo "<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_solutions/".$solution["output"].". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>";
+						echo "<div class='alert alert-warning'>".i18n("deleteproblem", "error_file", "uploaded_solutions/".$solution["output"])."</div>";
 					} else {
 						if (!unlink("uploaded_solutions/".$solution["sourcecode"])) {
-							echo "<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_solutions/".$solution["sourcecode"].". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>";
+							echo "<div class='alert alert-warning'>".i18n("deleteproblem", "error_file", "uploaded_solutions/".$solution["sourcecode"])."</div>";
 						}
 					}
 				}
@@ -69,7 +66,7 @@ table, th, td
 						$io = json_decode($row["io"], true);
 						foreach ($io["files"] as $file) {
 							if (!unlink("uploaded_img/".$file)) {
-								echo "<div class='alert alert-warning'>No se ha podido eliminar el archivo uploaded_img/".$file.". Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.</div>";
+								echo "<div class='alert alert-warning'>".i18n("deleteproblem", "error_file", "uploaded_img/".$file)."</div>";
 							} else {
 								header("Location: admincontest.php?id=".$row2["id"]."&msg=deleteproblemsuccess");
 							}
@@ -88,9 +85,9 @@ table, th, td
 			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
 			$row2 = mysqli_fetch_assoc($query2);
 		?>
-		<p>Estás a punto de eliminar el problema <b><?=$row["name"]?></b>.</p>
-		<p>¿Estás seguro? <span style="color:red;font-weight:bold;">Esta acción no se puede revertir</span></p>
-		<p><a href="deleteproblem.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red">Sí</a> <a href="admincontest.php?id=<?=$row2['id']?>" class="button-link">No</a></p>
+		<p><?=i18n("deleteproblem", "aboutto", array($row["name"]))?></p>
+		<p><?=i18n("global", "delete_areyousure")?></p>
+		<p><a href="deleteproblem.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red"><?=i18n("global", "yes")?></a> <a href="admincontest.php?id=<?=$row2['id']?>" class="button-link"><?=i18n("global", "no")?></a></p>
 		<?php
 		}
 		?>

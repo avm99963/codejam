@@ -19,6 +19,8 @@
   "msg_editproblemsuccess":"Problema editado satisfactoriamente",
   "msg_deleteproblemsuccess":"Problema eliminado satisfactoriamente",
   "msg_nameunique":"Un problema con este nombre ya existe",
+  "msg_configured":"La verificación en 2 pasos ha sido configurada satisfactoriamente",
+  "msg_disabled":"La verificación en 2 pasos se ha inhabilitado satisfactoriamente",
   "id":"ID",
   "username":"Usuario",
   "name":"Nombre",

@@ -19,6 +19,8 @@
   "msg_editproblemsuccess":"Problem edited successfully",
   "msg_deleteproblemsuccess":"Problem deleted successfully",
   "msg_nameunique":"There is already one problem with that name",
+  "msg_configured":"2-step verification has been configured successfully",
+  "msg_disabled":"2-step verification has been disabled successfully",
   "id":"ID",
   "username":"Username",
   "name":"Name",

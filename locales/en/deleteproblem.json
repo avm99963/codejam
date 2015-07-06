@@ -1,0 +1,7 @@
+{
+  "title":"Delete problem",
+  "aboutto":"You're about to delete the problem titled <b>%0</b>.",
+  "error_mysql":"Data from table %0 couldn't be deleted",
+  "error_file":"File %0 couldn't be deleted. Delete it manually or try later to purge it in the <a href='debug.php'>debug</a> page.",
+  "problemdoesntexist":"This problem doesn't exist."
+}

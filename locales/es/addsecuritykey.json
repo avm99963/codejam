@@ -1,0 +1,19 @@
+{
+	"title": "Administrar llaves de seguridad",
+	"intro1": "Puedes añadir una llave de seguridad a tu cuenta para que el proceso de inicio de sesión sea más seguro.",
+	"intro2": "Para ello, sigue los siguientes pasos:",
+	"step1": "Instala la extensión %0 de la Chrome Web Store.",
+	"step2": "Asegúrate de que tienes a mano una llave de seguridad",
+	"step2_helper": "¿No tienes una llave de seguridad? <a href=\"https://support.google.com/accounts/answer/6103523?hl=es\" target=\"_blank\">Más información</a>",
+	"step3": "Retira la llave de seguridad si ya la has insertado.",
+	"step4": "Haz clic en Registrar y, a continuación, introduce tu llave de seguridad en un puerto USB.",
+	"step4_helper": "Si tu llave de seguridad tiene un botón o un disco dorado, tócalo.",
+	"register": "Registrar",
+	"waiting_usb": "Ahora introduce (y toca) tu llave de seguridad.",
+	"done": "¡Listo!",
+	"usb_error_1":"Ha ocurrido un error inesperado. Por favor, intenta de nuevo.",
+	"usb_error_2":"Oh, vaya. Ha ocurrido un error inesperado.",
+	"usb_error_3":"Parece que la configuración no es está soportada.",
+	"usb_error_4":"Esta llave ya está asociada a tu cuenta.",
+	"usb_error_5":"Se ha agotado el tiempo de espera. Por favor, <a href='secondfactor.php'>intenta de nuevo<\/a>."
+}

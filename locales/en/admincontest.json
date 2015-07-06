@@ -15,6 +15,6 @@
   "status":"Status",
   "status_notstarted":"It hasn't started yet",
   "status_finished":"It has already finished",
-  "status_live":"¡Live!",
+  "status_live":"Live!",
   "invite":"Invite"
 }
