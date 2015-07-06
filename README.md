@@ -11,7 +11,7 @@ Special mention to the also Open Source software [*Minimum PHP Version Calculato
 ## Set-up
 1. Clone this repository into your Web Server or download a [zip tarball](https://github.com/avm99963/codejam/archive/master.zip). `git clone https://github.com/avm99963/codejam.git`
 
-2. Open the config.default.html file and edit the variables to configure the database connection, random file names length, etc.
+2. Open the `config.default.php` file and edit the variables to configure the database connection, random file names length, etc. Then save it as `config.php`
 
 3. Open in your preferred web browser the install.php webpage of the root directory.
 
