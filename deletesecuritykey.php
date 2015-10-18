@@ -1,5 +1,6 @@
 <?php
 require_once("core.php");
+initi18n("deletesecuritykey");
 if (isadmin())
 {
 $msg = "";
@@ -10,7 +11,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Eliminar llave de seguridad - <?php echo $appname; ?></title>
+<title><?=i18n("deletesecuritykey", "title")?> - <?php echo $appname; ?></title>
 <style>
 td, th
 {
@@ -36,7 +37,7 @@ thead {
 		<?php anuncio(); ?>
 		<?php require("sidebar.php"); ?>
 		<div class="text right large">
-		<h1>Eliminar llave de seguridad</h1>
+		<h1><?=i18n("deletesecuritykey", "title")?></h1>
 		<?=$msg?>
 		<?php
 		if (!twostepverification()) {
@@ -60,8 +61,8 @@ thead {
 		?>
 		<table>
 			<thead>
-              <tr><td colspan="2">Dispositivo donde se añadó</td><td colspan="2">Dispositivo donde se ha iniciado sesión la última vez</td></tr>
-              <tr><td>Dirección IP</td><td>Tiempo</td><td>Dirección IP</td><td>Tiempo</td></tr>
+              <tr><td colspan="2"><?=i18n("deletesecuritykey", "addeddevice")?></td><td colspan="2"><?=i18n("deletesecuritykey", "inserteddevice")?></td></tr>
+              <tr><td><?=i18n("deletesecuritykey", "ipaddress")?></td><td><?=i18n("deletesecuritykey", "date")?></td><td><?=i18n("deletesecuritykey", "ipaddress")?></td><td><?=i18n("deletesecuritykey", "date")?></td></tr>
             </thead>
 			<tbody>
 		<?php
@@ -69,12 +70,19 @@ thead {
 		if (!mysqli_num_rows($query))
 			die("<div class='alert alert-danger'>Esta llave de seguridad no existe.</div>");
 		$row = mysqli_fetch_assoc($query);
-		echo "<tr><td>".$row["deviceadded"]."</td><td>".$row["dateadded"]."</td><td>".$row["lastuseddevice"]."</td><td>".$row["lastuseddate"]."</td><td><a href='deletesecuritykey.php?id=".$row['id']."'><span class='icon svg-ic_delete_24px'></span></a></td></tr>";
+		if (empty($row["lastuseddate"])) {
+	      $lastuseddevice = "-";
+	      $lastuseddate = "-";
+	    } else {
+	      $lastuseddevice = $row["lastuseddevice"];
+	      $lastuseddate = date("d/m/Y H:i:s", $row["lastuseddate"]);
+	    }
+		echo "<tr><td>".$row["deviceadded"]."</td><td>".date("d/m/Y H:i:s", $row["dateadded"])."</td><td>".$lastuseddevice."</td><td>".$lastuseddate."</td></tr>";
 		?>
 			</tbody>
 		</table>
-		<p>¿Estás seguro? <span style="color:red;font-weight:bold;">Esta acción no se puede revertir</span></p>
-		<p><a href="deletesecuritykey.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red">Sí</a> <a href="securitykeys.php" class="button-link">No</a></p>
+		<p><?=i18n("global", "delete_areyousure")?></p>
+		<p><a href="deletesecuritykey.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red"><?=i18n("global", "yes")?></a> <a href="securitykeys.php" class="button-link"><?=i18n("global", "no")?></a></p>
 		<?php
 		}
 		?>

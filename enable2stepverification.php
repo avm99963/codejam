@@ -2,6 +2,8 @@
 require_once("core.php");
 require("lib/GoogleAuthenticator/GoogleAuthenticator.php");
 
+initi18n("enable2stepverification");
+
 $authenticator = new GoogleAuthenticator();
 
 $secret = $authenticator->generateSecret();
@@ -14,7 +16,7 @@ $qrcode = "http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=".urlencode
 <html>
     <head>
         <?php require ("head.php"); ?>
-        <title>Activar verificación en 2 pasos - <?php echo $appname; ?></title>
+        <title><?=i18n("enable2stepverification", "title")?> - <?php echo $appname; ?></title>
         <style>
         .step {
             padding: 10px 0;
@@ -199,43 +201,42 @@ $qrcode = "http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=".urlencode
                 <?php anuncio(); ?>
                 <div class="text small_view">
                     <?php
-                    if (!loggedin())
-                    {
-                        die ("<div class='alert-danger'><p>¡No estás connectado! <a href='index.php'>Conéctate</a></p></div>");
+                    if (!loggedin()) {
+                        die(i18n("global", "notloggedin"));
                     }
                     ?>
-                    <h1>Activar verificación en 2 pasos</h1>
-                    <p>Para activar la verificación en 2 pasos, sigue los siguientes pasos:</p>
+                    <h1><?=i18n("enable2stepverification", "title")?></h1>
+                    <p><?=i18n("enable2stepverification", "follow")?></p>
                     <div class="step">
-                        <div class="number">1</div><div class="text"><b>Instala la aplicación <a href="https://m.google.com/authenticator" target="_blank">Google Authenticator</a> en tu iPhone, Android o Blackberry.</b><br>También puedes usar otra aplicación si lo prefieres.</div>
+                        <div class="number">1</div><div class="text"><b><?=i18n("enable2stepverification", "step_1", array("<a href=\"https://m.google.com/authenticator\" target=\"_blank\">Google Authenticator</a>"))?></b><br><?=i18n("enable2stepverification", "step_1_helper")?></div>
                     </div>
                     <div class="step">
-                        <div class="number">2</div><div class="text"><b>Configura tu cuenta de <?=$appname?> escaneando el siguiente código QR:</b></div>
+                        <div class="number">2</div><div class="text"><b><?=i18n("enable2stepverification", "step_2", array($appname))?></b></div>
                     </div>
                     <img src="<?=$qrcode?>" style="display: block; margin-left: auto; margin-right: auto;">
                     <div class="step" style="border-top: 1px solid #ebebeb;">
-                        <div class="number">3</div><div class="text"><b>¿No puedes escanear el código QR? Introduce manualmente la siguiente llave secreta:</b><br><?=chunk_split($secret, 4, ' ');?></div>
+                        <div class="number">3</div><div class="text"><b><?=i18n("enable2stepverification", "step_3")?></b><br><?=chunk_split($secret, 4, ' ');?></div>
                     </div>
                     <div class="step" style="margin-bottom: 5px;">
-                        <div class="number">4</div><div class="text"><b>Introduce el código de verificación de seis dígitos:</b></div>
+                        <div class="number">4</div><div class="text"><b><?=i18n("enable2stepverification", "step_4")?></b></div>
                     </div>
                     <div id="verify_container">
                         <div id="input">
-                            <input type="text" id="verificationcode" maxlength="6"> <button id="verify" class="g-button g-button-submit">Verificar y guardar</button> <a id="cancel" href="2stepverification.php">Cancelar</a>
+                            <input type="text" id="verificationcode" maxlength="6"> <button id="verify" class="g-button g-button-submit"><?=i18n("enable2stepverification", "verify_btn")?></button> <a id="cancel" href="2stepverification.php"><?=i18n("enable2stepverification", "cancel_btn")?></a>
                         </div>
                         <div hidden id="waiting">
                             <svg class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                                 <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
                             </svg>
-                            <span>Verificando...</span>
+                            <span><?=i18n("enable2stepverification", "waiting")?></span>
                         </div>
                         <div hidden id="error_1">
                             <span class="icon svg-ic_warning_24px"></span>
-                            <span>El código de verificación debe tener 6 cifras</span>
+                            <span><?=i18n("enable2stepverification", "error_1")?></span>
                         </div>
                         <div hidden id="error_2">
                             <span class="icon svg-ic_error_24px"></span>
-                            <span>El código de verificación no es correcto</span>
+                            <span><?=i18n("enable2stepverification", "error_2")?></span>
                         </div>
                         <div hidden id="error_3">
                             <span class="icon svg-ic_error_24px"></span>

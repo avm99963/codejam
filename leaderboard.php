@@ -1,12 +1,13 @@
 <?php
 require_once("core.php");
 require_once("contest_helper.php");
+initi18n("leaderboard");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php require ("head.php"); ?>
-	<title>Clasificación - <?php echo $appname; ?></title>
+	<title><?=i18n("leaderboard", "title")?> - <?php echo $appname; ?></title>
 	<style>
 	table {
 		width: 100%;
@@ -49,9 +50,8 @@ require_once("contest_helper.php");
 	<?php include "nav.php"; ?>
 	<article>
 		<?php
-		if (!loggedin())
-		{
-			die ("<div class='alert-danger'><p>¡No estás connectado! <a href='index.php'>Conéctate</a></p></div>");
+		if (!loggedin()) {
+			die(i18n("global", "notloggedin"));
 		}
 		?>
 		<?php anuncio(); ?>
@@ -74,7 +74,7 @@ require_once("contest_helper.php");
 
 		if (!getrole() && $row["privacy"] == 0) { // TODO: Know if person is invited to contest and let them see leaderboard or not
 			if (!isinvited($id)) {
-				die("<div class='alert-danger'>Esta competición es privada y no has sido invitado.</div>");
+				die("<div class='alert-danger'>".i18n("leaderboard", "notinvited")."</div>");
 			}
 		}
 
@@ -83,11 +83,11 @@ require_once("contest_helper.php");
 		$query2 = mysqli_query($con, "SELECT id, name, io FROM problems WHERE contest = ".$id." ORDER BY num");
 
 		if (!mysqli_num_rows($query2)) {
-			die ("<div class='alert-danger'>Hey, this contest doesn't have any problem!</div>");
+			die ("<div class='alert-danger'>".i18n("leaderboard", "noproblems")."</div>");
 		}
 
 		if ($now < $row["starttime"] && getrole() == 0) {
-			die ("<div class='alert-danger'>Todavía no ha empezado la competición</div>");
+			die ("<div class='alert-danger'>".i18n("leaderboard", "notstarted")."</div>");
 		}
 
 		$problems = array();
@@ -103,7 +103,7 @@ require_once("contest_helper.php");
 			$leaderboard = leaderboard($row["id"]);
 		}
 		?>
-			<h2>Clasificación – <?=$row["name"]?></h2>
+			<h2><?=i18n("leaderboard", "title")?> – <?=$row["name"]?></h2>
 			<table>
 				<thead>
 					<tr>
@@ -115,14 +115,14 @@ require_once("contest_helper.php");
 						?>
 					</tr>
 					<tr>
-						<th>Rank</th>
-						<th>Contestant</th>
-						<th>Score</th>
-						<th>Time</th>
+						<th><?=i18n("leaderboard", "rank")?></th>
+						<th><?=i18n("leaderboard", "contestant")?></th>
+						<th><?=i18n("leaderboard", "score")?></th>
+						<th><?=i18n("leaderboard", "time")?></th>
 						<?php
 						foreach ($problems as $problem) {
 							$io = json_decode($problem["io"], true);
-							echo '<th>'.$io["pts"]["small"].'pt</th><th>'.$io["pts"]["large"].'pt</th>';
+							echo '<th>'.$io["pts"]["small"].i18n("leaderboard", "points_abbr").'</th><th>'.$io["pts"]["large"].i18n("leaderboard", "points_abbr").'</th>';
 						}
 						?>
 					</tr>
@@ -133,7 +133,7 @@ require_once("contest_helper.php");
 					?>
 				</tbody>
 			</table>
-			<p style="text-align: center; font-size: 13px;">No hay resultados</p>
+			<p style="text-align: center; font-size: 13px;"><?=i18n("leaderboard", "noresults")?></p>
 					<?php
 					exit;
 				}
@@ -155,23 +155,23 @@ require_once("contest_helper.php");
 							foreach ($submission as $type => $solution) {
 								if ($solution["status"] == "correct") {
 									if ($type == "small" && $solution["count"] > 1) {
-				        				$add = '<br><span style="color: black;">'.($solution["count"] - 1).' wrong '.(($solution["count"] - 1 == 1) ? "try" : "tries").'</span>';
+				        				$add = '<br><span style="color: black;">'.($solution["count"] - 1)." ".(($solution["count"] - 1 == 1) ? i18n("leaderboard", "wrongtry") : i18n("leaderboard", "wrongtries")).'</span>';
 				        			} else {
 				        				$add = '';
 				        			}
 				        			echo '<td style="color: #006600;"><img src="img/checkmark.png"> <span>'.format_time($solution["penalty"]).'</span>'.$add.'</td>';
 								} elseif ($solution["status"] == "incorrect") {
 									if ($type == "large") {
-										echo '<td>--<br>1 wrong try</td>';
+										echo '<td>--<br>1 '.i18n("leaderboard", "wrongtry").'</td>';
 									} else {
-										echo '<td>--<br>'.$solution["count"].' wrong '.(($solution["count"] == 1) ? "try" : "tries").'</td>';
+										echo '<td>--<br>'.$solution["count"]." ".(($solution["count"] == 1) ? i18n("leaderboard", "wrongtry") : i18n("leaderboard", "wrongtries")).'</td>';
 									}
 								} elseif ($solution["status"] == "notattempted") {
 									echo '<td>--</td>';
 								} elseif ($solution["status"] == "submitted") {
 									echo '<td style="color: #006600;"><img src="img/question.png"> <span>'.format_time($solution["penalty"]).'</span></td>';
 								} elseif ($solution["status"] == "timeexpired") {
-									echo '<td>Time expired</td>';
+									echo '<td>'.i18n("leaderboard", "timeexpired").'</td>';
 								}
 							}
 						}
@@ -182,7 +182,7 @@ require_once("contest_helper.php");
 					?>
 				</tbody>
 			</table>
-			<p style="font-size: 12px; text-align: right;">Updated: <?=date("d/m/Y H:i:s", time())?><?php if (getrole() && $now < $row["endtime"]) { ?> | <?php if (isset($_GET["tellmethetruth"]) && $_GET["tellmethetruth"] == 1) { ?><a href="leaderboard.php?id=<?=$_GET["id"]?>">Don't tell me the truth</a><?php } else { ?><a href="leaderboard.php?id=<?=$_GET["id"]?>&tellmethetruth=1">Tell me the truth</a><?php } } ?></p>
+			<p style="font-size: 12px; text-align: right;"><?=i18n("leaderboard", "updated")?>: <?=date("d/m/Y H:i:s", time())?><?php if (getrole() && $now < $row["endtime"]) { ?> | <?php if (isset($_GET["tellmethetruth"]) && $_GET["tellmethetruth"] == 1) { ?><a href="leaderboard.php?id=<?=$_GET["id"]?>"><?=i18n("leaderboard", "donttellmethetruth")?></a><?php } else { ?><a href="leaderboard.php?id=<?=$_GET["id"]?>&tellmethetruth=1"><?=i18n("leaderboard", "tellmethetruth")?></a><?php } } ?></p>
 		</div>
 	</article>
 </div>

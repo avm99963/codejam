@@ -1,0 +1,10 @@
+{
+	"title": "Inhabilitar verificación en 2 pasos",
+	"error_disable": "Error inhabilitando la verificación en 2 pasos (las llaves de seguridad sí se han eliminado)",
+	"error_deletesecuritykeys": "Error eliminando las llaves de seguridad",
+	"paragraph1": "¿Estás seguro de que quieres desactivar la verificación en 2 pasos?",
+	"paragraph2": "La verificación en 2 pasos ofrece seguridad extra a tu cuenta. Si inhabilitas la verificación en 2 pasos todas tus llaves de seguridad se desvincularán de esta cuenta y no te pediremos ningún código de verificación al iniciar sesión.",
+	"paragraph3": "Si después de pensártelo dos veces sigues estando seguro introduce tu contraseña y haz clic en el botón rojo.",
+	"yes": "Sí, estoy segurísimo",
+	"no": "¡De ninguna manera!"
+}

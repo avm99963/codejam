@@ -1,16 +1,17 @@
 <?php
 require_once("core.php");
+initi18n("disable2stepverification");
 $msg = "";
 if (isset($_GET['msg']) && $_GET['msg'] == "empty")
-  $msg = '<p class="alert-warning">Por favor, introduce tu contraseña</p>';
+  $msg = '<p class="alert-warning">'.i18n("global", "msg_empty2").'</p>';
 if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
-  $msg = '<p class="alert-danger">La contraseña que has introducido no es correcta</p>';
+  $msg = '<p class="alert-danger">'.i18n("global", "msg_passworddoesntmatch").'</p>';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <?php require ("head.php"); ?>
-        <title>Inhabilitar verificación en 2 pasos - <?php echo $appname; ?></title>
+        <title><?=i18n("disable2stepverification", "title")?> - <?php echo $appname; ?></title>
         <style>
         .small_view {
             max-width: 670px;
@@ -28,10 +29,10 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                     <?php
                     if (!loggedin())
                     {
-                      die ("<div class='alert-danger'><p>¡No estás connectado! <a href='index.php'>Conéctate</a></p></div>");
+                      die ("<div class='alert-danger'>".i18n("global", "notloggedin")."</div>");
                     }
                     ?>
-                    <h1>Inhabilitar verificación en 2 pasos</h1>
+                    <h1><?=i18n("disable2stepverification", "title")?></h1>
                     <?php
                     echo $msg;
                     if (!twostepverification()) {
@@ -52,10 +53,10 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                                 if (mysqli_query($con, $sql2)) {
                                     header("Location: 2stepverification.php?msg=disabled");
                                 } else {
-                                    die ("<p class='alert-danger'>Error inhabilitando la verificación en 2 pasos (las llaves de seguridad sí se han eliminado): " . mysqli_error($con) . "</p>");
+                                    die ("<p class='alert-danger'>".i18n("disable2stepverification", "error_disable")."</p>");
                                 }
                             } else {
-                                die ("<p class='alert-danger'>Error eliminando las llaves de seguridad: " . mysqli_error($con) . "</p>");
+                                die ("<p class='alert-danger'>".i18n("disable2stepverification", "error_deletesecuritykeys")."</p>");
                             }
                         } else {
                             header("Location: disable2stepverification.php?msg=passworddoesntmatch");
@@ -63,12 +64,12 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                         }
                     } else {
                     ?>
-                    <p>¿Estás seguro de que quieres desactivar la verificación en 2 pasos?</p>
-                    <p>La verificación en 2 pasos ofrece seguridad extra a tu cuenta. Si inhabilitas la verificación en 2 pasos todas tus llaves de seguridad se desvincularán de esta cuenta y no te pediremos ningún código de verificación al iniciar sesión.</p>
-                    <p>Si después de pensártelo dos veces sigues estando seguro introduce tu contraseña y haz clic en el botón rojo.</p>
+                    <p><?=i18n("disable2stepverification", "paragraph1")?></p>
+                    <p><?=i18n("disable2stepverification", "paragraph2")?></p>
+                    <p><?=i18n("disable2stepverification", "paragraph3")?></p>
                     <form action="disable2stepverification.php" method="POST">
-                        <p><label for="password">Contraseña:</label> <input type="password" id="password" name="password"></p>
-                        <p><input type="submit" href="disable2stepverification.php" class="button-link-red" value="Sí, estoy segurísimo"> <a href="2stepverification.php" class="button-link">¡De ninguna manera!</a></p>
+                        <p><label for="password"><?=i18n("global", "password")?>:</label> <input type="password" id="password" name="password"></p>
+                        <p><input type="submit" href="disable2stepverification.php" class="button-link-red" value="<?=i18n("disable2stepverification", "yes")?>"> <a href="2stepverification.php" class="button-link"><?=i18n("disable2stepverification", "no")?></a></p>
                     </form>
                     <?php
                     }

@@ -1,0 +1,9 @@
+{
+	"title": "Eliminar llave de seguridad",
+	"addeddevice": "Dispositivo donde se añadió",
+	"inserteddevice": "Dispositivo donde se ha insertado la última vez",
+	"ipaddress": "Dirección IP",
+	"date": "Fecha",
+	"addbtn": "Añadir",
+	"nosecuritykeys": "Oh vaya... Todavía no tienes asociada ninguna llave de seguridad :-("
+}

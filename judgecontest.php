@@ -46,19 +46,19 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
         <?php
         }
           if (!isset($_GET["id"]))
-            die("<div class='alert-danger'></div>");
+            die("<div class='alert-danger'>".i18n("judgecontest", "contestdoesntexist")."</div>");
           $id = (INT)$_GET["id"];
           $query = mysqli_query($con, "SELECT * FROM contests WHERE id = '{$id}'");
 
           if (!mysqli_num_rows($query))
-            die("<div class='alert-danger'>Esta competición no existe</div>");
+            die("<div class='alert-danger'>".i18n("judgecontest", "contestdoesntexist")."</div>");
 
           $row = mysqli_fetch_assoc($query);
 
           $now = time();
 
           if ($now < $row["starttime"]) {
-            die("<div class='alert-danger'></div>");
+            die("<div class='alert-danger'>".i18n("judgecontest", "contesthasntstarted")."</div>");
           }
 
           $query3 = mysqli_query($con, "SELECT id, name, io FROM problems WHERE contest = {$id}");
@@ -71,7 +71,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
               $problems[$problem["id"]]["io"] = json_decode($problems[$problem["id"]]["io"], true);
             }
           } else {
-            die("<div class='alert-danger'></div>");
+            die("<div class='alert-danger'>".i18n("judgecontest", "noproblems")."</div>");
           }
           ?>
           <?=$msg?>

@@ -21,6 +21,7 @@
   "msg_nameunique":"There is already one problem with that name",
   "msg_configured":"2-step verification has been configured successfully",
   "msg_disabled":"2-step verification has been disabled successfully",
+  "msg_empty2":"Please, enter your password",
   "id":"ID",
   "username":"Username",
   "name":"Name",

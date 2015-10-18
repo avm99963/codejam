@@ -1,5 +1,6 @@
 <?php
 require_once("core.php");
+initi18n("securitykeys");
 $msg = "";
 if (isset($_GET['msg']) && $_GET['msg'] == "emailincorrect")
   $msg = '<p class="alert-danger">Por favor, introduce una dirección de correo electrónico correcta.</p>';
@@ -20,7 +21,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Administrar llaves de seguridad - <?php echo $appname; ?></title>
+<title><?=i18n("securitykeys", "title")?> - <?php echo $appname; ?></title>
 <style>
 td, th
 {
@@ -56,7 +57,7 @@ h1 span {
             <?php } else { ?>
             <div class="text">
             <?php } ?>
-            <h1><a href="2stepverification.php"><span class='icon svg-ic_chevron_left_24px'></span></a> <span>Administrar llaves de seguridad</span></h1>
+            <h1><a href="2stepverification.php"><span class='icon svg-ic_chevron_left_24px'></span></a> <span><?=i18n("securitykeys", "title")?></span></h1>
             <?=$msg?>
             <?php
             if (!twostepverification()) {
@@ -68,8 +69,8 @@ h1 span {
               ?>
               <table>
                 <thead>
-                  <tr><td colspan="2">Dispositivo donde se añadió</td><td colspan="2">Dispositivo donde se ha insertado la última vez</td></tr>
-                  <tr><td>Dirección IP</td><td>Fecha</td><td>Dirección IP</td><td>Fecha</td></tr>
+                  <tr><td colspan="2"><?=i18n("securitykeys", "addeddevice")?></td><td colspan="2"><?=i18n("securitykeys", "inserteddevice")?></td></tr>
+                  <tr><td><?=i18n("securitykeys", "ipaddress")?></td><td><?=i18n("securitykeys", "date")?></td><td><?=i18n("securitykeys", "ipaddress")?></td><td><?=i18n("securitykeys", "date")?></td></tr>
                 </thead>
                 <tbody>
               <?php
@@ -89,11 +90,11 @@ h1 span {
               <?php
             } else {
               ?>
-              <p style="color: gray; text-align: center;">Oh vaya... Todavía no tienes asociada ninguna llave de seguridad :-(</p>
+              <p style="color: gray; text-align: center;"><?=i18n("securitykeys", "nosecuritykeys")?></p>
               <?php
             }
             ?>
-            <a href="addsecuritykey.php" class="button-link" style="display: inline-block;">Añadir</a>
+            <a href="addsecuritykey.php" class="button-link" style="display: inline-block;"><?=i18n("securitykeys", "addbtn")?></a>
             </div>
       </article>
 </div>

@@ -1,18 +1,20 @@
 <?php
 require_once("../core.php");
 
+initi18n("invite_errors", 1);
+
 $return = array();
 
 if (!getrole()) {
 	$return["errorCode"] = 1;
-	$return["errorText"] = "No tienes los suficientes privilegios para realizar esta acción";
+	$return["errorText"] = i18n("invite_errors", "error_1");
 	echo json_encode($return);
 	exit;
 }
 
 if (!isset($_POST["people"]) || empty($_POST["people"]) || !isset($_POST["contest"]) || empty($_POST["contest"])) {
 	$return["errorCode"] = 2;
-	$return["errorText"] = "No se han enviado todos los argumentos";
+	$return["errorText"] = i18n("invite_errors", "error_2");
 	echo json_encode($return);
 	exit;
 }
@@ -41,10 +43,10 @@ $rows = mysqli_num_rows($query);
 
 foreach ($people as $person) {
 	if (!in_array($person, $already_invited)) {
-		if ($id = userdata("id", $person)) {
+		if ($id == userdata("id", $person)) {
 			if (!mysqli_query($con, "INSERT INTO invitations (user_id, contest) VALUES ({$id}, {$contest})")) {
-				$return["errorCode"] = 2;
-				$return["errorText"] = "No se pudo invitar a una o más personas";
+				$return["errorCode"] = 3;
+				$return["errorText"] = i18n("invite_errors", "error_3");
 				echo json_encode($return);
 				exit;
 			}

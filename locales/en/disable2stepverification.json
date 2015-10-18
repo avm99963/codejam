@@ -1,0 +1,10 @@
+{
+	"title": "Disable 2-step verification",
+	"error_disable": "Error while disabling 2-step verification (your security keys were removed)",
+	"error_deletesecuritykeys": "Error while deleting the security keys",
+	"paragraph1": "Are you sure you want to disable 2-step verification?",
+	"paragraph2": "2-step verification offers extra seucurity to your account. If you disable 2-step verification all your security keys will be unlinked from this account and we will not request you any verification code while signing in.",
+	"paragraph3": "If, after thinking about it twice, you still want to, enter your password and click the red button.",
+	"yes": "Yes, I'm sure",
+	"no": "No way!"
+}

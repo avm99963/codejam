@@ -1,0 +1,9 @@
+{
+	"title": "Delete security key",
+	"addeddevice": "Device in which it was added",
+	"inserteddevice": "Device in which it has been inserted the last time",
+	"ipaddress": "IP Address",
+	"date": "Date",
+	"addbtn": "Add",
+	"nosecuritykeys": "Aw snap... You don't have yet any security key linked :-("
+}
