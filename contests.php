@@ -54,40 +54,40 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 				}
 			} else {
 				?>
-				<h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_public_24px'></span> <span style="vertical-align:middle;">Competiciones públicas</span></span></h2>
+				<h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_public_24px'></span> <span style="vertical-align:middle;"><?=i18n("contests", "publiccontests")?></span></span></h2>
 				<?php
 				$query = mysqli_query($con, "SELECT * FROM contests WHERE privacy = 2");
 				if (mysqli_num_rows($query)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query)) {
-						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a></p>";
+						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 					}
 					echo implode("", $output);
 				} else {
 					echo "<p style='text-align:center;'>".i18n("contests", "nopublic")."</p>";
 				}
 				?>
-				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_open_24px'></span> <span style="vertical-align:middle;">Competiciones semiprivadas</span></span></h2>
+				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_open_24px'></span> <span style="vertical-align:middle;"><?=i18n("contests", "semiprivatecontests")?></span></span></h2>
 				<?php
 				$query3 = mysqli_query($con, "SELECT * FROM contests WHERE privacy = 1"); // TODO: Adapt query when inviting contestants is implemented
 				if (mysqli_num_rows($query3)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query3)) {
-						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'>".(isinvited($row["id"]) ? "<a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br>" : "")."<a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a></p>";
+						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'>".(isinvited($row["id"]) ? "<a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br>" : "")."<a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 					}
 					echo implode("", $output);
 				} else {
 					echo "<p style='text-align:center;'>".i18n("contests", "nosemiprivate")."</p>";
 				}
 				?>
-				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_24px'></span> <span style="vertical-align:middle;">Competiciones privadas</span></span></h2>
+				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_24px'></span> <span style="vertical-align:middle;"><?=i18n("contests", "privatecontests")?></span></span></h2>
 				<?php
 				$query2 = mysqli_query($con, "SELECT * FROM contests WHERE privacy = 0");
 				if (mysqli_num_rows($query2)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query2)) {
 						if (isinvited($row["id"])) {
-							$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a></p>";
+							$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 						}
 					}
 					if (!count($output)) {

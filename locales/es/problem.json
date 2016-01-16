@@ -1,0 +1,8 @@
+{
+	"title": "Problema",
+	"inputoutput": "Archivos de entrada/salida",
+	"smallinputset": "Conjuntos de entrada pequeña",
+	"largeinputset": "Conjuntos de entrada grande",
+	"inputlabel": "Entrada %0",
+	"outputlabel": "Salida %0"
+}

@@ -100,7 +100,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("empty", "nameunique")))
               <input type="hidden" name="contest" value="<?=$_GET["id"]?>">
               <p><label for="name"><?=i18n("addproblem", "name_field")?></label>: <input type="text" name="name" id="name" required="required" maxlength="50"></p>
               <p><label for="description"><?=i18n("addproblem", "description_field")?></label>:<br><textarea name="description" id="description" required="required"></textarea></p>
-              <h3>Input sets:</h3>
+              <h3><?=i18n("addproblem", "inputsets")?>:</h3>
               <h4 style="margin-bottom: 0;"><?=i18n("addproblem", "small")?>:</h4>
               <div class="padding10">
                 <p style="margin-top: 5px;">

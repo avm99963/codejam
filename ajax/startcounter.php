@@ -1,12 +1,13 @@
 <?php
 require_once("../core.php");
 require_once("../contest_helper.php");
+initi18n("startcounter", 1);
 
 $return = array();
 
 if (!isset($_POST["problem"]) || !isset($_POST["type"])) {
 	$return["errorCode"] = 1;
-	$return["errorText"] = "No se ha indicado el problema o el tipo";
+	$return["errorText"] = i18n("startcounter", "error1");
 	echo json_encode($return);
 	exit;
 }
@@ -16,7 +17,7 @@ $type = mysqli_real_escape_string($con, $_POST["type"]);
 
 if (!in_array($type, array("small", "large"))) {
 	$return["errorCode"] = 7;
-	$return["errorText"] = "Se ha especificado un tipo incorrecto";
+	$return["errorText"] = i18n("startcounter", "error7");
 	echo json_encode($return);
 	exit;
 }
@@ -27,7 +28,7 @@ $query2 = mysqli_query($con, "SELECT * FROM problems WHERE id = ".$problem);
 
 if (!mysqli_num_rows($query2)) {
 	$return["errorCode"] = 5;
-	$return["errorText"] = "Este problema no existe";
+	$return["errorText"] = i18n("startcounter", "error5");
 	echo json_encode($return);
 	exit;
 }
@@ -38,14 +39,14 @@ $query = mysqli_query($con, "SELECT * FROM contests WHERE id = ".$row2["contest"
 
 if (!mysqli_num_rows($query)) {
 	$return["errorCode"] = 2;
-	$return["errorText"] = "Esta competición no existe";
+	$return["errorText"] = i18n("startcounter", "error2");
 	echo json_encode($return);
 	exit;
 }
 
 if (!isinvited($row2["contest"])) {
 	$return["errorCode"] = 11;
-	$return["errorText"] = "No estás invitado a esta competición";
+	$return["errorText"] = i18n("startcounter", "error11");
 	echo json_encode($return);
 	exit;
 }
@@ -54,14 +55,14 @@ $row = mysqli_fetch_assoc($query);
 
 if ($now < $row["starttime"]) {
 	$return["errorCode"] = 3;
-	$return["errorText"] = "Todavía no ha empezado la competición";
+	$return["errorText"] = i18n("startcounter", "error3");
 	echo json_encode($return);
 	exit;
 }
 
 if ($now > $row["endtime"]) {
 	$return["errorCode"] = 4;
-	$return["errorText"] = "Ya ha terminado la competición";
+	$return["errorText"] = i18n("startcounter", "error4");
 	echo json_encode($return);
 	exit;
 }
@@ -77,12 +78,12 @@ if ($type == "small") {
 if (mysqli_num_rows($query3)) {
 	if ($type == "large") {
 		$return["errorCode"] = 6;
-		$return["errorText"] = "Ya tienes o has tenido un contador activo para el tipo large de este problema";
+		$return["errorText"] = i18n("startcounter", "error6");
 		echo json_encode($return);
 		exit;
 	} elseif (mysqli_num_rows($query3) >= 3) {
 		$return["errorCode"] = 8;
-		$return["errorText"] = "Ya has hecho 3 intentos para el tipo small de este problema";
+		$return["errorText"] = i18n("startcounter", "error8");
 		echo json_encode($return);
 		exit;
 	} else {
@@ -90,7 +91,7 @@ if (mysqli_num_rows($query3)) {
 		$row3 = mysqli_fetch_assoc($query3);
 		if ($row3["valid"] == 1) {
 			$return["errorCode"] = 10;
-			$return["errorText"] = "Ya has solucionado correctamente este problema";
+			$return["errorText"] = i18n("startcounter", "error10");
 			echo json_encode($return);
 			exit;
 		}
@@ -109,7 +110,7 @@ if (mysqli_query($con, "INSERT INTO submissions (user_id, contest, problem, type
 	$return["inputurl"] = "download.php?problem=".$problem."&type=".$fileshorthand;
 } else {
 	$return["errorCode"] = 9;
-	$return["errorText"] = "No se ha podido contactar con la base de datos";
+	$return["errorText"] = i18n("startcounter", "error9");
 	echo json_encode($return);
 	exit;
 }

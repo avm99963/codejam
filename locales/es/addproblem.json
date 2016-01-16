@@ -11,5 +11,6 @@
   "points":"Puntos",
   "input_field":"Entrada %0 (<i>.in<\/i>)",
   "output_field":"Salida %0 (<i>.out<\/i>)",
-  "add_btn":"Añadir"
+  "add_btn":"Añadir",
+  "inputsets":"Conjuntos de entrada"
 }

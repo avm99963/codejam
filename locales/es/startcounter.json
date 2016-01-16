@@ -1,0 +1,13 @@
+{
+	"error1":"No se ha indicado el problema o el tipo",
+	"error7":"Se ha especificado un tipo incorrecto",
+	"error5":"Este problema no existe",
+	"error2":"Esta competición no existe",
+	"error11":"No estás invitado a esta competición",
+	"error3":"Todavía no ha empezado la competición",
+	"error4":"Ya ha terminado la competición",
+	"error6":"Ya tienes o has tenido un contador activo para la entrada grande de este problema",
+	"error8":"Ya has hecho 3 intentos para la entrada pequeña de este problema",
+	"error10":"Ya has solucionado correctamente este problema",
+	"error9":"No se ha podido contactar con la base de datos"
+}

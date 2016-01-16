@@ -1,0 +1,19 @@
+{
+	"error1":"Please upload all files",
+	"error15":"The output file should weigh less than 200kB",
+	"error2":"This contest doesn't exist",
+	"error18":"You haven't been invited to this contest",
+	"error3":"This contest hasn't started yet",
+	"error4":"This contest has already finished",
+	"error5":"This problem doesn't exist",
+	"error16":"The source code should weigh less than 200kB",
+	"error10":"The time has expired",
+	"error14":"There aren't any active timers",
+	"error9":"You haven't started any timer",
+	"error6":"An unexpected error has occurred while checking if the response was correct",
+	"error7":"The file that you have uploaded doesn't appear to be the output file",
+	"error8":"The output file doesn't contain the solution to all the cases, or it contains the solution to more cases than expected",
+	"error11":"Error %0 has occurred while uploading file %1",
+	"error12":"The file %0 couldn't be uploaded",
+	"error1":"The connection to the database failed"
+}

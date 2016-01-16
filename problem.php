@@ -2,6 +2,7 @@
 require_once("core.php");
 if (getrole() > 0)
 {
+initi18n("problem");
 $msg = "";
 if (isset($_GET['msg']) && $_GET['msg'] == "empty")
   $msg = '<p class="alert-danger">Por favor, rellena todos los campos</p>';
@@ -12,7 +13,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
 <html>
   <head>
     <?php require ("head.php"); ?>
-    <title>Problema – <?=$appname?></title>
+    <title><?=i18n("problem", "title")?> – <?=$appname?></title>
     <style>
     #description {
       /* Font */
@@ -39,17 +40,21 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
           ?>
           <h1><?=$row["name"]?></h1>
           <div id="description"><?=$row["description"]?></div>
-          <h3>Input/output files</h3>
-          <h4>Small Input Set</h4>
-          <p><a href="download.php?problem=<?=$row["id"]?>&type=in1_sinput"><span class="icon svg-ic_file_download_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=in1_sinput">Input 1</a><br>
-          <a href="download.php?problem=<?=$row["id"]?>&type=out1_sinput"><span class="icon svg-ic_file_upload_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=out1_sinput">Output 1</a><br>
-          <a href="download.php?problem=<?=$row["id"]?>&type=in2_sinput"><span class="icon svg-ic_file_download_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=in2_sinput">Input 2</a><br>
-          <a href="download.php?problem=<?=$row["id"]?>&type=out2_sinput"><span class="icon svg-ic_file_upload_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=out2_sinput">Output 2</a><br>
-          <a href="download.php?problem=<?=$row["id"]?>&type=in3_sinput"><span class="icon svg-ic_file_download_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=in3_sinput">Input 3</a><br>
-          <a href="download.php?problem=<?=$row["id"]?>&type=out3_sinput"><span class="icon svg-ic_file_upload_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=out3_sinput">Output 3</a></p>
-          <h4>Large Input Set</h4>
-          <p><a href="download.php?problem=<?=$row["id"]?>&type=in_linput"><span class="icon svg-ic_file_download_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=in_linput">Input</a><br>
-          <a href="download.php?problem=<?=$row["id"]?>&type=out_linput"><span class="icon svg-ic_file_upload_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=out_linput">Output</a></p>
+          <h3><?=i18n("problem", "inputoutput")?></h3>
+          <h4><?=i18n("problem", "smallinputset")?></h4>
+          <p>
+            <?php
+            $echo = array();
+            for ($i = 1; $i < 4; $i++) {
+              $echo[] = '<a href="download.php?problem='.$row["id"].'&type=in'.$i.'_sinput"><span class="icon svg-ic_file_download_24px"></span></a> <a href="download.php?problem='.$row["id"].'&type=in'.$i.'_sinput">'.i18n("problem", "inputlabel", array($i)).'</a>';
+              $echo[] = '<a href="download.php?problem='.$row["id"].'&type=out'.$i.'_sinput"><span class="icon svg-ic_file_upload_24px"></span></a> <a href="download.php?problem='.$row["id"].'&type=out'.$i.'_sinput">'.i18n("problem", "outputlabel", array($i)).'</a>';
+            }
+            echo implode($echo, "<br>");
+            ?>
+          </p>
+          <h4><?=i18n("problem", "largeinputset")?></h4>
+          <p><a href="download.php?problem=<?=$row["id"]?>&type=in_linput"><span class="icon svg-ic_file_download_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=in_linput"><?=i18n("global", "input")?></a><br>
+          <a href="download.php?problem=<?=$row["id"]?>&type=out_linput"><span class="icon svg-ic_file_upload_24px"></span></a> <a href="download.php?problem=<?=$row["id"]?>&type=out_linput"><?=i18n("global", "output")?></a></p>
           <?php
           } else {
             echo "<div class='alert-danger'>Este problema no existe :-/</div>";

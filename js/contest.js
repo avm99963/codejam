@@ -38,7 +38,7 @@ function updatestats() {
 	    if(this.status == 200) {
 	        var response = JSON.parse(this.responseText);
 	        if (response.errorCode) {
-	        	toast.create("No se ha podido refrescar la página porque ha ocurrido un error inesperado:<br>"+response.errorText, 10000);
+	        	toast.create(i18n.couldntrefresh+"<br>"+response.errorText, 10000);
 	        } else {
 	        	$("#rank").innerText = response.rank;
 	        	$("#score").innerText = response.score;
@@ -49,34 +49,34 @@ function updatestats() {
 	        	for (var i in response.submissions) {
 	        		var submission = response.submissions[i];
 	        		if (submission.small.status == "correct") {
-	        			var small = '<span class="correct">Correct</span>';
+	        			var small = '<span class="correct">'+i18n.correct+'</span>';
 	        			if (submission.small.count > 1) {
-	        				small += "<br>("+(submission.small.count - 1)+' incorrect attempt'+(((submission.small.count - 1) == 1) ? '' : 's')+")";
+	        				small += "<br>("+(submission.small.count - 1)+' '+(((submission.small.count - 1) == 1) ? i18n.incorrectattempt : i18n.incorrectattempts)+")";
 	        			}
 	        		} else if (submission.small.status == "notattempted") {
-	        			var small = 'Not attempted';
+	        			var small = i18n.notattempted;
 	        		} else if (submission.small.status == "incorrect") {
-	        			var small = submission.small.count+' incorrect attempt'+((submission.small.count == 1) ? '' : 's');
+	        			var small = submission.small.count+' '+((submission.small.count == 1) ? i18n.incorrectattempt : i18n.incorrectattempts);
 	        		}
 
 	        		if (submission.small.manuallyjudged === true) {
-	        			small += '<span class="mj" title="Manually Judged">(MJ)</span>';
+	        			small += '<span class="mj" title="'+i18n.manuallyjudged+'">(MJ)</span>';
 	        		}
 
 	        		if (submission.large.status == "correct") {
-	        			var large = '<span class="correct">Correct</span>';
+	        			var large = '<span class="correct">'+i18n.correct+'</span>';
 	        		} else if (submission.large.status == "incorrect") {
-	        			var large = 'Incorrect';
+	        			var large = i18n.incorrect;
 	        		} else if (submission.large.status == "submitted") {
-	        			var large = 'Submitted';
+	        			var large = i18n.submitted;
 	        		} else if (submission.large.status == "notattempted") {
-	        			var large = 'Not attempted';
+	        			var large = i18n.notattempted;
 	        		} else if (submission.large.status == "timeexpired") {
-	        			var large = 'Time expired';
+	        			var large = i18n.timeexpired;
 	        		}
 
 	        		if (submission.large.manuallyjudged === true) {
-	        			large += '<span class="mj" title="Manually Judged">(MJ)</span>';
+	        			large += '<span class="mj" title="'+i18n.manuallyjudged+'">(MJ)</span>';
 	        		}
 
 	        		$(".submission[data-problem-id='"+i+"'] .small_submission").innerHTML = small;
@@ -122,7 +122,7 @@ function solve() {
 		this.hidden = true;
 		$(".solve_container[data-problem-id='"+this.getAttribute("data-problem-id")+"'][data-type='"+this.getAttribute("data-type")+"']").hidden = false;
 	} else {
-		var confirmed = confirm("Esto va a hacer que empieze un contador de "+((this.getAttribute("data-type") == "large") ? "8" : "4")+" minutos, después del cual no podrás enviar ninguna solución al problema. ¿Estás seguro de querer resolver el problema?");
+		var confirmed = confirm((this.getAttribute("data-type") == "large") ? i18n.timer8 : i18n.timer4);
 		if (confirmed === true) {
 			var problemId = this.getAttribute("data-problem-id"),
 				type = this.getAttribute("data-type");
@@ -135,10 +135,10 @@ function solve() {
 				if(this.status == 200) {
 					var response = JSON.parse(this.responseText);
 			        if (response.errorCode) {
-			        	toast.create("No se ha podido empezar el contador: "+response.errorText, 10000);
+			        	toast.create(i18n.couldntstarttimer+" "+response.errorText, 10000);
 			        	$(".solve_btn[data-problem-id='"+problemId+"'][data-type='"+type+"']").disabled = false;
 			        } else {
-			        	$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"'] .file_download").innerHTML = '<img src="img/file.gif"> <a href="'+response.inputurl+'" data-problem-id="'+response.problem+'" data-type="'+response.type+'">Download '+response.inputfilename+'.in</a>';
+			        	$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"'] .file_download").innerHTML = '<img src="img/file.gif"> <a href="'+response.inputurl+'" data-problem-id="'+response.problem+'" data-type="'+response.type+'">'+i18n.download+' '+response.inputfilename+'.in</a>';
 			        	$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"'] .time").innerText = ((response.type == "large") ? "08" : "04")+":00";
 			        	$(".solve_btn[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").hidden = true;
 						$(".solve_container[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").hidden = false;
@@ -152,13 +152,13 @@ function solve() {
 						$("a[data-problem-id='"+response.problem+"'][data-type='"+response.type+"']").click();
 			        }
 				} else {
-					toast.create("No se ha podido contactar con el servidor correctamente. Por favor, vuelve a probar.", 10000);
+					toast.create(i18n.couldntconnect, 10000);
 				}
 			}
 			http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			http.send(params);
 			$(".solve_btn[data-problem-id='"+problemId+"'][data-type='"+type+"']").disabled = true;
-			toast.create("Cargando...");
+			toast.create(i18n.loading);
 		}
 	}
 }
@@ -175,17 +175,17 @@ function submit() {
 	if (competitionhasendedyey !== true) {
 		var sourcecode = $(".solve_container[data-problem-id='"+problemId+"'][data-type='"+type+"'] .sourcecode").files[0];
 		if (!sourcecode) {
-			alert("No se ha seleccionado el archivo de código fuente");
+			alert(i18n.sourcecodenotselected);
 			return false;
 		}
 		if (sourcecode.size >= 200*1024) {
-			alert("El código fuente debe pesar menos de 200kB");
+			alert(i18n.sourcecodesize);
 			return false;
 		}
 	}
 	if (output) {
 		if (output.size >= 200*1024) {
-			alert("El archivo de salida debe pesar menos de 200kB");
+			alert(i18n.outputsize);
 			return false;
 		}
 		var fd = new FormData();
@@ -207,15 +207,15 @@ function submit() {
 		    if(this.status == 200) {
 		        var response = JSON.parse(this.responseText);
 		        if (response.errorCode) {
-		        	toast.create("No se ha juzgado la solución: "+response.errorText, 10000);
+		        	toast.create(i18n.notjudged+" "+response.errorText, 10000);
 		        } else {
 		        	if (type == "large" && competitionhasendedyey !== true) {
-		        		toast.create("Solución enviada. Se juzgará cuando acabe la competición", 30000);
+		        		toast.create(i18n.solutionsent, 30000);
 		        	} else {
-		        		toast.create("Solución juzgada: "+((response.judged == 1) ? "<span style='color: green;'>Correcta</span>" : "<span style='color: red;'>Incorrecta</span>"), 30000);
+		        		toast.create(i18n.solutionjudged+" "+((response.judged == 1) ? "<span style='color: green;'>"+i18n.correct+"</span>" : "<span style='color: red;'>"+i18n.incorrect+"</span>"), 30000);
 		        	}
 		        	if (competitionhasendedyey === true) {
-		        		$(".solve_msg[data-problem-id='"+problemId+"'][data-type='"+type+"']").innerText = "Última solución juzgada: "+((response.judged == 1) ? "Correcta" : "Incorrecta");
+		        		$(".solve_msg[data-problem-id='"+problemId+"'][data-type='"+type+"']").innerText = i18n.lastjudgedsolution+" "+((response.judged == 1) ? i18n.correct : i18n.incorrect);
 		        	} else {
 		        		updatestats();
 		        	}
@@ -233,14 +233,14 @@ function submit() {
 		        }
 		        $(".solve_container[data-problem-id='"+problemId+"'][data-type='"+type+"'] .submit").disabled = false;
 		    } else {
-		    	toast.create("No se ha podido contactar con el servidor correctamente. Por favor, vuelve a probar.", 10000);
+		    	toast.create(i18n.couldntconnect, 10000);
 		    }
 		}
 		http.send(fd);
 		$(".solve_container[data-problem-id='"+problemId+"'][data-type='"+type+"'] .submit").disabled = true;
-		toast.create("Cargando...");
+		toast.create(i18n.loading);
 	} else {
-		alert("No se ha seleccionado el archivo de salida");
+		alert(i18n.outputnotselected);
 	}
 }
 
@@ -277,7 +277,7 @@ function doTimer() {
         		delete counters[counter];
         	}
         	window.setTimeout(updatestats, Math.floor((Math.random() * 5000) + 1200));
-        	$("#time").innerText = "La competición ha terminado";
+        	$("#time").innerText = i18n.contestended;
         } else {
         	var time2 = contestends - (Math.round(new Date().getTime()/1000.0));
         	var time = secondstotime(time2);

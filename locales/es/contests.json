@@ -6,5 +6,8 @@
   "nocontests":"No hay competiciones disponibles. <a href='newcontest.php'>Crea una<\/a>",
   "nopublic":"No hay competiciones públicas disponibles.",
   "nosemiprivate":"No hay ninguna competición semiprivada.",
-  "noprivate":"No has sido invitado a ninguna competición privada."
+  "noprivate":"No has sido invitado a ninguna competición privada.",
+  "publiccontests":"Competiciones públicas",
+  "semiprivatecontests":"Competiciones semiprivadas",
+  "privatecontests":"Competiciones privadas"
 }

@@ -11,5 +11,6 @@
   "points":"Points",
   "input_field":"Input %0 (<i>.in<\/i>)",
   "output_field":"Output %0 (<i>.out<\/i>)",
-  "add_btn":"Add"
+  "add_btn":"Add",
+  "inputsets":"Input sets"
 }
