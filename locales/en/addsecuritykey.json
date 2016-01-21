@@ -1,0 +1,19 @@
+{
+	"title": "Add security key",
+	"intro1": "You can add a security key to your account so the logging in process is more secure.",
+	"intro2": "To do so, follow the steps below:",
+	"step1": "Install the %0 extension from the Chrome Web Store.",
+	"step2": "Make sure you have a security key handy",
+	"step2_helper": "Don't have a security key? <a href=\"https://support.google.com/accounts/answer/6103523?hl=es\" target=\"_blank\">More information</a>",
+	"step3": "Remove your security key if you have already inserted it.",
+	"step4": "Press Register and afterwards insert your security key in a USB port.",
+	"step4_helper": "If your security key has a button or a golden disk, touch it.",
+	"register": "Register",
+	"waiting_usb": "Now insert (and touch) your security key.",
+	"done": "Ready!",
+	"usb_error_1":"An unexpected error has occurred. Please, try again.",
+	"usb_error_2":"Aw, snap. An unexpected error has occurred.",
+	"usb_error_3":"It seems like the configuration is not supported.",
+	"usb_error_4":"This security key is already linked with your account.",
+	"usb_error_5":"A timeout occurred while waiting for a Security Key to be inserted or tapped. Please, <a href='secondfactor.php'>try again<\/a>."
+}

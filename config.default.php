@@ -16,6 +16,9 @@
 // Define the website name:
 $appname = "Code Jam";
 
+// Define the language: (currently only en is supported)
+$language = "en";
+
 // Define the MySQL DataBase settings:
 $host_db = ''; // DB Host (default: localhost)
 $usuario_db = ''; // DB User

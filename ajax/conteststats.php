@@ -1,12 +1,13 @@
 <?php
 require("../core.php");
 require("../contest_helper.php");
+initi18n("conteststats", 1);
 
 $return = array();
 
 if (!isset($_POST["contest"])) {
 	$return["errorCode"] = 1;
-	$return["errorText"] = "No se ha indicado de qué competición obtener datos";
+	$return["errorText"] = i18n("conteststats", "error1");
 	echo json_encode($return);
 	exit;
 }
@@ -17,7 +18,7 @@ $query = mysqli_query($con, "SELECT * FROM contests WHERE id = ".$contest." LIMI
 
 if (!mysqli_num_rows($query)) {
 	$return["errorCode"] = 2;
-	$return["errorText"] = "Esta competición no existe";
+	$return["errorText"] = i18n("conteststats", "error2");
 	echo json_encode($return);
 	exit;
 }
@@ -26,7 +27,7 @@ $row = mysqli_fetch_assoc($query);
 
 if (!isinvited($contest)) {
 	$return["errorCode"] = 5;
-	$return["errorText"] = "No estás invitado a esta competición";
+	$return["errorText"] = i18n("conteststats", "error5");
 	echo json_encode($return);
 	exit;
 }
@@ -35,7 +36,7 @@ $now = time();
 
 if ($now < $row["starttime"]) {
 	$return["errorCode"] = 3;
-	$return["errorText"] = "Todavía no ha empezado la competición";
+	$return["errorText"] = i18n("conteststats", "error3");
 	echo json_encode($return);
 	exit;
 }
@@ -44,7 +45,7 @@ $query2 = mysqli_query($con, "SELECT * FROM problems WHERE contest = ".$contest)
 
 if (!mysqli_num_rows($query2)) {
 	$return["errorCode"] = 4;
-	$return["errorText"] = "Esta competición no tiene ningún problema";
+	$return["errorText"] = i18n("conteststats", "error4");
 	echo json_encode($return);
 	exit;
 }

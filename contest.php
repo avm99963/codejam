@@ -2,12 +2,14 @@
 require_once("core.php");
 require_once("contest_helper.php");
 
+initi18n("contest");
+
 $contest = (int)$_GET["id"];
 
 $query = mysqli_query($con, "SELECT * FROM contests WHERE id = ".$contest);
 
 if (!mysqli_num_rows($query)) {
-  die("This contest doesn't exist");
+  die(i18n("contest", "contestdoesntexist"));
 }
 
 $row = mysqli_fetch_assoc($query);
@@ -19,7 +21,8 @@ $row = mysqli_fetch_assoc($query);
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/contest.css">
     <link rel="icon" href="img/favicon.ico">
-    <title>Panel de competición – <?=$row["name"]?> – <?=$appname?></title>
+    <title><?=i18n("contest", "title")?> – <?=$row["name"]?> – <?=$appname?></title>
+    <?php initi18n_js("contest_js"); ?>
     <script src="js/contest.js"></script>
     <script>var contest = <?=(INT)$_GET["id"]?>;</script>
     <?php
@@ -29,8 +32,8 @@ $row = mysqli_fetch_assoc($query);
     ?>
     <script>
       window.addEventListener('load', function() {
-        toast.create('La competición ya ha acabado', 5000);
-        $('#time').parentNode.innerHTML = '<span style=\'text-align: center; display: block;\'>La competición ha terminado</span>';
+        toast.create('<?=i18n("contest", "contestended")?>', 5000);
+        $('#time').parentNode.innerHTML = '<span style=\'text-align: center; display: block;\'><?=i18n("contest", "contestended2")?></span>';
       });
       var competitionhasendedyey = true;
     </script>
@@ -50,7 +53,7 @@ $row = mysqli_fetch_assoc($query);
       window.addEventListener('load', function() {
         var buttons = $all(".solve_btn");
         for (var i = 0; i< buttons.length; i++) {
-          $(".solve_msg[data-problem-id='"+buttons[i].getAttribute("data-problem-id")+"'][data-type='"+buttons[i].getAttribute("data-type")+"']").innerText = "Todavía no ha empezado la competición";
+          $(".solve_msg[data-problem-id='"+buttons[i].getAttribute("data-problem-id")+"'][data-type='"+buttons[i].getAttribute("data-type")+"']").innerText = "<?=i18n("contest", "contestnotstarted")?>";
           buttons[i].parentNode.removeChild(buttons[i]);
         }
       });
@@ -62,7 +65,7 @@ $row = mysqli_fetch_assoc($query);
   <body>
     <?php
     if (!loggedin()) {
-      die ("<p>¡No estás connectado! <a href='index.php'>Conéctate</a></p>");
+      die(i18n("global", "notloggedin"));
     }
     ?>
     <header>
@@ -73,10 +76,10 @@ $row = mysqli_fetch_assoc($query);
         <ul>
           <?php
           if ($now < $row["starttime"] && getrole() == 0) {
-            die("<span style='color: red;'>Todavía no ha empezado la competición</span>");
+            die("<span style='color: red;'>".i18n("contest", "contestnotstarted")."</span>");
           }
           if (!isinvited($row["id"]) && getrole() == 0) {
-            die("<span style='color: red;'>No estás invitado a esta competición</span>");
+            die("<span style='color: red;'>".i18n("contest", "notinvited")."</span>");
           }
           $query2 = mysqli_query($con, "SELECT * FROM problems WHERE contest = ".$contest." ORDER BY num");
           $problems = array();
@@ -91,7 +94,7 @@ $row = mysqli_fetch_assoc($query);
               echo '<li'.$active.' data-problem-id="'.$problems[$i]["id"].'">'.$problems[$i]["name"].'</li>';
             }
           } else {
-            die("<span style='color: red;'>No hay problemas en esta competición</span>");
+            die("<span style='color: red;'>".i18n("contest", "noproblems")."</span>");
           }
           ?>
         </ul>
@@ -135,7 +138,7 @@ $row = mysqli_fetch_assoc($query);
           <?php
           if ($now > $row["endtime"]) {
           ?>
-          <p style="color: gray;">This contest is open for practice. You can try every problem as many times as you like, though we won't keep track of which problems you solve.</p>
+          <p style="color: gray;"><?=i18n("contest", "openforpractice")?></p>
           <?php
           }
           ?>
@@ -161,19 +164,19 @@ $row = mysqli_fetch_assoc($query);
             ?>
             <tr>
               <td>
-                <?=ucfirst($type)?> input<br>
-                <?=$io["pts"][$type]?> points
+                <?=i18n("contest", $type."input")?><br>
+                <?=$io["pts"][$type]?> <?=i18n("contest", "pts")?>
               </td>
               <td>
-                <button class="solve_btn" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>"<?=($submissionactive ? " hidden" : "")?>>Solucionar <?=$type?></button>
+                <button class="solve_btn" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>"<?=($submissionactive ? " hidden" : "")?>><?=i18n("contest", "solve".$type)?></button>
                 <div class="solve_container" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>"<?=($submissionactive ? "" : " hidden")?>>
                   <?php
                   if ($now > $row["endtime"]) {
                   ?>
-                  <div class="file_download"><img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>">Download <?=getfilename($problem["id"], $type_file)?>.in</a></div>
-                  <div class="output_file">output: <input type="file" class="output"></div>
-                  <div class="source_file notneeded">código fuente: no se necesita</div>
-                  <div class="navigation"><button class="submit">Enviar solución</button> <button class="hide">Ocultar</button></div>
+                  <div class="file_download"><img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>"><?=i18n("contest", "downloadfile", array(getfilename($problem["id"], $type_file).".in"))?></a></div>
+                  <div class="output_file"><?=i18n("contest", "output")?>: <input type="file" class="output"></div>
+                  <div class="source_file notneeded"><?=i18n("contest", "sourcecode")?>: <?=i18n("contest", "notneeded")?></div>
+                  <div class="navigation"><button class="submit"><?=i18n("contest", "sendsolution")?></button> <button class="hide"><?=i18n("contest", "hide")?></button></div>
                   <?php
                   } else {
                   ?>
@@ -181,15 +184,15 @@ $row = mysqli_fetch_assoc($query);
                   <?php  
                   if ($submissionactive) {
                   ?>
-                  <img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>">Download <?=getfilename($problem["id"], convertfileshorthand($type, "in", $try))?>.in</a>
+                  <img src="img/file.gif"> <a href="download.php?problem=<?=$problem["id"]?>&type=<?=$type_file?>" data-problem-id="<?=$problem["id"]?>" data-type="<?=$type?>"><?=i18n("contest", "downloadfile", array(getfilename($problem["id"], convertfileshorthand($type, "in", $try)).".in"))?></a>
                   <?php
                   }
                   ?>
                   </div>
-                  <div class="output_file">output: <input type="file" class="output"></div>
-                  <div class="source_file">código fuente: <input type="file" class="sourcecode"></div>
+                  <div class="output_file"><?=i18n("contest", "output")?>: <input type="file" class="output"></div>
+                  <div class="source_file"><?=i18n("contest", "sourcecode")?>: <input type="file" class="sourcecode"></div>
                   <div class="navigation">
-                    <button class="submit">Enviar solución</button>
+                    <button class="submit"><?=i18n("contest", "sendsolution")?></button>
                     <div class="time"></div>
                   </div>
                   <?php
@@ -225,20 +228,20 @@ $row = mysqli_fetch_assoc($query);
       </section>
       <aside>
         <details open>
-          <summary>Time</summary>
+          <summary><?=i18n("contest", "time")?></summary>
           <div class="detailed">
             <span id="time"></span>
           </div>
         </details>
         <details open>
-          <summary>Stats</summary>
+          <summary><?=i18n("contest", "stats")?></summary>
           <div class="detailed stats">
-            <p>Rank: <span id="rank" class="value">--</span></p>
-            <p>Score: <span id="score" class="value">--</span></p>
+            <p><?=i18n("contest", "rank")?>: <span id="rank" class="value">--</span></p>
+            <p><?=i18n("contest", "score")?>: <span id="score" class="value">--</span></p>
           </div>
         </details>
         <details open>
-          <summary>Submissions</summary>
+          <summary><?=i18n("contest", "submissions")?></summary>
           <div class="detailed">
             <?php
             foreach ($problems as $i => $problem) {
@@ -249,13 +252,13 @@ $row = mysqli_fetch_assoc($query);
           </div>
         </details>
         <details open>
-          <summary>Top Scores</summary>
+          <summary><?=i18n("contest", "topscores")?></summary>
           <div class="detailed nopadding">
             <table id="topscores">
               <tbody>
               </tbody>
             </table>
-            <span id="leaderboardlink"><a href="leaderboard.php?id=<?=$contest?>" target="_blank">Leaderboard...</a></span>
+            <span id="leaderboardlink"><a href="leaderboard.php?id=<?=$contest?>" target="_blank"><?=i18n("contest", "leaderboard")?></a></span>
           </div>
         </details>
       </aside>

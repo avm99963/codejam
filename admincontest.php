@@ -1,22 +1,18 @@
 <?php
 require_once("core.php");
+initi18n("admincontest");
 if (getrole())
 {
 $msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "editsuccess")
-  $msg = '<p class="alert-success">Competición editada satisfactoriamente</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "addproblemsuccess")
-  $msg = '<p class="alert-success">Problema añadido satisfactoriamente</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "editproblemsuccess")
-  $msg = '<p class="alert-success">Problema editado satisfactoriamente</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
-  $msg = '<p class="alert-success">Problema eliminado satisfactoriamente</p>';
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("editsuccess", "addproblemsuccess", "editproblemsuccess", "deleteproblemsuccess"))) {
+  $msg = "<p class='alert-success'>".i18n("global", "msg_".$_GET['msg'])."</p>";
+}
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <?php require ("head.php"); ?>
-    <title>Administrar competición – <?=$appname?></title>
+    <title><?=i18n("admincontest", "title")?> – <?=$appname?></title>
     <style>
     td, th {
       padding:5px;
@@ -104,6 +100,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
       line-height: 15px;
     }
     </style>
+    <?php initi18n_js("share_js"); ?>
     <script src="js/share.js"></script>
   </head>
   <body>
@@ -120,12 +117,12 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
         <?php
         }
           if (!isset($_GET["id"]))
-            die("<div class='alert-danger'>Esta competición no existe</div>");
+            die("<div class='alert-danger'>".i18n("admincontest", "nonexistent_contest")."</div>");
           $id = (INT)$_GET["id"];
           $query = mysqli_query($con, "SELECT * FROM contests WHERE id = '{$id}'");
 
           if (!mysqli_num_rows($query))
-            die("<div class='alert-danger'>Esta competición no existe</div>");
+            die("<div class='alert-danger'>".i18n("admincontest", "nonexistent_contest")."</div>");
 
           $row = mysqli_fetch_assoc($query);
 
@@ -133,24 +130,22 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
 
           if ($now < $row["starttime"]) {
             $status = "notstarted";
-            $status_text = "Todavía no ha empezado";
           } elseif ($now > $row["endtime"]) {
             $status = "finished";
-            $status_text = "Ya ha acabado";
           } else {
             $status = "live";
-            $status_text = "¡En vivo!";
           }
+          $status_text = i18n("admincontest", "status_".$status);
           ?>
           <script>var contest = <?=(INT)$_GET["id"]?>;</script>
           <?=$msg?>
           <div class="float right">
-            <div><button id="share" class="g-button g-button-share">Invitar</button></div>
+            <div><button id="share" class="g-button g-button-share"><?=i18n("admincontest", "invite")?></button></div>
           </div>
-          <h1>Administrar <?=$row["name"]?></h1>
-          <p><?php if (getrole() > 1) { ?><a href="addproblem.php?id=<?=$row["id"]?>"><span class="icon svg-ic_note_add_24px"></span></a> <a href="addproblem.php?id=<?=$row["id"]?>">Añadir problema</a><?php } if (isadmin()) { ?> | <a href="editcontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_mode_edit_24px"></span></a> <a href="editcontest.php?id=<?=$row["id"]?>">Editar datos de la competición</a> | <a href="deletecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_delete_24px"></span></a> <a href="deletecontest.php?id=<?=$row["id"]?>">Eliminar competición</a><?php } if ($status != "notstarted") { ?> | <a href="judgecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_thumbs_up_down_24px"></span></a> <a href="judgecontest.php?id=<?=$row["id"]?>">Juzgar respuestas</a><?php } ?></p>
+          <h1><?=i18n("admincontest", "subtitle")?> <?=$row["name"]?></h1>
+          <p><?php if (getrole() > 1) { ?><a href="addproblem.php?id=<?=$row["id"]?>"><span class="icon svg-ic_note_add_24px"></span></a> <a href="addproblem.php?id=<?=$row["id"]?>"><?=i18n("admincontest", "addproblem")?></a><?php } if (isadmin()) { ?> | <a href="editcontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_mode_edit_24px"></span></a> <a href="editcontest.php?id=<?=$row["id"]?>"><?=i18n("admincontest", "editcontest")?></a> | <a href="deletecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_delete_24px"></span></a> <a href="deletecontest.php?id=<?=$row["id"]?>"><?=i18n("admincontest", "deletecontest")?></a><?php } if ($status != "notstarted") { ?> | <a href="judgecontest.php?id=<?=$row["id"]?>"><span class="icon svg-ic_thumbs_up_down_24px"></span></a> <a href="judgecontest.php?id=<?=$row["id"]?>"><?=i18n("admincontest", "judgecontest")?></a><?php } ?></p>
 
-          <h3>Problemas</h3>
+          <h3><?=i18n("admincontest", "problems")?></h3>
           <?php
           $problems_query = mysqli_query($con, "SELECT * FROM problems WHERE contest = '{$id}' ORDER BY num");
           if ($numrows = mysqli_num_rows($problems_query)) {
@@ -158,10 +153,10 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
           <table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Small input</th>
-                <th>Large input</th>
+                <th><?=i18n("admincontest", "problems_id")?></th>
+                <th><?=i18n("admincontest", "problems_title")?></th>
+                <th><?=i18n("admincontest", "problems_small")?></th>
+                <th><?=i18n("admincontest", "problems_large")?></th>
               </tr>
             </thead>
             <tbody>
@@ -182,11 +177,11 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deleteproblemsuccess")
           </table>
           <?php
           } else {
-            echo "<p style='text-align:center;'>No hay ningún problema en esta competición :-O</p>";
+            echo "<p style='text-align:center;'>".i18n("admincontest", "noproblems")."</p>";
           }
           ?>
           <div id="status_box" class="<?=$status?>">
-            <h3 id="status_title">Estado</h3>
+            <h3 id="status_title"><?=i18n("admincontest", "status")?></h3>
             <p id="status_text"><?=$status_text?></p>
           </div>
     		</div>

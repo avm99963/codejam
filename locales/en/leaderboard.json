@@ -1,0 +1,18 @@
+{
+	"title":"Leaderboard",
+	"notinvited":"This is a private contest and you haven't been invited.",
+	"noproblems":"This contest doesn't have any problems",
+	"notstarted":"The contest hasn't started yet",
+	"rank":"Rank",
+	"contestant":"Contestant",
+	"score":"Score",
+	"time":"Time",
+	"points_abbr":"pt",
+	"noresults":"There are no results",
+	"wrongtry":"wrong try",
+	"wrongtries":"wrong tries",
+	"timexpired":"Time expired",
+	"updated":"Updated",
+	"donttellmethetruth":"Don't tell me the truth",
+	"tellmethetruth":"Tell me the truth"
+}

@@ -1,0 +1,14 @@
+{
+  "title":"Enable 2-step verification",
+  "follow":"To enable 2-step verification, read the following steps:",
+  "step_1":"Install the %0 app in your iPhone, Android or Blackberry.",
+  "step_1_helper":"You can also use another app if you want.",
+  "step_2":"Set up your %0 account scanning the following QR code:",
+  "step_3":"Can't you scan the QR code? Introduce manually the following secret key:",
+  "step_4":"Input the 6-digit verification code:",
+  "verify_btn":"Verify and save",
+  "cancel_btn":"Cancel",
+  "waiting":"Verifying...",
+  "error_1":"The verification code should have 6 digits",
+  "error_2":"The verification code is not correct"
+}

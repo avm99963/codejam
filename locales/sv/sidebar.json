@@ -1,0 +1,12 @@
+{
+  "dashboard":"Dashboard",
+  "users":"Users",
+  "contests":"Contests",
+  "admin_contest":"admin",
+  "leaderboard_contest":"leader",
+  "create_contest":"Create contest",
+  "configuration":"Configuration",
+  "2stepverification":"2-Step Verification",
+  "promote":"Promote",
+  "debug":"Debug"
+}

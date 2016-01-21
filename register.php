@@ -1,34 +1,28 @@
 <?php
 require_once("core.php");
+initi18n("register");
 $msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "emailincorrect")
-  $msg = '<p class="alert-danger">Por favor, introduce una dirección de correo electrónico correcta.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "empty")
-  $msg = '<p class="alert-danger">Por favor, rellena todos los campos</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "emaildomain")
-  $msg = '<p class="alert-danger">La dirección de correo electrónico debe estar en el dominio '.$conf["email_domain"].'.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "usernametaken")
-  $msg = '<p class="alert-danger">El nombre de usuario escogido ya está siendo usado por otro participante. Por favor, escoge otro.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "emailregistered")
-  $msg = '<p class="alert-danger">Ya hay un concursante inscrito con esta dirección de correo electrónico. Por favor, introduce una diferente.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "password")
-  $msg = '<p class="alert-danger">La contraseña debe contener como mínimo 6 caracteres.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "recaptcha")
-  $msg = '<p class="alert-danger">Por favor, rellena otra vez el captcha.</p>';
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("emailincorrect", "usernametaken", "emailregistered", "password", "recaptcha", "empty"))) {
+  if (isset($_GET['msg']) && $_GET['msg'] == "emaildomain") {
+    $msg = '<p class="alert-warning">'.i18n("global", "msg_emaildomain", array($conf["email_domain"])).'</p>';
+  } else {
+    $msg = '<p class="alert-danger">'.i18n("global", "msg_".$_GET['msg']).'</p>';
+  }
+}
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <?php require ("head.php"); ?>
-    <title>Formulario de registro – <?=$appname?></title>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <title><?=i18n("register", "title")?> – <?=$appname?></title>
+    <script src='https://www.google.com/recaptcha/api.js?hl=<?=getlanguagei18n()?>'></script>
   </head>
   <body>
     <div class="content">
       <?php require("nav.php"); ?>
     	<article>
     		<div class="text" style='margin-top:10px;'>
-    		  <h1 style='text-align:center;'>Formulario de registro</h1>
+    		  <h1 style='text-align:center;'><?=i18n("register", "title")?></h1>
           <?=$msg?>
           <?php
           if (isset($_GET["sent"]) && $_GET["sent"] == 1) {
@@ -83,13 +77,13 @@ if (isset($_GET['msg']) && $_GET['msg'] == "recaptcha")
             }
           } else {
           ?>
-      		<p>Rellena el siguiente formulario para inscribirte como concursante en "<?=$appname?>":</p>
+      		<p><?=i18n("register", "introduction", array($appname))?></p>
           <form action="register.php?sent=1" method="POST">
-              <p><label for="username">Usuario</label>: <input type="text" name="username" id="username" required="required" maxlength="50"></p>
-              <p><label for="name">Nombre</label>: <input type="text" name="name" id="name" required="required" maxlength="50"></p>
-              <p><label for="surname">Apellidos</label>: <input type="text" name="surname" id="surname" required="required" maxlength="100"></p>
-              <p><label for="email">Email</label>: <input type="email" name="email" id="email" required="required" maxlength="100"></p>
-              <p><label for="password">Contraseña</label>: <input type="password" name="password" id="password" required="required" maxlength="50"></p>
+              <p><label for="username"><?=i18n("register", "username_field")?></label>: <input type="text" name="username" id="username" required="required" maxlength="50"></p>
+              <p><label for="name"><?=i18n("register", "name_field")?></label>: <input type="text" name="name" id="name" required="required" maxlength="50"></p>
+              <p><label for="surname"><?=i18n("register", "surname_field")?></label>: <input type="text" name="surname" id="surname" required="required" maxlength="100"></p>
+              <p><label for="email"><?=i18n("register", "email_field")?></label>: <input type="email" name="email" id="email" required="required" maxlength="100"></p>
+              <p><label for="password"><?=i18n("register", "password_field")?></label>: <input type="password" name="password" id="password" required="required" maxlength="50"></p>
               <div class="g-recaptcha" data-sitekey="<?=$conf["recaptcha"]["sitekey"]?>"></div>
   		        <p><input type="submit" value="Regístrate" class="button-link"></p>
           </form>

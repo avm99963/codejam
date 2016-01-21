@@ -1,0 +1,6 @@
+{
+  "title":"Edit user",
+  "password_helper":"Leave blank if you don't want to change the password",
+  "submit_btn":"Edit user",
+  "mysql_error":"Error while editing user:"
+}

@@ -1,0 +1,13 @@
+{
+  "title":"Create contest",
+  "name_field":"Name",
+  "description_field":"Description",
+  "privacy_field":"Privacy",
+  "starttime_field":"Beginning",
+  "endtime_field":"End",
+  "submit_btn":"Create",
+  "error":"An error ocurred while creating the contest",
+  "public":"Public",
+  "semiprivate":"Semiprivate",
+  "private":"Private"
+}

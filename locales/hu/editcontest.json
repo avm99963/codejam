@@ -1,0 +1,14 @@
+{
+  "title":"Edit contest",
+  "id_field":"ID",
+  "name_field":"Name",
+  "description_field":"Description",
+  "privacy_field":"Privacy",
+  "starttime_field":"Beginning",
+  "endtime_field":"End",
+  "submit_btn":"Edit",
+  "error":"An error ocurred while editing the contest",
+  "public":"Public",
+  "semiprivate":"Semiprivate",
+  "private":"Private"
+}

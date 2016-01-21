@@ -1,0 +1,10 @@
+{
+  "title":"Register",
+  "introduction":"Fill in the following form to register as a contestant in <b>%0<\/b>:",
+  "username_field":"Username",
+  "name_field":"Name",
+  "surname_field":"Surname",
+  "email_field":"Email",
+  "password_field":"Password",
+  "register_btn":"Register"
+}

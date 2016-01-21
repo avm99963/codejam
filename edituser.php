@@ -1,28 +1,21 @@
 <?php
 require_once("core.php");
-if (isadmin())
-{
+initi18n("edituser");
+if (isadmin()) {
 $msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "emailincorrect")
-  $msg = '<p class="alert-danger">Por favor, introduce una dirección de correo electrónico correcta.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "empty")
-  $msg = '<p class="alert-danger">Por favor, rellena todos los campos</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "emaildomain")
-  $msg = '<p class="alert-danger">La dirección de correo electrónico debe estar en el dominio '.$conf["email_domain"].'.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "usernametaken")
-  $msg = '<p class="alert-danger">El nombre de usuario escogido ya está siendo usado por otro participante. Por favor, escoge otro.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "emailregistered")
-  $msg = '<p class="alert-danger">Ya hay un concursante inscrito con esta dirección de correo electrónico. Por favor, introduce una diferente.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "password")
-  $msg = '<p class="alert-danger">La contraseña debe contener como mínimo 6 caracteres.</p>';
-if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
-  $msg = '<p class="alert-danger">¡No puedes quitar el rol de hyperadmin al único hyperadmin!</p>';
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("emailincorrect", "empty", "emaildomain", "usernametaken", "emailregistered", "password", "uniquehyperadmin"))) {
+  if (isset($_GET['msg']) && $_GET['msg'] == "emaildomain") {
+    $msg = '<p class="alert-warning">'.i18n("global", "msg_emaildomain", array($conf["email_domain"])).'</p>';
+  } else {
+    $msg = '<p class="alert-danger">'.i18n("global", "msg_".$_GET['msg']).'</p>';
+  }
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Editar usuario - <?php echo $appname; ?></title>
+<title><?=i18n("edituser", "title")?> - <?php echo $appname; ?></title>
 </head>
 <body>
 <div class="content">
@@ -31,7 +24,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
             <?php anuncio(); ?>
             <?php require("sidebar.php"); ?>
             <div class="text right large">
-            <h1>Editar usuario</h1>
+            <h1><?=i18n("edituser", "title")?></h1>
             <?=$msg?>
             <?php
             if (isset($_GET['sent']) && $_GET['sent'] == "1") {
@@ -87,7 +80,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
               }
             else
               {
-              die ("<p class='alert-danger'>Error editando el usuario: " . mysqli_error($con) . "</p>");
+              die ("<p class='alert-danger'>".i18n("edituser", "mysql_error")." " . mysqli_error($con) . "</p>");
               }
             }
             else
@@ -96,14 +89,14 @@ if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
 			       $row = mysqli_fetch_assoc($query);
             ?>
             <form action="edituser.php?sent=1" method="POST" id="install-form" autocomplete="off">
-              <p><label for="id">ID</label>: <input type="number" name="id" id="id" required="required" value="<?php echo $row['id']; ?>" readonly="readonly"></p>
-              <p><label for="username">Usuario</label>: <input type="text" name="username" id="username" required="required" value="<?php echo $row['username']; ?>" readonly="readonly"></p>
-              <p><label for="name">Nombre</label>: <input type="text" name="name" id="name" required="required" value="<?php echo $row['name']; ?>" maxlength="50"></p>
-              <p><label for="surname">Apellidos</label>: <input type="text" name="surname" id="surname" required="required" value="<?php echo $row['surname']; ?>" maxlength="100"></p>
-              <p><label for="email">Email</label>: <input type="email" name="email" id="email" required="required" value="<?php echo $row['email']; ?>" maxlength="100"></p>
-              <p><label for="password">Contraseña</label>: <input type="password" name="password" id="password" maxlength="50"> <span style="color:gray;">Dejar en blanco si no quieres cambiar la contraseña</span></p>
-              <p><label for="role">Rol</label>: <select name="role"><option value="0"<?php if ($row["role"] == 0) echo " selected='selected'"; ?>>Contestant</option><option value="1"<?php if ($row["role"] == 1) echo " selected='selected'"; ?>>Judge</option><option value="2"<?php if ($row["role"] == 2) echo " selected='selected'"; ?>>Problem writer</option><option value="3"<?php if ($row["role"] == 3) echo " selected='selected'"; ?>>Hyperadmin</option></select></p>
-              <p><input type="submit" class="button-link" value="Editar usuario"></p>
+              <p><label for="id"><?=i18n("global", "id")?></label>: <input type="number" name="id" id="id" required="required" value="<?php echo $row['id']; ?>" readonly="readonly"></p>
+              <p><label for="username"><?=i18n("global", "username")?></label>: <input type="text" name="username" id="username" required="required" value="<?php echo $row['username']; ?>" readonly="readonly"></p>
+              <p><label for="name"><?=i18n("global", "name")?></label>: <input type="text" name="name" id="name" required="required" value="<?php echo $row['name']; ?>" maxlength="50"></p>
+              <p><label for="surname"><?=i18n("global", "surname")?></label>: <input type="text" name="surname" id="surname" required="required" value="<?php echo $row['surname']; ?>" maxlength="100"></p>
+              <p><label for="email"><?=i18n("global", "email")?></label>: <input type="email" name="email" id="email" required="required" value="<?php echo $row['email']; ?>" maxlength="100"></p>
+              <p><label for="password"><?=i18n("global", "password")?></label>: <input type="password" name="password" id="password" maxlength="50"> <span style="color:gray;"><?=i18n("edituser", "password_helper")?></span></p>
+              <p><label for="role"><?=i18n("global", "role")?></label>: <select name="role"><?php for ($i = 0; $i < 4; $i++) { ?><option value="<?=$i?>"<?php if ($row["role"] == $i) echo " selected='selected'"; ?>><?=i18n("global", "role_".$i)?></option><?php } ?></select></p>
+              <p><input type="submit" class="button-link" value="<?=i18n("edituser", "submit_btn")?>"></p>
             </form>
             <?php
 		        }
@@ -114,9 +107,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
 </body>
 </html>
 <?php
-}
-else
-{
+} else {
       header('HTTP/1.0 404 Not Found');
 }
 ?>

@@ -1,0 +1,9 @@
+{
+	"title": "2-step verification",
+	"enabled": "2-step verification is enabled.",
+	"disabled": "2-step verification is disabled.",
+	"setupagain": "Set it up again",
+	"securitykeys": "Manage your security keys",
+	"enable": "Enable",
+	"disable": "Disable"
+}

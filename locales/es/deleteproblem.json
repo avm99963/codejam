@@ -1,0 +1,7 @@
+{
+  "title":"Eliminar problema",
+  "aboutto":"Estás a punto de eliminar el problema <b>%0</b>.",
+  "error_mysql":"No se han podido eliminar los datos de la tabla %0",
+  "error_file":"No se ha podido eliminar el archivo %0. Bórralo manualmente o prueba después de purgarlo en la página <a href='debug.php'>debug</a>.",
+  "problemdoesntexist":"Este problema no existe."
+}

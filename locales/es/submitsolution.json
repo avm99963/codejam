@@ -1,0 +1,19 @@
+{
+	"error1":"No se han subido todos los archivos",
+	"error15":"El archivo de salida debe pesar menos de 200kB",
+	"error2":"Esta competición no existe",
+	"error18":"No estás invitado a esta competición",
+	"error3":"Todavía no ha empezado la competición",
+	"error4":"Ya ha terminado la competición",
+	"error5":"Este problema no existe",
+	"error16":"El archivo de código fuente debe pesar menos de 200kB",
+	"error10":"El tiempo ha expirado",
+	"error14":"No hay contadores activos",
+	"error9":"No se ha iniciado ningún contador",
+	"error6":"Un error inesperado ocurrió comprobando si la respuesta era correcta",
+	"error7":"El archivo que has subido no parece el archivo de salida",
+	"error8":"El archivo de salida no contiene la solución a todos los casos, o bien contiene la solución de más casos de los esperados",
+	"error11":"Ha ocurrido el error %0 mientras se subía el archivo %1",
+	"error12":"No se ha podido subir el archivo %0",
+	"error1":"No se ha podido contactar con la base de datos"
+}

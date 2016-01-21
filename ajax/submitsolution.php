@@ -1,19 +1,20 @@
 <?php
 require_once("../core.php");
 require_once("../contest_helper.php");
+initi18n("submitsolution", 1);
 
 $return = array();
 
 if (!isset($_POST["contest"]) || !isset($_POST["problem"]) || !isset($_FILES["output"])) {
 	$return["errorCode"] = 1;
-	$return["errorText"] = "No se han subido todos los archivos";
+	$return["errorText"] = i18n("submitsolution", "error1");
 	echo json_encode($return);
 	exit;
 }
 
 if($_FILES["output"]["size"] >= 200*1024) {
 	$return["errorCode"] = 15;
-	$return["errorText"] = "El archivo de salida debe pesar menos de 200kB";
+	$return["errorText"] = i18n("submitsolution", "error15");
 	echo json_encode($return);
 	exit;
 }
@@ -28,14 +29,14 @@ $query = mysqli_query($con, "SELECT * FROM contests WHERE id = ".$contest." LIMI
 
 if (!mysqli_num_rows($query)) {
 	$return["errorCode"] = 2;
-	$return["errorText"] = "Esta competición no existe";
+	$return["errorText"] = i18n("submitsolution", "error2");
 	echo json_encode($return);
 	exit;
 }
 
 if (!isinvited($contest)) {
 	$return["errorCode"] = 18;
-	$return["errorText"] = "No estás invitado a esta competición";
+	$return["errorText"] = i18n("submitsolution", "error18");
 	echo json_encode($return);
 	exit;
 }
@@ -44,7 +45,7 @@ $row = mysqli_fetch_assoc($query);
 
 if ($now < $row["starttime"]) {
 	$return["errorCode"] = 3;
-	$return["errorText"] = "Todavía no ha empezado la competición";
+	$return["errorText"] = i18n("submitsolution", "error3");
 	echo json_encode($return);
 	exit;
 }
@@ -57,7 +58,7 @@ if ($_POST["competitionhasendedyey"] == 1 && $now > $row["endtime"]) {
 
 if ($now > $row["endtime"] && $competitionhasendedyey === false) {
 	$return["errorCode"] = 4;
-	$return["errorText"] = "Ya ha terminado la competición";
+	$return["errorText"] = i18n("submitsolution", "error4");
 	echo json_encode($return);
 	exit;
 }
@@ -66,7 +67,7 @@ $query2 = mysqli_query($con, "SELECT * FROM problems WHERE contest = ".$contest.
 
 if (!mysqli_num_rows($query2)) {
 	$return["errorCode"] = 5;
-	$return["errorText"] = "Este problema no existe";
+	$return["errorText"] = i18n("submitsolution", "error5");
 	echo json_encode($return);
 	exit;
 }
@@ -75,13 +76,13 @@ $row2 = mysqli_fetch_assoc($query2);
 
 if (!isset($_FILES["sourcecode"]) && !$competitionhasendedyey) {
 	$return["errorCode"] = 1;
-	$return["errorText"] = "No se han subido todos los archivos";
+	$return["errorText"] = i18n("submitsolution", "error1");
 	echo json_encode($return);
 	exit;
 	
 	if($_FILES["output"]["size"] >= 200*1024) {
 		$return["errorCode"] = 16;
-		$return["errorText"] = "El archivo de código fuente debe pesar menos de 200kB";
+		$return["errorText"] = i18n("submitsolution", "error16");
 		echo json_encode($return);
 		exit;
 	}
@@ -103,19 +104,19 @@ if ($competitionhasendedyey) {
 		$endtime = $row3["time"] + (($type == "small") ? 4 : 8) * 60;
 		if ($now > $endtime) {
 			$return["errorCode"] = 10;
-			$return["errorText"] = "El tiempo ha expirado";
+			$return["errorText"] = i18n("submitsolution", "error10");
 			echo json_encode($return);
 			exit;
 		}
 		if (isset($row3["valid"])) {
 			$return["errorCode"] = 14;
-			$return["errorText"] = "No hay contadores activos";
+			$return["errorText"] = i18n("submitsolution", "error14");
 			echo json_encode($return);
 			exit;
 		}
 	} else {
 		$return["errorCode"] = 9;
-		$return["errorText"] = "No se ha iniciado ningún contador";
+		$return["errorText"] = i18n("submitsolution", "error9");
 		echo json_encode($return);
 		exit;
 	}
@@ -126,21 +127,21 @@ $judged = judge_output($response, $problem, $weirdtype);
 
 if ($judged >= -2 && $judged < 0) {
 	$return["errorCode"] = 6;
-	$return["errorText"] = "Un error inesperado ocurrió comprobando si la respuesta era correcta";
+	$return["errorText"] = i18n("submitsolution", "error6");
 	echo json_encode($return);
 	exit;
 }
 
 if ($judged == -3) {
 	$return["errorCode"] = 7;
-	$return["errorText"] = "El archivo que has subido no parece el archivo de salida";
+	$return["errorText"] = i18n("submitsolution", "error7");
 	echo json_encode($return);
 	exit;
 }
 
 if ($judged == -4) {
 	$return["errorCode"] = 8;
-	$return["errorText"] = "El archivo de salida no contiene la solución a todos los casos, o bien contiene la solución de más casos de los esperados";
+	$return["errorText"] = i18n("submitsolution", "error8");
 	echo json_encode($return);
 	exit;
 }
@@ -157,7 +158,7 @@ if (!$competitionhasendedyey) {
 	foreach ($array_files as $file) {
 		if ($_FILES[$file]["error"] != 0)  {
 			$return["errorCode"] = 11;
-			$return["errorText"] = "Ha ocurrido el error ".$_FILES[$file]["error"]." mientras se subía el archivo ".htmlspecialchars($_FILES[$file]["name"]);
+			$return["errorText"] = i18n("submitsolution", "error11", array($_FILES[$file]["error"], htmlspecialchars($_FILES[$file]["name"])));
 			echo json_encode($return);
 			exit;
 		} else {
@@ -169,7 +170,7 @@ if (!$competitionhasendedyey) {
 				$solution[$file] = $newfilename;
 			} else {
 				$return["errorCode"] = 12;
-				$return["errorText"] = "No se ha podido subir el archivo ".htmlspecialchars($_FILES[$file]["name"]);
+				$return["errorText"] = i18n("submitsolution", "error11", array(htmlspecialchars($_FILES[$file]["name"])));
 				echo json_encode($return);
 				exit;
 			}
@@ -181,7 +182,7 @@ if (!$competitionhasendedyey) {
 		$return["saved"] = 1;
 	} else {
 		$return["errorCode"] = 17;
-		$return["errorText"] = "No se ha podido contactar con la base de datos";
+		$return["errorText"] = i18n("submitsolution", "error1");
 		echo json_encode($return);
 		exit;
 	}

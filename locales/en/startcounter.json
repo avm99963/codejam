@@ -1,0 +1,13 @@
+{
+	"error1":"The problem or the type hasn't been specified",
+	"error7":"An incorrect type has been specified",
+	"error5":"This problem doesn't exist",
+	"error2":"This contest doesn't exist",
+	"error11":"You haven't been invited to this contest",
+	"error3":"This contest hasn't started yet",
+	"error4":"This contest has already ended",
+	"error6":"You already have already tried this problem's large input",
+	"error8":"You have already tried 3 times this problem's small input",
+	"error10":"You have already solved correctly this problem",
+	"error9":"The query to the database failed"
+}

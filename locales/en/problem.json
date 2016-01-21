@@ -1,0 +1,8 @@
+{
+	"title": "Problem",
+	"inputoutput": "Input/output files",
+	"smallinputset": "Small Input Set",
+	"largeinputset": "Large Input Set",
+	"inputlabel": "Input %0",
+	"outputlabel": "Output %0"
+}

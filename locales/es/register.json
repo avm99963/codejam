@@ -1,0 +1,10 @@
+{
+  "title":"Formulario de registro",
+  "introduction":"Rellena el siguiente formulario para inscribirte como concursante en <b>%0<\/b>:",
+  "username_field":"Usuario",
+  "name_field":"Nombre",
+  "surname_field":"Apellidos",
+  "email_field":"Correo electrónico",
+  "password_field":"Contraseña",
+  "register_btn":"Regístrate"
+}

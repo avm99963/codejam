@@ -2,15 +2,13 @@
 require_once("core.php");
 if (isadmin())
 {
-$msg = "";
-if (isset($_GET['msg']) && $_GET['msg'] == "uniquehyperadmin")
-  $msg = '<p class="alert-danger">¡No puedes borrar el único hyperadmin!</p>';
+initi18n("deletecontest");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Eliminar competición - <?php echo $appname; ?></title>
+<title><?=i18n("deletecontest", "title")?> - <?php echo $appname; ?></title>
 <style>
 td, th
 {
@@ -33,8 +31,7 @@ table, th, td
 		<?php anuncio(); ?>
 		<?php require("sidebar.php"); ?>
 		<div class="text right large">
-		<h1>Eliminar competición</h1>
-		<?=$msg?>
+		<h1><?=i18n("deletecontest", "title")?></h1>
 		<?php
 		if (isset($_GET['sent']) && $_GET['sent'] == "1") {
 			$sql = "DELETE FROM problems WHERE contest = ".(INT)$_GET['id']."";
@@ -45,13 +42,13 @@ table, th, td
 					if (mysqli_query($con, $sql3)) {
   						header("Location: contests.php?msg=deletesuccessful");
   					} else {
-  						die ("<p class='alert-danger'>Error eliminando los envíos de la competición: " . mysqli_error($con) . "</p>");
+  						die ("<p class='alert-danger'>".i18n("deletecontest", "error_submissions")." " . mysqli_error($con) . "</p>");
   					}
  				} else {
-					die ("<p class='alert-danger'>Error eliminando la competición: " . mysqli_error($con) . "</p>");
+					die ("<p class='alert-danger'>".i18n("deletecontest", "error_contest")." " . mysqli_error($con) . "</p>");
 				}
 			} else {
-				die ("<p class='alert-danger'>Error eliminando los problemas de la competición: " . mysqli_error($con) . "</p>");
+				die ("<p class='alert-danger'>".i18n("deletecontest", "error_problems")." " . mysqli_error($con) . "</p>");
 			}
 		} else {
 			$query = mysqli_query($con, "SELECT * FROM contests WHERE ID = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
@@ -67,8 +64,8 @@ table, th, td
 			}
 			echo "<blockquote><h3><span class='icon svg-ic_".$img."_24px'></span> ".$row["name"]."</h3><p>".$row["description"]."</p></blockquote>";
 		?>
-		<p>¿Estás seguro? <span style="color:red;font-weight:bold;">Esta acción no se puede revertir</span></p>
-		<p><a href="deletecontest.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red">Sí</a> <a href="admincontest.php?id=<?=$_GET['id']?>" class="button-link">No</a></p>
+		<p><?=i18n("global", "delete_areyousure")?></p>
+		<p><a href="deletecontest.php?id=<?php echo $_GET['id'];?>&sent=1" class="button-link-red"><?=i18n("global", "yes")?></a> <a href="admincontest.php?id=<?=$_GET['id']?>" class="button-link"><?=i18n("global", "no")?></a></p>
 		<?php
 		}
 		?>

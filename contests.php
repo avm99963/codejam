@@ -1,6 +1,7 @@
 <?php
 require_once("core.php");
 require_once("contest_helper.php");
+initi18n("contests");
 $msg = "";
 if (isset($_GET['msg']) && $_GET['msg'] == "newsuccess")
   $msg = '<p class="alert-success">Competición creada correctamente</p>';
@@ -11,7 +12,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Competiciones - <?php echo $appname; ?></title>
+<title><?=i18n("contests", "title")?> - <?php echo $appname; ?></title>
 </head>
 <body>
 <div class="content">
@@ -20,7 +21,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 		<?php
 		if (!loggedin())
 		{
-			die ("<div class='alert-danger'><p>¡No estás connectado! <a href='index.php'>Conéctate</a></p></div>");
+			die ("<div class='alert-danger'>".i18n("global", "notloggedin")."</div>");
 		}
 		?>
 		<?php anuncio(); ?>
@@ -45,57 +46,57 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 						} elseif ($row["privacy"] == 0) {
 							$img = "lock";
 						}
-						$output[] = "<h2><span class='icon svg-ic_".$img."_24px'></span> <span style='vertical-align: middle;'>".$row["name"]."</span></h2><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a><br><a href='admincontest.php?id=".$row["id"]."'><span class='icon svg-ic_mode_edit_24px'></span></a> <a href='admincontest.php?id=".$row["id"]."'>Administrar la competición</a></p>";
+						$output[] = "<h2><span class='icon svg-ic_".$img."_24px'></span> ".$row["name"]."</h2><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a><br><a href='admincontest.php?id=".$row["id"]."'><span class='icon svg-ic_mode_edit_24px'></span></a> <a href='admincontest.php?id=".$row["id"]."'>".i18n("contests", "admin")."</a></p>";
 					}
 					echo implode("<hr>", $output);
 				} else {
-					echo "<p style='text-align:center;'>No hay competiciones disponibles. <a href='newcontest.php'>Crea una</a></p>";
+					echo "<p style='text-align:center;'>".i18n("contests", "nocontests")."</p>";
 				}
 			} else {
 				?>
-				<h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_public_24px'></span> <span style="vertical-align:middle;">Competiciones públicas</span></span></h2>
+				<h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_public_24px'></span> <span style="vertical-align:middle;"><?=i18n("contests", "publiccontests")?></span></span></h2>
 				<?php
 				$query = mysqli_query($con, "SELECT * FROM contests WHERE privacy = 2");
 				if (mysqli_num_rows($query)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query)) {
-						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a></p>";
+						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 					}
 					echo implode("", $output);
 				} else {
-					echo "<p style='text-align:center;'>No hay competiciones públicas disponibles.</p>";
+					echo "<p style='text-align:center;'>".i18n("contests", "nopublic")."</p>";
 				}
 				?>
-				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_open_24px'></span> <span style="vertical-align:middle;">Competiciones semiprivadas</span></span></h2>
+				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_open_24px'></span> <span style="vertical-align:middle;"><?=i18n("contests", "semiprivatecontests")?></span></span></h2>
 				<?php
 				$query3 = mysqli_query($con, "SELECT * FROM contests WHERE privacy = 1"); // TODO: Adapt query when inviting contestants is implemented
 				if (mysqli_num_rows($query3)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query3)) {
-						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'>".(isinvited($row["id"]) ? "<a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br>" : "")."<a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a></p>";
+						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'>".(isinvited($row["id"]) ? "<a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br>" : "")."<a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 					}
 					echo implode("", $output);
 				} else {
-					echo "<p style='text-align:center;'>No hay ninguna competición semiprivada.</p>";
+					echo "<p style='text-align:center;'>".i18n("contests", "nosemiprivate")."</p>";
 				}
 				?>
-				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_24px'></span> <span style="vertical-align:middle;">Competiciones privadas</span></span></h2>
+				<hr><h2><span style="border-bottom: 1px solid #BDBDBD; padding-bottom: 5px;"><span class='icon svg-ic_lock_24px'></span> <span style="vertical-align:middle;"><?=i18n("contests", "privatecontests")?></span></span></h2>
 				<?php
 				$query2 = mysqli_query($con, "SELECT * FROM contests WHERE privacy = 0");
 				if (mysqli_num_rows($query2)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query2)) {
 						if (isinvited($row["id"])) {
-							$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>Abrir el panel de competición</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>Ver la clasificación</a></p>";
+							$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 						}
 					}
 					if (!count($output)) {
-						echo "<p style='text-align:center;'>No has sido invitado a ninguna competición privada.</p>";
+						echo "<p style='text-align:center;'>".i18n("contests", "noprivate")."</p>";
 					} else {
 						echo implode("", $output);
 					}
 				} else {
-					echo "<p style='text-align:center;'>No has sido invitado a ninguna competición privada.</p>";
+					echo "<p style='text-align:center;'>".i18n("contests", "noprivate")."</p>";
 				}
 			}
 			?>

@@ -1,0 +1,20 @@
+{
+  "title":"Manage contest",
+  "subtitle":"Manage",
+  "addproblem":"Add problem",
+  "editcontest":"Edit contest data",
+  "deletecontest":"Delete contest",
+  "judgecontest":"Judge submissions",
+  "problems":"Problems",
+  "problems_id":"ID",
+  "problems_title":"Title",
+  "problems_small":"Small input",
+  "problems_large":"Large input",
+  "noproblems":"There isn't any problem in this contest :-O",
+  "nonexistent_contest":"This contest does not exist",
+  "status":"Status",
+  "status_notstarted":"It hasn't started yet",
+  "status_finished":"It has already finished",
+  "status_live":"¡Live!",
+  "invite":"Invite"
+}

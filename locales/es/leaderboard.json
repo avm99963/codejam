@@ -1,0 +1,18 @@
+{
+	"title":"Clasificación",
+	"notinvited":"Esta competición es privada y no has sido invitado.",
+	"noproblems":"Esta competición no tiene problemas",
+	"notstarted":"Todavía no ha empezado la competición",
+	"rank":"Posición",
+	"contestant":"Concursante",
+	"score":"Puntuación",
+	"time":"Tiempo",
+	"points_abbr":"pt",
+	"noresults":"No hay resultados",
+	"wrongtry":"intento fallido",
+	"wrongtries":"intentos fallidos",
+	"timexpired":"El tiempo expiró",
+	"updated":"Actualizado",
+	"donttellmethetruth":"No me digas la verdad",
+	"tellmethetruth":"Dime la verdad"
+}

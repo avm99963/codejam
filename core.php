@@ -16,6 +16,9 @@ date_default_timezone_set("Europe/Madrid");
 // Aquí se recoge la configuración
 require("config.php");
 
+// Possible languages:
+$conf["hllist"] = array("af", "ar", "ca", "cs", "da", "de", "el", "en", "es", "fi", "fr", "he", "hu", "it", "ja", "ko", "nl", "no", "pl", "pt", "ro", "ru", "sr", "sv", "tr", "uk", "vi", "zh", "empty");
+
 // Aquí se accede a la BD y a la sesión
 $con = @mysqli_connect($host_db, $usuario_db, $clave_db, $nombre_db) or die("<center>Check Mysqli settings in config.php</center>"); // Conectamos y seleccionamos BD
 
@@ -153,7 +156,7 @@ function format_time($t,$f=':') {
 }
 
 function htmledit() {
-    echo '<script src="lib/ckeditor/ckeditor.js"></script>';
+    echo '<script src="lib/ckeditor/ckeditor.js"></script><script>window.addEventListener("load", function() { CKEDITOR.replace(document.querySelector("textarea"), { language: "'.getlanguagei18n().'" }); });</script>';
 }
 
 function get_ip_address(){
@@ -270,5 +273,99 @@ function array_search_multidimensional($haystack, $field, $needle) {
          return $key;
    }
    return false;
+}
+
+function getlanguagei18n() {
+    global $language;
+    global $_GET;
+    global $conf;
+
+    if (isset($_GET["hl"]) && in_array($_GET["hl"], $conf["hllist"])) {
+        return $_GET["hl"];
+    } else {
+        return $language;
+    }
+}
+
+function initi18n($include, $gobacki=0) {
+    global $i18n_strings;
+
+    if (empty($i18n_strings))
+        $i18n_strings = array();
+    $language = getlanguagei18n();
+
+    /* Messy code which allows me to be able to load empty strings :-D */
+    if ($language == "empty") {
+        return true;
+    }
+    /* End of messy code */
+
+    $goback = "";
+
+    for ($i = 0; $i < $gobacki; $i++) {
+        $goback .= "../";
+    }
+
+    $i18n_strings["global"] = json_decode(file_get_contents($goback."locales/".$language."/global.json"), true);
+
+    if (gettype($include) == "array") {
+        foreach ($include as $includer) {
+            $file = $goback."locales/".$language."/".$includer.".json";
+            if (file_exists($file)) {
+                $i18n_strings[$includer] = json_decode(file_get_contents($file), true);
+            } else {
+                die("<div class='alert alert-danger'>File ".$file." doesn't exist</div>");
+                return false;
+            }
+        }
+    } elseif (gettype($include) == "string") {
+        $file = $goback."locales/".$language."/".$include.".json";
+        if (file_exists($file)) {
+            $i18n_strings[$include] = json_decode(file_get_contents($file), true);
+        } else {
+            die("<div class='alert alert-danger'>File ".$file." doesn't exist</div>");
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+    return true;
+}
+
+function i18n($include, $message, $strings = null) {
+    global $i18n_strings;
+
+    if (!isset($i18n_strings[$include][$message])) {
+        return false;
+    }
+
+    $string = $i18n_strings[$include][$message];
+
+    if ($strings != null) {
+        foreach ($strings as $i => $subst) {
+            $string = str_replace("%".$i, $subst, $string);
+        }
+    }
+
+    return $string;
+}
+
+function initi18n_js($include, $gobacki=0) {
+    $language = getlanguagei18n();
+
+    $goback = "";
+
+    for ($i = 0; $i < $gobacki; $i++) {
+        $goback .= "../";
+    }
+
+    $file = $goback."locales/".$language."/".$include.".json";
+    if (file_exists($file)) {
+        echo "<script>var i18n = ".file_get_contents($file).";</script>";
+    } else {
+        die("<div class='alert alert-danger'>File ".$file." doesn't exist</div>");
+        return false;
+    }
 }
 ?>

@@ -1,0 +1,14 @@
+{
+  "title":"Activar verificación en 2 pasos",
+  "follow":"Para activar la verificación en 2 pasos, sigue los siguientes pasos:",
+  "step_1":"Instala la aplicación %0 en tu iPhone, Android o Blackberry.",
+  "step_1_helper":"También puedes usar otra aplicación si lo prefieres.",
+  "step_2":"Configura tu cuenta de %0 escaneando el siguiente código QR:",
+  "step_3":"¿No puedes escanear el código QR? Introduce manualmente la siguiente llave secreta:",
+  "step_4":"Introduce el código de verificación de seis dígitos:",
+  "verify_btn":"Verificar y guardar",
+  "cancel_btn":"Cancelar",
+  "waiting":"Verificando...",
+  "error_1":"El código de verificación debe tener 6 cifras",
+  "error_2":"El código de verificación no es correcto"
+}

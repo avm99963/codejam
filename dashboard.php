@@ -1,5 +1,6 @@
 <?php
 require_once("core.php");
+initi18n("dashboard");
 if (getrole())
 {
 ?>
@@ -7,7 +8,7 @@ if (getrole())
 <html>
 <head>
 <?php require ("head.php"); ?>
-<title>Dashboard - <?php echo $appname; ?></title>
+<title><?=i18n("dashboard", "title")?> - <?php echo $appname; ?></title>
 </head>
 <body>
 <div class="content">
@@ -16,12 +17,8 @@ if (getrole())
 		<?php anuncio(); ?>
 		<?php require("sidebar.php"); ?>
 		<div class="text right large">
-		<h1>Panel de Control</h1>
-		<?php
-		/*if ($_GET['msg'] == "newexamen")
-			echo "<div class='alert-success'>Examen creado satisfactoriamente</div>";*/
-		?>
-		¡Hola <?php echo userdata('username'); ?>! Bienvenido a tu Panel de Control.
+		<h1><?=i18n("dashboard", "title")?></h1>
+		<?=i18n("dashboard", "msg", array(userdata("username")))?>
 		</div>
 	</article>
 </div>

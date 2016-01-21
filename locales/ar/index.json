@@ -1,0 +1,10 @@
+{
+  "title":"Log in",
+  "user_field":"Username:",
+  "password_field":"Password:",
+  "form_button":"Log in",
+  "salute":"Hi %0!",
+  "contests_btn":"Contests",
+  "dashboard_btn":"Dashboard",
+  "install_promotion":"Install the app!"
+}

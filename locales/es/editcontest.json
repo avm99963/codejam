@@ -1,0 +1,14 @@
+{
+  "title":"Editar competición",
+  "id_field":"ID",
+  "name_field":"Nombre",
+  "description_field":"Descripción",
+  "privacy_field":"Privacidad",
+  "starttime_field":"Comienzo",
+  "endtime_field":"Final",
+  "submit_btn":"Editar",
+  "error":"Error al editar la competición",
+  "public":"Público",
+  "semiprivate":"Semiprivado",
+  "private":"Privado"
+}

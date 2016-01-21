@@ -1,0 +1,9 @@
+{
+	"title": "Verificación en 2 pasos",
+	"enabled": "La verificación en 2 pasos está activada.",
+	"disabled": "La verificación en 2 pasos no está activada.",
+	"setupagain": "Configurar de nuevo",
+	"securitykeys": "Administra las llaves de seguridad",
+	"enable": "Actívala",
+	"disable": "Desactívala"
+}

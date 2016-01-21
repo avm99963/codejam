@@ -1,0 +1,13 @@
+{
+  "title":"Crear competición",
+  "name_field":"Nombre",
+  "description_field":"Descripción",
+  "privacy_field":"Privacidad",
+  "starttime_field":"Comienzo",
+  "endtime_field":"Final",
+  "submit_btn":"Crear",
+  "error":"Error al crear la competición",
+  "public":"Público",
+  "semiprivate":"Semiprivado",
+  "private":"Privado"
+}

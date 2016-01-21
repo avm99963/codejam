@@ -1,6 +1,8 @@
 # codejam
 PHP software for holding online coding competitions
 
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/codejam/localized.png)](https://crowdin.com/project/codejam)
+
 ## Requirements
 * PHP 5.2+
 * Support for the mysqli extension
