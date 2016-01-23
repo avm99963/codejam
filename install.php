@@ -23,7 +23,7 @@ if (isset($_GET['install']) && $_GET['install'] == "1") {
   surname VARCHAR(100),
   email VARCHAR(100),
   role INT(2),
-  password VARCHAR(50)
+  password VARCHAR(255)
   )";
 
   $sql["contests"] = "CREATE TABLE contests 
