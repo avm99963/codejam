@@ -43,7 +43,7 @@ $rows = mysqli_num_rows($query);
 
 foreach ($people as $person) {
 	if (!in_array($person, $already_invited)) {
-		if ($id == userdata("id", $person)) {
+		if ($id = userdata("id", $person)) {
 			if (!mysqli_query($con, "INSERT INTO invitations (user_id, contest) VALUES ({$id}, {$contest})")) {
 				$return["errorCode"] = 3;
 				$return["errorText"] = i18n("invite_errors", "error_3");
