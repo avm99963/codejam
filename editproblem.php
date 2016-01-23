@@ -93,13 +93,13 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
               <h4 style="margin-bottom: 0;"><?=i18n("editproblem", "small")?></h4>
               <div class="padding10">
                 <p style="margin-top: 5px;">
-                  <label for="pts_sinput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_sinput" id="pts_sinput" required="required" min="1"><br><br>
-                  <label for="in1_sinput"><?=i18n("editproblem", "input_field", array("1"))?></label>: <input type="file" name="in1_sinput" id="in1_sinput" accept=".in" required="required"><br>
-                  <label for="out1_sinput"><?=i18n("editproblem", "output_field", array("1"))?></label>: <input type="file" name="out1_sinput" id="out1_sinput" accept=".out" required="required"><br><br>
-                  <label for="in2_sinput"><?=i18n("editproblem", "input_field", array("2"))?></label>: <input type="file" name="in2_sinput" id="in2_sinput" accept=".in" required="required"><br>
-                  <label for="out2_sinput"><?=i18n("editproblem", "output_field", array("2"))?></label>: <input type="file" name="out2_sinput" id="out2_sinput" accept=".out" required="required"><br><br>
-                  <label for="in3_sinput"><?=i18n("editproblem", "input_field", array("3"))?></label>: <input type="file" name="in3_sinput" id="in3_sinput" accept=".in" required="required"><br>
-                  <label for="out3_sinput"><?=i18n("editproblem", "output_field", array("3"))?></label>: <input type="file" name="out3_sinput" id="out3_sinput" accept=".out" required="required">
+                  <label for="pts_sinput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_sinput" id="pts_sinput" min="1" value="<?=$io["pts"]["small"]?>"><br><br>
+                  <label for="in1_sinput"><?=i18n("editproblem", "input_field", array("1"))?></label>: <input type="file" name="in1_sinput" id="in1_sinput" accept=".in"><br>
+                  <label for="out1_sinput"><?=i18n("editproblem", "output_field", array("1"))?></label>: <input type="file" name="out1_sinput" id="out1_sinput" accept=".out"><br><br>
+                  <label for="in2_sinput"><?=i18n("editproblem", "input_field", array("2"))?></label>: <input type="file" name="in2_sinput" id="in2_sinput" accept=".in"><br>
+                  <label for="out2_sinput"><?=i18n("editproblem", "output_field", array("2"))?></label>: <input type="file" name="out2_sinput" id="out2_sinput" accept=".out"><br><br>
+                  <label for="in3_sinput"><?=i18n("editproblem", "input_field", array("3"))?></label>: <input type="file" name="in3_sinput" id="in3_sinput" accept=".in"><br>
+                  <label for="out3_sinput"><?=i18n("editproblem", "output_field", array("3"))?></label>: <input type="file" name="out3_sinput" id="out3_sinput" accept=".out">
                 </p>
               </div>
               <div id="largeinputs">
@@ -107,9 +107,9 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
                   <h4 style="margin-bottom: 0;"><?=i18n("editproblem", "large")?></h4>
                   <div class="padding10">
                     <p style="margin-top: 5px;">
-                      <label for="pts_linput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_linput" id="pts_linput" required="required" min="1"><br>
-                      <label for="in_linput"><?=i18n("editproblem", "input_field", array(""))?>: <input type="file" name="in_linput" id="in_linput" accept=".in" required="required"><br>
-                      <label for="out_linput"><?=i18n("editproblem", "output_field", array(""))?></label>: <input type="file" name="out_linput" id="out_linput" accept=".out" required="required">
+                      <label for="pts_linput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_linput" id="pts_linput" min="1" value="<?=$io["pts"]["large"]?>"><br>
+                      <label for="in_linput"><?=i18n("editproblem", "input_field", array(""))?>: <input type="file" name="in_linput" id="in_linput" accept=".in"><br>
+                      <label for="out_linput"><?=i18n("editproblem", "output_field", array(""))?></label>: <input type="file" name="out_linput" id="out_linput" accept=".out">
                     </p>
                   </div>
                 </div>
