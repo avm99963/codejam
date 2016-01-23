@@ -70,7 +70,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("emailincorrect", "usern
               exit();
             }
 
-            if (mysqli_query($con, "INSERT INTO users (username, name, surname, email, role, password) VALUES ('".$username."', '".$name."', '".$surname."', '".$email."', 0, '".password_hash($password)."')")) {
+            if (mysqli_query($con, "INSERT INTO users (username, name, surname, email, role, password) VALUES ('".$username."', '".$name."', '".$surname."', '".$email."', 0, '".password_hash($_POST["password"], PASSWORD_DEFAULT)."')")) {
               header("Location: index.php?msg=registersuccess");
             } else {
               die("<div class='alert alert-danger'>Error registrando al concursante :-/</div>");

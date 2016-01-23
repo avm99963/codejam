@@ -110,7 +110,7 @@ if (isset($_GET['install']) && $_GET['install'] == "1") {
   $surname = htmlspecialchars(mysqli_real_escape_string($con, $_POST['surname']));
   $email = mysqli_real_escape_string($con, $_POST['email']);
   $password = mysqli_real_escape_string($con, $_POST['password']);
-  $sql6 = "INSERT INTO users (username, name, surname, email, role, password) VALUES ('".$username."', '".$name."', '".$surname."', '".$email."', 3, '".password_hash($password)."')";
+  $sql6 = "INSERT INTO users (username, name, surname, email, role, password) VALUES ('".$username."', '".$name."', '".$surname."', '".$email."', 3, '".password_hash($_POST["password"], PASSWORD_DEFAULT)."')";
     if (mysqli_query($con,$sql6))
     {
     echo "<p style='color:green;'>Admin user created.</p>";
