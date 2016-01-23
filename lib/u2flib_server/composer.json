@@ -1,0 +1,19 @@
+{
+  "name":"yubico/u2flib-server",
+  "description":"Library for U2F implementation",
+  "homepage":"https://developers.yubico.com/php-u2flib-server",
+  "license":"BSD-2-Clause",
+  "repositories": [ {
+    "type":"git",
+    "url":"https://github.com/mdanter/phpecc"
+  } ],
+  "require": {
+    "phpseclib/phpseclib":"0.3.*",
+    "ext-gmp":"*",
+    "mdanter/ecc":"dev-master"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}
+

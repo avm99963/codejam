@@ -1,0 +1,379 @@
+2014-10-24  Klas Lindfors <klas@yubico.com>
+
+	* NEWS: version 0.0.2
+
+2014-10-24  Klas Lindfors <klas@yubico.com>
+
+	* composer.json: remove the mcrypt extension from dependencies since it's not used relates to #3
+
+2014-10-24  Klas Lindfors <klas@yubico.com>
+
+	* examples/pdo/index.php: public key is base64 encoded, so it will
+	be longer than 65 bytes so just make it varchar(255)..
+
+2014-10-23  Henrik Stråth <minisu@users.noreply.github.com>
+
+	* README: Linkifying and spelling correction of README
+
+2014-10-23  Henrik Stråth <henrik.strath@gmail.com>
+
+	* README: Fixed README headers All headers were top level headers. Now they're not.
+
+2014-10-23  Henrik Stråth <henrik@yubico.com>
+
+	* README.adoc: Created symlink to README
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* examples/pdo/index.php: add an example using PDO and sqlite
+
+2014-10-22  Klas Lindfors <klas@yubico.com>
+
+	* examples/localstorage/index.php: fixup localstorage example after
+	refactor
+
+2014-10-22  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: refactor to skip
+	json formatted parameters
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* examples/{ => localstorage}/index.php: move localstorage example
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: add a test for a bad public key in the
+	registration message
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: decode the public key during
+	registration to make sure it's usable
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: add a test for registration with broken
+	public key inside
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: add a test for authenticate with bad pubkey
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: let public key decode failure return an
+	error instead of throwing an exception
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: php 5.3 doesn't support array
+	de-referencing
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: when decoding the registration, build
+	an offset instead and make sure the array and the raw has the same offset
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: update doc
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: test failing authentication due to counter
+	fail
+
+2014-10-21  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: refactor and
+	drop the Authentication class instead add the counter field to the Registration class and check
+	the counter and return an updated Registration in doAuthenticate()
+
+2014-10-20  Klas Lindfors <klas@yubico.com>
+
+	* .gitignore, apigen.neon, do-source-release.sh,
+	src/u2flib_server/U2F.php: some documentation comments and apigen
+	config
+
+2014-10-20  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: clarify
+
+2014-10-20  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: check the crypto_strong parameter to
+	openssl_random_pseudo_bytes fixes #1
+
+2014-10-17  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: drop ModuleConfig stuff
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* do-source-release.sh: tagnames have to be just version for
+	packagist to find it
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* .gitignore: ignore
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* do-source-release.sh: fix
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* NEWS: bump version after release
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* NEWS: version 0.0.1
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* do-source-release.sh: add script for doing release
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* NEWS: add NEWS file
+
+2014-10-16  Klas Lindfors <klas@yubico.com>
+
+	* phpunit.xml: blacklist vendor from coverage reports
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: add test for bad signature in
+	authentication
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: test non-verifying attestation signature
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: fix so error is
+	returned for miss-matched registration challenge and test it
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: handle errors in the example
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: let
+	doAuthentication return json for success
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* .travis.yml: travis is now running hhvm 3.3 which works
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: test authentication without mathing
+	keyHandle
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: try to cleanup from broken keyhandles in
+	storage
+
+2014-10-15  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: return errors
+	instead of null
+
+2014-10-13  Klas Lindfors <klas@yubico.com>
+
+	* tests/certs/yubico-u2f-ca-1.pem, tests/u2flib_test.php: add tests
+	for attestation
+
+2014-10-13  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: change to work with refactorings in
+	phpecc
+
+2014-10-13  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: make certificate
+	inclusion in registration optional
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: do some cert attesting
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: add a bit of text about number of
+	authenticators
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: more assertions
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: more asserts
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: more assertions
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: start with some assertions
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: fixup multi registration and auth
+
+2014-10-10  Klas Lindfors <klas@yubico.com>
+
+	* tests/u2flib_test.php: use print_r to handle that it's an array
+	that gets back..
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: support multiple registrations
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php, src/u2flib_server/U2F.php: let getRegisterData
+	return signRequests as well
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: FIXME
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: add copyright and license for the example
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: naive but working example
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: encode the array, not just the members
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: skip JSON encode parameter
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: fix another instance of array
+	de-referencing
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* .travis.yml: we want to support php 5.3
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: php 5.3 doesn't support array
+	dereferencing
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* .gitignore: ignore more
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* examples/index.php: start with basic example usage
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* .travis.yml: drop php 5.3 and try to mark hhvm as allowed failure
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: construct arrays
+	with array() instead
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* README: README
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* COPYING, src/u2flib_server/U2F.php, tests/u2flib_test.php: add
+	copyright and license
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* phpunit.xml, tests/bootstrap.php, tests/u2flib_test.php: drop
+	bootstrap step, just require vendor/autoload.php
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* BLURB: BLURB
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php: loadX509() can use the base64 encoded
+	cert
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* composer.json, src/u2flib_server/U2F.php: switch to the "real"
+	upstream of phpecc
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: change how some
+	of the data is stored base64 encode publicKey and certificate
+
+2014-10-09  Klas Lindfors <klas@yubico.com>
+
+	* .travis.yml, src/u2flib_server/U2F.php: change around a bit to
+	make it compatible with php 5.3 specifically drop usage of hex2bin()
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* .travis.yml: add travis.yml
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* tests/phpunit.xml => phpunit.xml: move phpunit.xml to root
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: working
+	authenticate
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* src/u2flib_server/U2F.php, tests/u2flib_test.php: continuing with
+	a simple authenticate
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* composer.json, src/u2flib_server/U2F.php: think on how a
+	registration should be stored.
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* .gitignore: ignore
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* composer.json, src/u2flib_server/U2F.php: include our own pubkey
+	decoder
+
+2014-10-08  Klas Lindfors <klas@yubico.com>
+
+	* composer.json, src/u2flib_server/U2F.php, tests/bootstrap.php,
+	tests/phpunit.xml, tests/u2flib_test.php: somewhat working register
+
+2014-10-07  Klas Lindfors <klas@yubico.com>
+
+	* composer.json, src/u2flib_server/U2F.php: beginnings of some code
+	and structure
+
+2014-10-07  Klas Lindfors <klas@yubico.com>
+
+	* first commit.
+
