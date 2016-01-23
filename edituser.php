@@ -51,7 +51,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("emailincorrect", "empty
               exit();
             }
             if (isset($password)) {
-              $password_query = ", password='".md5($password)."'";
+              $password_query = ", password='".password_hash($password)."'";
             } else {
               $password_query = "";
             }

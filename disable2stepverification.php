@@ -44,23 +44,25 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                             header("Location: disable2stepverification.php?msg=empty");
                             exit;
                         }
-                        $password = mysqli_real_escape_string($con, $_POST["password"]);
-                        $query = mysqli_query($con, "SELECT * FROM users WHERE id=".$_SESSION['id']." and password='".md5($password)."'");
+                        $query = mysqli_query($con, "SELECT * FROM users WHERE id=".$_SESSION['id']);
                         if (mysqli_num_rows($query)) {
-                            $sql = "DELETE FROM securitykeys WHERE user_id = ".$_SESSION['id'];
-                            $sql2 = "DELETE FROM 2stepverification WHERE user_id = ".$_SESSION['id']." LIMIT 1";
-                            if (mysqli_query($con, $sql)) {
-                                if (mysqli_query($con, $sql2)) {
-                                    header("Location: 2stepverification.php?msg=disabled");
+                            $row = mysqli_fetch_assoc($query);
+                            if (password_verify($row, $_POST["password"])) {
+                                $sql = "DELETE FROM securitykeys WHERE user_id = ".$_SESSION['id'];
+                                $sql2 = "DELETE FROM 2stepverification WHERE user_id = ".$_SESSION['id']." LIMIT 1";
+                                if (mysqli_query($con, $sql)) {
+                                    if (mysqli_query($con, $sql2)) {
+                                        header("Location: 2stepverification.php?msg=disabled");
+                                    } else {
+                                        die ("<p class='alert-danger'>".i18n("disable2stepverification", "error_disable")."</p>");
+                                    }
                                 } else {
-                                    die ("<p class='alert-danger'>".i18n("disable2stepverification", "error_disable")."</p>");
+                                    die ("<p class='alert-danger'>".i18n("disable2stepverification", "error_deletesecuritykeys")."</p>");
                                 }
                             } else {
-                                die ("<p class='alert-danger'>".i18n("disable2stepverification", "error_deletesecuritykeys")."</p>");
+                                header("Location: disable2stepverification.php?msg=passworddoesntmatch");
+                                exit;
                             }
-                        } else {
-                            header("Location: disable2stepverification.php?msg=passworddoesntmatch");
-                            exit;
                         }
                     } else {
                     ?>
