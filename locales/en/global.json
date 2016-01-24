@@ -23,6 +23,7 @@
   "msg_disabled":"2-step verification has been disabled successfully",
   "msg_empty2":"Please, enter your password",
   "msg_usereditsuccess": "You have edited your profile successfully.",
+  "msg_timesdontmatch":"Something illogical happened: The start time is greater or equal than the end time.",
   "id":"ID",
   "username":"Username",
   "name":"Name",

@@ -23,6 +23,7 @@
   "msg_disabled":"La verificación en 2 pasos se ha inhabilitado satisfactoriamente",
   "msg_empty2":"Por favor, introduce tu contraseña",
   "msg_usereditsuccess": "Has editado tu perfil correctamente.",
+  "msg_timesdontmatch":"Ilógica aplastante: El tiempo de comienzo es mayor o igual al tiempo de fin.",
   "id":"ID",
   "username":"Usuario",
   "name":"Nombre",
