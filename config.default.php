@@ -16,7 +16,7 @@
 // Define the website name:
 $appname = "Code Jam";
 
-// Define the language: (currently only en is supported)
+// Define the language: (currently only "en" and "es" are supported)
 $language = "en";
 
 // Define the MySQL DataBase settings:
