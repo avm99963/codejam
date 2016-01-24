@@ -60,7 +60,7 @@ function updatestats() {
 	        		}
 
 	        		if (submission.small.manuallyjudged === true) {
-	        			small += '<span class="mj" title="'+i18n.manuallyjudged+'">(MJ)</span>';
+	        			small += '<span class="mj" title="'+i18n.manuallyjudgedtitle+'">(MJ)</span>';
 	        		}
 
 	        		if (submission.large.status == "correct") {
@@ -76,7 +76,7 @@ function updatestats() {
 	        		}
 
 	        		if (submission.large.manuallyjudged === true) {
-	        			large += '<span class="mj" title="'+i18n.manuallyjudged+'">(MJ)</span>';
+	        			large += '<span class="mj" title="'+i18n.manuallyjudgedtitle+'">(MJ)</span>';
 	        		}
 
 	        		$(".submission[data-problem-id='"+i+"'] .small_submission").innerHTML = small;
