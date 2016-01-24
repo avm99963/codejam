@@ -47,7 +47,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "passworddoesntmatch")
                         $query = mysqli_query($con, "SELECT * FROM users WHERE id=".$_SESSION['id']);
                         if (mysqli_num_rows($query)) {
                             $row = mysqli_fetch_assoc($query);
-                            if (password_verify($row, $_POST["password"])) {
+                            if (password_verify($_POST["password"], $row["password"])) {
                                 $sql = "DELETE FROM securitykeys WHERE user_id = ".$_SESSION['id'];
                                 $sql2 = "DELETE FROM 2stepverification WHERE user_id = ".$_SESSION['id']." LIMIT 1";
                                 if (mysqli_query($con, $sql)) {
