@@ -36,7 +36,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("empty", "nameunique")))
               header("Location: addproblem.php?msg=pts&id=".$contest);
             }
 
-            if (empty($name) || empty($description) || empty($pts_sinput) || empty($pts_linput) || empty($contest)) {
+            if (empty($name) || empty($description) || $pts_sinput < 0 || $pts_linput < 0 || empty($contest)) {
               header("Location: addproblem.php?msg=empty&id=".$contest);
               exit();
             }
@@ -104,7 +104,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("empty", "nameunique")))
               <h4 style="margin-bottom: 0;"><?=i18n("addproblem", "small")?>:</h4>
               <div class="padding10">
                 <p style="margin-top: 5px;">
-                  <label for="pts_sinput"><?=i18n("addproblem", "points")?></label>: <input type="number" name="pts_sinput" id="pts_sinput" required="required" min="1"><br><br>
+                  <label for="pts_sinput"><?=i18n("addproblem", "points")?></label>: <input type="number" name="pts_sinput" id="pts_sinput" required="required" min="0"><br><br>
                   <label for="in1_sinput"><?=i18n("addproblem", "input_field", array("1"))?></label>: <input type="file" name="in1_sinput" id="in1_sinput" accept=".in" required="required"><br>
                   <label for="out1_sinput"><?=i18n("addproblem", "output_field", array("1"))?></label>: <input type="file" name="out1_sinput" id="out1_sinput" accept=".out" required="required"><br><br>
                   <label for="in2_sinput"><?=i18n("addproblem", "input_field", array("2"))?></label>: <input type="file" name="in2_sinput" id="in2_sinput" accept=".in" required="required"><br>
@@ -118,7 +118,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("empty", "nameunique")))
                   <h4 style="margin-bottom: 0;"><?=i18n("addproblem", "large")?>:</h4>
                   <div class="padding10">
                     <p style="margin-top: 5px;">
-                      <label for="pts_linput"><?=i18n("addproblem", "points")?></label>: <input type="number" name="pts_linput" id="pts_linput" required="required" min="1"><br>
+                      <label for="pts_linput"><?=i18n("addproblem", "points")?></label>: <input type="number" name="pts_linput" id="pts_linput" required="required" min="0"><br>
                       <label for="in_linput"><?=i18n("addproblem", "input_field", array(""))?>: <input type="file" name="in_linput" id="in_linput" accept=".in" required="required"><br>
                       <label for="out_linput"><?=i18n("addproblem", "output_field", array(""))?></label>: <input type="file" name="out_linput" id="out_linput" accept=".out" required="required">
                     </p>

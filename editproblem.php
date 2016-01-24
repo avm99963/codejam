@@ -18,7 +18,98 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
   </head>
   <body>
     <div class="content">
-      <?php require("nav.php"); ?>
+      <?php require("nav.php"); ?><?php
+// Google Code Jam 2015 Round 1B - Hiking Deer
+
+require_once("codejam.php");
+
+$t = (int)fgets(STDIN);
+
+function solve($n, $ni) {
+  $people = array();
+  foreach ($ni as $nii) {
+    for ($i = 0; $i < $nii[1]; $i++) {
+      $people[] = array(
+        "d" => $nii[0],
+        "m" => $nii[2] + $i
+      );
+    }
+  }
+  $firstperson = reset($people)["m"];
+  $condition = true;
+  foreach ($people as $person) {
+    if ($person["m"] != $firstperson) {
+      $condition = false;
+      break;
+    }
+  }
+  if ($condition == true) {
+    return 0;
+  } else {
+    /*if ($people[0]["d"] > $people[1]["d"]) {
+      $personone = $people[0];
+      $persontwo = $people[1];
+    } elseif ($people[0]["d"] > $people[1]["d"]) {*/
+      if ($people[0]["m"] > $people[1]["m"]) {
+        $personone = $people[1];
+        $persontwo = $people[0];
+      } else {
+        $personone = $people[0];
+        $persontwo = $people[1];
+      }
+    /*} else {
+      $personone = $people[1];
+      $persontwo = $people[0];
+    }*/
+    //print_r($personone);
+    //print_r($persontwo);
+
+    $seeoverlappingdegrees = 720 - $personone["d"];
+    $seeoverlappingdegrees2 = 720 - $persontwo["d"];
+
+    if ($personone["d"] < $persontwo["d"]) {
+      $siguiented = $persontwo["d"] + 360;
+
+      $t = ($siguiented - $personone["d"]) / ($persontwo["m"] - $personone["m"]);
+
+      $x = $personone["m"] * $t;
+
+      
+    } else {
+      $siguiented = $persontwo["d"] + 360;
+
+      $t = ($siguiented - $personone["d"]) / ($persontwo["m"] - $personone["m"]);
+
+      $x = $personone["m"] * $t;
+
+      if ($x + $personone["d"] <= 360) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+    $personone["t"] = $siguiented / ($personone["m"] * 360);
+    $degrees = $personone["t"] * ($persontwo["m"] * 360);
+    echo $personone["t"];
+    if ($degrees <= 360) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
+
+for ($x = 1; $x <= $t; $x++) {
+  $n = (int)fgets(STDIN);
+  $ni = array();
+  for ($i = 0; $i < $n; $i++) {
+    $ni[] = array_map("intval", explode(" ", fgets(STDIN)));
+  }
+  $y = solve($n, $ni);
+  echo "Case #".$x.": ".$y."\n";
+}
+º
     	<article>
         <?php anuncio(); ?>
         <?php require("sidebar.php"); ?>
@@ -47,7 +138,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
             $pts_sinput = (INT)$_POST['pts_sinput'];
             $pts_linput = (INT)$_POST['pts_linput'];
 
-            if (empty($name) || empty($description) || empty($pts_sinput) || empty($pts_linput)) {
+            if (empty($name) || empty($description) || $pts_sinput < 0 || $pts_linput < 0) {
               header("Location: editproblem.php?msg=empty");
               exit();
             }
@@ -93,7 +184,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
               <h4 style="margin-bottom: 0;"><?=i18n("editproblem", "small")?></h4>
               <div class="padding10">
                 <p style="margin-top: 5px;">
-                  <label for="pts_sinput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_sinput" id="pts_sinput" min="1" value="<?=$io["pts"]["small"]?>"><br><br>
+                  <label for="pts_sinput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_sinput" id="pts_sinput" min="0" value="<?=$io["pts"]["small"]?>"><br><br>
                   <label for="in1_sinput"><?=i18n("editproblem", "input_field", array("1"))?></label>: <input type="file" name="in1_sinput" id="in1_sinput" accept=".in"><br>
                   <label for="out1_sinput"><?=i18n("editproblem", "output_field", array("1"))?></label>: <input type="file" name="out1_sinput" id="out1_sinput" accept=".out"><br><br>
                   <label for="in2_sinput"><?=i18n("editproblem", "input_field", array("2"))?></label>: <input type="file" name="in2_sinput" id="in2_sinput" accept=".in"><br>
@@ -107,7 +198,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "nameunique")
                   <h4 style="margin-bottom: 0;"><?=i18n("editproblem", "large")?></h4>
                   <div class="padding10">
                     <p style="margin-top: 5px;">
-                      <label for="pts_linput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_linput" id="pts_linput" min="1" value="<?=$io["pts"]["large"]?>"><br>
+                      <label for="pts_linput"><?=i18n("editproblem", "points")?></label>: <input type="number" name="pts_linput" id="pts_linput" min="0" value="<?=$io["pts"]["large"]?>"><br>
                       <label for="in_linput"><?=i18n("editproblem", "input_field", array(""))?>: <input type="file" name="in_linput" id="in_linput" accept=".in"><br>
                       <label for="out_linput"><?=i18n("editproblem", "output_field", array(""))?></label>: <input type="file" name="out_linput" id="out_linput" accept=".out">
                     </p>
