@@ -46,7 +46,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 						} elseif ($row["privacy"] == 0) {
 							$img = "lock";
 						}
-						$output[] = "<h2><span class='icon svg-ic_".$img."_24px'></span> ".$row["name"]."</h2><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a><br><a href='admincontest.php?id=".$row["id"]."'><span class='icon svg-ic_mode_edit_24px'></span></a> <a href='admincontest.php?id=".$row["id"]."'>".i18n("contests", "admin")."</a></p>";
+						$output[] = "<h2><span class='icon svg-ic_".$img."_24px'></span> ".$row["name"]."</h2><p>".nl2br($row["description"], false)."</p><p class='padding10'><span class='icon svg-ic_today_24px'></span> <span style='color: #555;'>".date("j M Y H:i", $row["starttime"])." - ".date("j M Y H:i (e)", $row["endtime"])."</span><br><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a><br><a href='admincontest.php?id=".$row["id"]."'><span class='icon svg-ic_mode_edit_24px'></span></a> <a href='admincontest.php?id=".$row["id"]."'>".i18n("contests", "admin")."</a></p>";
 					}
 					echo implode("<hr>", $output);
 				} else {
@@ -60,7 +60,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 				if (mysqli_num_rows($query)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query)) {
-						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
+						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><span class='icon svg-ic_today_24px'></span> <span style='color: #555;'>".date("j M Y H:i", $row["starttime"])." - ".date("j M Y H:i (e)", $row["endtime"])."</span><br><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 					}
 					echo implode("", $output);
 				} else {
@@ -73,7 +73,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 				if (mysqli_num_rows($query3)) {
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query3)) {
-						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'>".(isinvited($row["id"]) ? "<a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br>" : "")."<a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
+						$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><span class='icon svg-ic_today_24px'></span> <span style='color: #555;'>".date("j M Y H:i", $row["starttime"])." - ".date("j M Y H:i (e)", $row["endtime"])."</span><br>".(isinvited($row["id"]) ? "<a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br>" : "")."<a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 					}
 					echo implode("", $output);
 				} else {
@@ -87,7 +87,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "deletesuccessful")
 					$output = array();
 					while ($row = mysqli_fetch_assoc($query2)) {
 						if (isinvited($row["id"])) {
-							$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
+							$output[] = "<h3>".$row["name"]."</h3><p>".nl2br($row["description"], false)."</p><p class='padding10'><span class='icon svg-ic_today_24px'></span> <span style='color: #555;'>".date("j M Y H:i", $row["starttime"])." - ".date("j M Y H:i (e)", $row["endtime"])."</span><br><a href='contest.php?id=".$row["id"]."'><span class='icon svg-ic_open_in_browser_24px'></span></a> <a href='contest.php?id=".$row["id"]."'>".i18n("contests", "dashboard")."</a><br><a href='leaderboard.php?id=".$row["id"]."'><span class='icon svg-ic_format_list_numbered_24px'></span></a> <a href='leaderboard.php?id=".$row["id"]."'>".i18n("contests", "leaderboard")."</a></p>";
 						}
 					}
 					if (!count($output)) {
