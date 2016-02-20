@@ -16,6 +16,9 @@ date_default_timezone_set("Europe/Madrid");
 // Aquí se recoge la configuración
 require("config.php");
 
+// For PHP <5.5
+require("lib/password.php");
+
 // Possible languages:
 $conf["hllist"] = array("af", "ar", "ca", "cs", "da", "de", "el", "en", "es", "fi", "fr", "he", "hu", "it", "ja", "ko", "nl", "no", "pl", "pt", "ro", "ru", "sr", "sv", "tr", "uk", "vi", "zh", "empty");
 
@@ -368,4 +371,3 @@ function initi18n_js($include, $gobacki=0) {
         return false;
     }
 }
-?>

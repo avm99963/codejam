@@ -2,7 +2,7 @@
 require_once("core.php");
 initi18n("register");
 $msg = "";
-if (isset($_GET['msg']) && in_array($_GET['msg'], array("emailincorrect", "usernametaken", "emailregistered", "password", "recaptcha", "empty"))) {
+if (isset($_GET['msg']) && in_array($_GET['msg'], array("emailincorrect", "usernametaken", "emailregistered", "password", "recaptcha", "empty", "registersuccess", "emaildomain"))) {
   if (isset($_GET['msg']) && $_GET['msg'] == "emaildomain") {
     $msg = '<p class="alert-warning">'.i18n("global", "msg_emaildomain", array($conf["email_domain"])).'</p>';
   } else {
