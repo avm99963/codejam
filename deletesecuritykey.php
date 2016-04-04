@@ -66,7 +66,7 @@ thead {
             </thead>
 			<tbody>
 		<?php
-		$query = mysqli_query($con, "SELECT * FROM securitykeys WHERE id = ".(INT)$_GET['id']." AND user_id = ".$_SESSION['id']." LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+		$query = mysqli_query($con, "SELECT * FROM securitykeys WHERE id = ".(INT)$_GET['id']." AND user_id = ".$_SESSION['id']." LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 		if (!mysqli_num_rows($query))
 			die("<div class='alert alert-danger'>Esta llave de seguridad no existe.</div>");
 		$row = mysqli_fetch_assoc($query);

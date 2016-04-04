@@ -71,7 +71,7 @@ table, th, td
 			</thead>
 			<tbody>
 		<?php
-		$query = mysqli_query($con, "SELECT * FROM users WHERE ID = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+		$query = mysqli_query($con, "SELECT * FROM users WHERE ID = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 		if (!mysqli_num_rows($query))
 			die("<div class='alert alert-danger'>".i18n("deleteuser", "doesntexist")."</div>");
 		$row = mysqli_fetch_assoc($query);

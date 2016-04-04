@@ -34,12 +34,12 @@ table, th, td
 		<h1><?=i18n("deleteproblem", "title")?></h1>
 		<?php
 		if (isset($_GET['sent']) && $_GET['sent'] == "1") {
-			$query = mysqli_query($con, "SELECT * FROM problems WHERE id = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+			$query = mysqli_query($con, "SELECT * FROM problems WHERE id = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 			if (!mysqli_num_rows($query))
 				die("<div class='alert alert-danger'>".i18n("deleteproblem", "problemdoesntexist")."</div>");
 			$row = mysqli_fetch_assoc($query);
 
-			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 			$row2 = mysqli_fetch_assoc($query2);
 
 			$sql = array();
@@ -77,12 +77,12 @@ table, th, td
 				}
 			}
 		} else {
-			$query = mysqli_query($con, "SELECT * FROM problems WHERE id = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+			$query = mysqli_query($con, "SELECT * FROM problems WHERE id = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 			if (!mysqli_num_rows($query))
 				die("<div class='alert alert-danger'>Este problema no existe.</div>");
 			$row = mysqli_fetch_assoc($query);
 
-			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+			$query2 = mysqli_query($con, "SELECT * FROM contests WHERE id = '".mysqli_real_escape_string($con, $row['contest'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 			$row2 = mysqli_fetch_assoc($query2);
 		?>
 		<p><?=i18n("deleteproblem", "aboutto", array($row["name"]))?></p>

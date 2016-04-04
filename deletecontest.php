@@ -58,7 +58,7 @@ table, th, td
 				die ("<p class='alert-danger'>".i18n("deletecontest", "error_problems")." " . mysqli_error($con) . "</p>");
 			}
 		} else {
-			$query = mysqli_query($con, "SELECT * FROM contests WHERE ID = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error()."</div>");
+			$query = mysqli_query($con, "SELECT * FROM contests WHERE ID = '".mysqli_real_escape_string($con, $_GET['id'])."' LIMIT 1") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
 			if (!mysqli_num_rows($query))
 				die("<div class='alert alert-danger'>Esta competición no existe.</div>");
 			$row = mysqli_fetch_assoc($query);
