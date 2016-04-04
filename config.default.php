@@ -34,6 +34,10 @@ $anuncio = '';
 // Configuration array:
 $conf = array();
 
+// Path in the URL to the codejam app. It will be used to set up the session cookie.
+// Examples: "/codejam/", "/", "/p/codejam/"
+$conf["path"] = "/stpaulscodejam/";
+
 // Domains permitted for registration:
 $conf["email_domain"] = "";
 

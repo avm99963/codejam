@@ -25,6 +25,8 @@ $conf["hllist"] = array("af", "ar", "ca", "cs", "da", "de", "el", "en", "es", "f
 // Aquí se accede a la BD y a la sesión
 $con = @mysqli_connect($host_db, $usuario_db, $clave_db, $nombre_db) or die("<center>Check Mysqli settings in config.php</center>"); // Conectamos y seleccionamos BD
 
+
+session_set_cookie_params(0, $conf["path"]);
 session_start();
 
 // Custom error handler
