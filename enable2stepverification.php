@@ -10,7 +10,7 @@ $secret = $authenticator->generateSecret();
 
 $url = "otpauth://totp/".str_replace("+", "%20", urlencode($appname)).":".userdata('username')."?secret=".urlencode($secret)."&issuer=".str_replace("+", "%20", urlencode($appname));
 
-$qrcode = "http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=".urlencode($url)."&chld=H|0";
+$qrcode = "//chart.apis.google.com/chart?cht=qr&chs=200x200&chl=".urlencode($url)."&chld=H|0";
 ?>
 <!DOCTYPE html>
 <html>
