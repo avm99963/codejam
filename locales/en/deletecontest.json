@@ -2,5 +2,6 @@
   "title":"Delete contest",
   "error_submissions":"An error ocurred while deleting this contest' submissions:",
   "error_contest":"An error ocurred while deleting this contest:",
-  "error_problems":"An error ocurred while deleting this contest' problems:"
+  "error_problems":"An error ocurred while deleting this contest' problems:",
+  "error_thereareproblems":"To be able to delete this contest, you must previously delete or move its problems to another contest individually."
 }

@@ -34,6 +34,13 @@ table, th, td
 		<h1><?=i18n("deletecontest", "title")?></h1>
 		<?php
 		if (isset($_GET['sent']) && $_GET['sent'] == "1") {
+			$problems = mysqli_query($con, "SELECT * FROM problems WHERE contest = ".(int)$_GET["id"]);
+
+			if (mysqli_num_rows($problems)) {
+				echo "<p class='alert-danger'>".i18n("deletecontest", "error_thereareproblems")." " . mysqli_error($con) . "</p>";
+				exit();
+			}
+
 			$sql = "DELETE FROM problems WHERE contest = ".(INT)$_GET['id']."";
 			if (mysqli_query($con, $sql)) {
 				$sql2 = "DELETE FROM contests WHERE id = ".(INT)$_GET['id']." LIMIT 1";
