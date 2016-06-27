@@ -146,7 +146,7 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("wrongcode", "passworddo
                         exit;
                     }
                     if (isset($_POST["verificationcode"])) {
-                        
+
                     } else {
                         if ($secondfactor == 1 || (isset($_GET["forcecode"]) && $_GET["forcecode"] == "true")) {
                     ?>
@@ -226,13 +226,15 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("wrongcode", "passworddo
                             }
 
                             try {
-                                $reqs = json_encode($u2f->getAuthenticateData($row));
-                                echo "<script>var req = $reqs;</script>";
+                                $reqs_nojson = $u2f->getAuthenticateData($row);
+                                $challenge = $reqs_nojson[0]->challenge;
+                                $reqs = json_encode($reqs_nojson);
+                                echo "<script>var req = $reqs, host = '".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."', challenge = '".$challenge."';</script>";
                             } catch( Exception $e ) {
                                 echo "Error: ".$e->getMessage();
                             }
                     ?>
-                    <script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
+                    <script src="js/u2f-api.js"></script>
                     <script src="js/secondfactor_gnubby.js"></script>
                     <style>
                     #waiting_usb span {

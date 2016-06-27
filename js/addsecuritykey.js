@@ -1,10 +1,33 @@
+function xhr(method, url, params, callback) {
+	var http = new XMLHttpRequest();
+	if (method == "POST") {
+		http.open(method, url, true);
+	} else {
+		http.open(method, url+"?"+params, true);
+	}
+	http.onreadystatechange = function() {
+		if(http.readyState === XMLHttpRequest.DONE) {
+			if(this.status != 200) {
+				console.warn("Attention, status code "+this.status+" when loading via xhr url "+url);
+			}
+			callback(this.responseText, this.status);
+	  };
+	}
+	if (method == "POST") {
+		http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		http.send(params);
+	} else {
+		http.send();
+	}
+}
+
 function $(a) {
 	return document.querySelector(a);
 }
 
 function register() {
 	$("#registrar").setAttribute("hidden", "");
-	u2f.register([req], sigs, function(data) {
+	u2f.register(host, [req], sigs, function(data) {
 		$("#waiting_usb").setAttribute("hidden", "");
 		if(data.errorCode) {
 			$("#usb_error_"+data.errorCode).removeAttribute("hidden");
@@ -27,16 +50,19 @@ function register() {
 		}
 		http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		http.send(params);
-	});
+	}, 30);
 	$("#waiting_usb").removeAttribute("hidden");
 }
 
 window.onload = function() {
-	if(window.u2f !== undefined) {
-		$("#extension").removeAttribute("hidden");
-	} else {
-		$(".step .text").style.color = "red";
-		$(".step .text").innerHTML = '<b>Instala la extensión <a href="https://chrome.google.com/webstore/detail/fido-u2f-universal-2nd-fa/pfboblefjcgdjicmnffhdgionmgcdmne">FIDO U2F</a> de la Chrome Web Store</b>.<br>Después vuelve a cargar esta página.';
-	}
-	$("#registrar").addEventListener('click', register);
+	xhr("GET", "chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-comms.html", "", function(response, status) {
+		if (status == 200) {
+				$("#extension").removeAttribute("hidden");
+		} else {
+			$(".step .text").style.color = "red";
+			$(".step .text").innerHTML = '<b>Instala la extensión <a href="https://chrome.google.com/webstore/detail/fido-u2f-universal-2nd-fa/pfboblefjcgdjicmnffhdgionmgcdmne">FIDO U2F</a> de la Chrome Web Store</b>.<br>Después vuelve a cargar esta página.';
+			$("#registrar").disabled = true;
+		}
+		$("#registrar").addEventListener('click', register);
+	});
 }

@@ -81,11 +81,11 @@ try {
             -webkit-flex-basis: 0.000000001px;
             flex-basis: 0.000000001px;
         }
-        
+
         #registrar_container div {
             margin-top: 8px;
         }
-        
+
         #waiting_usb span {
             vertical-align: middle;
         }
@@ -195,13 +195,14 @@ try {
           }
         }
         </style>
-        <script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
         <script>
         <?php
         echo "var req = " . json_encode($req) . ";";
         echo "var sigs = " . json_encode($sigs) . ";";
+        echo "var host = '" . $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'] . "';";
         ?>
         </script>
+        <script src="js/u2f-api.js"></script>
         <script src="js/addsecuritykey.js"></script>
     </head>
     <body>

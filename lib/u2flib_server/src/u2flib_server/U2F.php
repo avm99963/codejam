@@ -147,7 +147,7 @@ class U2F {
     if($this->attestDir) {
       if(!$x509->validateSignature($cert)) {
         return new Error(ERR_ATTESTATION_VERIFICATION, "Attestation certificate can not be validated");
-        /* XXX: validateDate uses platform time_t to represent time, 
+        /* XXX: validateDate uses platform time_t to represent time,
          * this breaks with long validity periods and 32-bit platforms.
       } else if (!$x509->validateDate()) {
         return null; */
@@ -185,14 +185,15 @@ class U2F {
    */
   public function getAuthenticateData($registrations) {
     $sigs = array();
+    $challenge = U2F::base64u_encode(openssl_random_pseudo_bytes(32, $crypto_strong));
+    if($crypto_strong != true) {
+      return new Error(ERR_BAD_RANDOM, "Unable to obtain a good source of randomness");
+    }
     foreach ($registrations as $reg) {
       $sig = new SignRequest();
       $sig->appId = $this->appId;
       $sig->keyHandle = $reg->keyHandle;
-      $sig->challenge = U2F::base64u_encode(openssl_random_pseudo_bytes(32, $crypto_strong));
-      if($crypto_strong != true) {
-        return new Error(ERR_BAD_RANDOM, "Unable to obtain a good source of randomness");
-      }
+      $sig->challenge = $challenge;
       $sigs[] = $sig;
     }
     return $sigs;
