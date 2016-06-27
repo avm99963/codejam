@@ -199,7 +199,7 @@ try {
         <?php
         echo "var req = " . json_encode($req) . ";";
         echo "var sigs = " . json_encode($sigs) . ";";
-        echo "var host = '" . $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'] . "';";
+        echo "var host = '" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https" : "http")."://".$_SERVER['HTTP_HOST'] . "';";
         ?>
         </script>
         <script src="js/u2f-api.js"></script>
