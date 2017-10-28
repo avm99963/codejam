@@ -1,6 +1,8 @@
 <?php
 require("../core.php");
-require("../lib/u2flib_server/loadU2F.php");
+require("../lib/u2flib_server/U2F.php");
+
+$u2f = new u2flib_server\U2F((isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERVER['HTTP_HOST']);
 
 $return = array();
 

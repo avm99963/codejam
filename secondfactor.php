@@ -210,7 +210,8 @@ if (isset($_GET['msg']) && in_array($_GET['msg'], array("wrongcode", "passworddo
                     </div>
                     <?php
                         } elseif ($secondfactor == 2) {
-                            require("lib/u2flib_server/loadU2F.php");
+                            require("lib/u2flib_server/U2F.php");
+                            $u2f = new u2flib_server\U2F((isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERVER['HTTP_HOST']);
                             $query = mysqli_query($con, "SELECT keyHandle FROM securitykeys WHERE user_id = '".$_SESSION['prov_id']."'") or die("<div class='alert-danger'>".mysqli_error($con)."</div>");
                             $row = array();
                             if (mysqli_num_rows($query)) {
