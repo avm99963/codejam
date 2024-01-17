@@ -1,7 +1,17 @@
 # codejam
 PHP software for holding online coding competitions
 
+> [!CAUTION]
+> **DO NOT USE THIS PROJECT. It is unmaintained and has known security
+> vulnerabilities.** It was originally created in 2015 and contains legacy code
+> that in no way reflects my current coding standards and best practices
+> (fortunately, since then I've progressed in terms of designing and building
+> software having security in mind!).
+
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/codejam/localized.png)](https://crowdin.com/project/codejam)
+
+## Project status
+Unmaintained. Please DO NOT run this in production or anywhere.
 
 ## Requirements
 * PHP
